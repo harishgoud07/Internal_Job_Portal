@@ -19,38 +19,31 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 
 	protected function _initSession()
 	{
-		$session = new Zend_Session_Namespace('project', true);
+		/*$session = new Zend_Session_Namespace('project', true);
 
-		return $session;
+		return $session;*/
 	}
 
-	public function _initTranslations()
+	protected function _initDB()
 	{
-		$translate = new Zend_Translate(array (
-			'adapter' => 'Array',
-			'content' => APPLICATION_PATH . '/../data/lang/en/common.php',
-			'locale' => 'en',
-		));
+		$config = new Zend_Config_Ini(APPLICATION_PATH . '/configs/application.ini', APPLICATION_ENV);
+		$db_params = $config->resources->db->params;
+		
+		$params = array(
+    'host'           => $db_params->host,
+    'username'       => $db_params->username,
+    'password'       => $db_params->password,
+    'dbname'         => $db_params->dbname,
+    
+);
 
-		$translate->addTranslation(array (
-			'adapter' => 'Array',
-			'content' => APPLICATION_PATH . '/../data/lang/fr/common.php',
-			'locale' => 'fr',
-		));
-
-		Zend_Registry::set('Zend_Translate', $translate);
-
-		return $translate;
+$db = Zend_Db::factory($config->resources->db->adapter, $params);
+		Zend_Db_Table::setDefaultAdapter($db);
 	}
+
 
 	protected function _initViewHelpers()
 	{
-		$view = new Zend_View();
-		$viewRenderer = new Zend_Controller_Action_Helper_ViewRenderer();
-
-		$view->addHelperPath(APPLICATION_PATH . '/views/helpers');
-		$view->addHelperPath('ZendX/JQuery/View/Helper/', 'ZendX_JQuery_View_Helper');
-		$viewRenderer->setView($view);
-		Zend_Controller_Action_HelperBroker::addHelper($viewRenderer);
+		
 	}
 }
