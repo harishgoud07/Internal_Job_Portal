@@ -10,7 +10,7 @@ class AdminController extends Zend_Controller_Action
 
     public function indexAction()
     {
-        echo 'hai admin';
+        //echo 'hai admin';
     }
 
 	public function registerAction()
