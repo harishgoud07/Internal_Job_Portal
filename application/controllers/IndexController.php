@@ -27,7 +27,6 @@ class IndexController extends Zend_Controller_Action
             $adapter->setCredential($request_params['password']);
  
             $result = $auth->authenticate($adapter);
- //svar_dump($result->isValid());exit;
             if ($result->isValid()) {
                  $storage = new Zend_Auth_Storage_Session();
                  $logged_in_user_details = $adapter->getResultRowObject();
@@ -54,7 +53,7 @@ class IndexController extends Zend_Controller_Action
 
 	public function logoutAction(){
 
-Zend_Auth::getInstance()->clearIdentity();
-    $this->_redirect('/');
+     Zend_Auth::getInstance()->clearIdentity();
+     $this->_redirect('/');
     }
 }
