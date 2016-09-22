@@ -1,0 +1,68 @@
+/*Dashboard*/
+.navbar-login {
+  width: 305px;
+  padding: 10px;
+  padding-bottom: 0px;
+}
+
+.navbar {
+  border-radius: 0px;
+}
+
+.jobs-list-container {
+  margin-top:40px;
+}
+.job-list-item-btn-container .btn {
+  width: 100%;
+  margin:5px;
+}
+
+.jobs-list-container .container {
+    border: 1px solid #ddd;
+    padding:20px;
+}
+
+.badge {
+  margin-left: 2px;
+}
+
+.user-icon {
+  margin-right : 6px;
+}
+
+.navbar-login-session {
+  padding: 10px;
+  padding-bottom: 0px;
+  padding-top: 0px;
+}
+
+.icon-size {
+  font-size: 87px;
+}
+
+
+
+/*Login and signup*/
+
+
+.login-signup-container {
+  margin-top: 7%;
+  padding: 0px;
+  box-shadow: 0 16px 24px 2px rgba(0, 0, 0, .14), 0 6px 30px 5px rgba(0, 0, 0, .12), 0 8px 10px -5px rgba(0, 0, 0, .2);
+}
+
+.login-signup-nav-btn-group {
+  margin: 0px 0px;
+  margin-bottom: 10px;
+}
+
+.login-form-container,
+.register-form-container {
+  margin-top: 10px;
+}
+
+.login-signup-nav-btn-group .btn {
+  width : 100%;
+  height:45px;
+  border-radius: 0px;
+}
