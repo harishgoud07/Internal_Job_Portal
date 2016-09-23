@@ -10,7 +10,7 @@ class EmployeeController extends Zend_Controller_Action
 
     public function indexAction()
     {
-        echo 'hai employee';
+         $this->_forward('index', 'posts', null);
     }
 
 	public function registerAction()
