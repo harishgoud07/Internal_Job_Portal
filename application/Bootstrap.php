@@ -45,6 +45,6 @@ $db = Zend_Db::factory($config->resources->db->adapter, $params);
 	protected function _initRegisterPlugins()
 	{
 		$front = Zend_Controller_Front::getInstance();
-        //$front->registerPlugin(new application_plugins_session());
+        $front->registerPlugin(new application_plugins_session());
 	}
 }

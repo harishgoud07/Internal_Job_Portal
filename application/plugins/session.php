@@ -4,22 +4,22 @@ class application_plugins_session extends Zend_Controller_Plugin_Abstract {
 		$module = $request->getModuleName ();
 		$controller = $request->getControllerName ();
 		$action = $request->getActionName ();
-
-        if(!($controller == 'index' && $action == 'index' && $controller == 'error' && $action == 'error')){
-            $storage = Zend_Auth::getInstance();
-            if(!$storage->hasIdentity()){
+        
+        if(!(($controller == 'index' && $action == 'index') || ($controller == 'error' && $action == 'error'))){
+             $storage = Zend_Auth::getInstance()->getIdentity();
+            if(!$storage->user_role){
                  $request->setControllerName ('index')->setActionName ('index');
             }
         }else{
-            $storage = Zend_Auth::getInstance();
-            if($storage->hasIdentity()){
-                   if($user_data->user_role == 'A'){
+            $storage = Zend_Auth::getInstance()->getIdentity();
+            if($storage->user_role){
+                   if($storage->user_role == 'A'){
                        $request->setControllerName('admin')
                                ->setActionName('index');
-                  }else if($user_data->user_role == 'M'){
+                  }else if($storage->user_role == 'M'){
                        $request->setControllerName('manager')
                                ->setActionName('index');
-                  }else if($user_data->user_role == 'E'){
+                  }else if($storage->user_role == 'E'){
                       $request->setControllerName('employee')
                               ->setActionName('index');
                       
