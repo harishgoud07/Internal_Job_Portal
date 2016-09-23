@@ -9,10 +9,12 @@
 		echo $this->headScript()->prependFile($this->baseUrl('externals\js\jquery-3.1.0.min.js'))
                                 ->appendFile($this->baseUrl('externals\js\bootstrap.min.js'))
                                 ->appendFile($this->baseUrl('externals\js\moment.min.js'))
+                                ->appendFile($this->baseUrl('externals\js\chosen.jquery.js'))
                                 ->appendFile($this->baseUrl('externals\js\bootstrap-datetimepicker.min.js'))
                                 ->appendFile($this->baseUrl('externals\js\dashboard.js'));
 
-		echo $this->headLink()->prependStylesheet($this->baseUrl('externals\css\bootstrap.min.css'))
+		echo $this->headLink()->prependStylesheet($this->baseUrl('externals\css\chosen.css'))
+								->prependStylesheet($this->baseUrl('externals\css\bootstrap.min.css'))
                                 ->appendStylesheet($this->baseUrl('externals\css\bootstrap-datetimepicker.css'))
                                 ->appendStylesheet($this->baseUrl('externals\css\chosen-bootstrap.css'))
                                 ->appendStylesheet($this->baseUrl('externals\css\styles.css'));
