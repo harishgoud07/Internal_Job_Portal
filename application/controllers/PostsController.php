@@ -11,7 +11,7 @@ class PostsController extends Zend_Controller_Action
     public function indexAction()
     {
 
-       $posts = new Application_models_Posts();
+       $posts = new application_models_Posts();
        $posts_data = $posts->get_posts();
        $this->view->posts_data = $posts_data;
     }

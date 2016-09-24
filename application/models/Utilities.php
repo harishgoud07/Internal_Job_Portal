@@ -1,5 +1,5 @@
 <?php
-class Application_models_Utilities{
+class application_models_Utilities{
 
     private $db;
     public function _construct(){
