@@ -13,6 +13,9 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 		$loader = new Zend_Application_Module_Autoloader(array(
 			'namespace' => '',
 			'basePath'  => APPLICATION_PATH));
+Zend_Loader_Autoloader::getInstance()->registerNamespace('Application_models_');
+
+    
 
 		return $loader;
 	}
@@ -45,6 +48,8 @@ $db = Zend_Db::factory($config->resources->db->adapter, $params);
 	protected function _initRegisterPlugins()
 	{
 		$front = Zend_Controller_Front::getInstance();
-        //$front->registerPlugin(new application_plugins_session());
+       $front->registerPlugin(new application_plugins_session());
 	}
+
+	
 }

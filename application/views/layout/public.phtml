@@ -21,6 +21,12 @@
 	?>
 	
 </head>
+<?php
+$storage = Zend_Auth::getInstance()->getIdentity();
+if($storage->name){
+$logged_in_user_name = $storage->name;
+}
+?>
 <body>
     <nav role="navigation" class="navbar navbar-inverse">
         <div class="container">
@@ -41,8 +47,10 @@
                     <li><a href="#">Login Requests</a></li>
                     <li><a href="#">Projects</a></li>
                     <li class="dropdown">
-                        <a data-toggle="dropdown" class="dropdown-toggle" href="#"> <span class="glyphicon glyphicon-user user-icon"> </span> User name<b class="caret"></b></a>
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#"> <span class="glyphicon glyphicon-user user-icon"> </span> <?php echo $logged_in_user_name;?><b class="caret"></b></a>
                         <div role="menu" class="dropdown-menu">
+                        <a class="dropdown-item" href="#">Edit profile</a>
+                        <a class="dropdown-item" href="<?php echo $this->url(array('action'=>'logout','controller'=>'index'),null,true)?>">Logout</a>
                         </div>
                     </li>
                 </ul>

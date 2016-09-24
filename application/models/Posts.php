@@ -2,11 +2,25 @@
 class Application_models_Posts{
 
     private $db,$user_details;
-    public function _construct(){
+    public function __construct(){
             $this->db = Zend_Db_Table::getDefaultAdapter();
                $utilities = new Application_models_Utilities();
        $this->user_details = $utilities->get_user_details();
     }
+
+
+public function get_posts(){
+    $get_posts_query = $this->db->select()
+            ->from(array('emp'=>'ijp_employees_list'))
+            ->join(array('posts'=>'ijp_job_posts'),'emp.eid = posts.eid')
+             ->join(array('projects'=>'ijp_projects_list'),'posts.project_id = projects.project_id',array('project_name'=>'name'))
+            ->where('posts.status = ?','A')
+            ->order('posts.date_of_creation desc');
+
+    return $this->db->fetchAll($get_posts_query);
+            
+}
+
 
 
     function add_posts($values){
