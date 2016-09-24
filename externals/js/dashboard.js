@@ -1,3 +1,4 @@
-	$(function () {
-		$('#datetimepicker1').datetimepicker();
-	});
+$(function () {
+	$('expiry_date_datepicker').datetimepicker();
+    $('.chosen-select').chosen();
+});

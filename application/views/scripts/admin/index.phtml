@@ -44,98 +44,113 @@
     </section>
 
     <div id="add-new-job" class="modal fade" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title">Modal title</h4>
+                    <h4 class="modal-title">Add/Update a Job Post</h4>
                 </div>
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-8 col-xs-offset-2">
                             <form class="form-horizontal">
+                            	<input type="text" hidden="true" name="job_id">
                                 <div class="form-group">
-                                    <select class="form-control">
-                                            <option>1</option>
-                                            <option>2</option>
-                                            <option>3</option>
-                                            <option>4</option>
-                                            <option>5</option>
+                                	<label for="project_name">Project Name</label>
+                                    <select required class="form-control" name="project_name" id ="project_name">
+                                            <option>Sample 1</option>
+                                            <option>Sample 2</option>
+                                            <option>Sample 3</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
                                     <div class="">
-                                        <input type="text" class="form-control" id="" placeholder="Job Title">
+                                    	<label for="job_title">Job Title</label>
+                                        <input required type="text" class="form-control" name="job_title" id="job_title" placeholder="">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <div class="">
-                                        <input type="number" class="form-control" id="" placeholder="Number of vacancies">
+                                    	<label for="no_of_vacancies">Number of vacancies</label>
+                                        <input type="number" class="form-control" name="no_of_vacancies" id="no_of_vacancies" placeholder="">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <div class="">
-                                        <textarea class="form-control" rows="3"></textarea>
+                                    	<label for="salary">Salary</label>
+                                        <input type="text" class="form-control" name="salary" id="salary" placeholder="">
                                     </div>
                                 </div>
-                                <div class='input-group date post-job-date-control' id='datetimepicker1'>
-                                    <input type='text' class="form-control" />
-                                    <span class="input-group-addon">
-                                        <span class="glyphicon glyphicon-calendar"></span>
-                                    </span>
+                                <div class="form-group">
+                                    <div class="">
+                                    	<label for="job_description">Job Description</label>
+                                        <textarea required name="job_description" id="job_description" class="form-control" rows="3"></textarea>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                	<div class="">
+                                		<label for="key_skills">Required Key skills</label>
+                                		<select required name="key_skills" id="key_skills" data-placeholder=" " class="form-control chosen-select" multiple tabindex="6">
+								        <option value="Empty">&nbsp;</option>
+								        <optgroup label="NFC EAST">
+								          <option>Dallas Cowboys</option>
+								          <option>New York Giants</option>
+								          <option>Philadelphia Eagles</option>
+								          <option>Washington Redskins</option>
+								        </optgroup>
+								        <optgroup label="NFC NORTH">
+								          <option>Chicago Bears</option>
+								          <option>Detroit Lions</option>
+								          <option>Green Bay Packers</option>
+								          <option>Minnesota Vikings</option>
+								        </optgroup>
+								        <optgroup label="NFC SOUTH">
+								          <option>Atlanta Falcons</option>
+								          <option>Carolina Panthers</option>
+								          <option>New Orleans Saints</option>
+								          <option>Tampa Bay Buccaneers</option>
+								        </optgroup>
+								        <optgroup label="NFC WEST">
+								          <option>Arizona Cardinals</option>
+								          <option>St. Louis Rams</option>
+								          <option>San Francisco 49ers</option>
+								          <option>Seattle Seahawks</option>
+								        </optgroup>
+								        <optgroup label="AFC EAST">
+								          <option>Buffalo Bills</option>
+								          <option>Miami Dolphins</option>
+								          <option>New England Patriots</option>
+								          <option>New York Jets</option>
+								        </optgroup>
+								        <optgroup label="AFC NORTH">
+								          <option>Baltimore Ravens</option>
+								          <option>Cincinnati Bengals</option>
+								          <option>Cleveland Browns</option>
+								          <option>Pittsburgh Steelers</option>
+								        </optgroup>
+								        <optgroup label="AFC SOUTH">
+								          <option>Houston Texans</option>
+								          <option>Indianapolis Colts</option>
+								          <option>Jacksonville Jaguars</option>
+								          <option>Tennessee Titans</option>
+								        </optgroup>
+								        <optgroup label="AFC WEST">
+								          <option>Denver Broncos</option>
+								          <option>Kansas City Chiefs</option>
+								          <option>Oakland Raiders</option>
+								          <option>San Diego Chargers</option>
+								        </optgroup>
+								      </select>
+                                	</div>
                                 </div>
                                 <div class='form-group'>
-                                    <select data-placeholder="Your Favorite Football Teams" class="chosen-select" multiple="" tabindex="-1" style="display: none;">
-                                        <option value=""></option>
-                                        <optgroup label="NFC EAST">
-                                            <option>Dallas Cowboys</option>
-                                            <option>New York Giants</option>
-                                            <option>Philadelphia Eagles</option>
-                                            <option>Washington Redskins</option>
-                                        </optgroup><optgroup>
-                                        </optgroup><optgroup label="NFC NORTH">
-                                            <option>Chicago Bears</option>
-                                            <option>Detroit Lions</option>
-                                            <option>Green Bay Packers</option>
-                                            <option>Minnesota Vikings</option>
-                                        </optgroup>
-                                        <optgroup label="NFC SOUTH">
-                                            <option>Atlanta Falcons</option>
-                                            <option>Carolina Panthers</option>
-                                            <option>New Orleans Saints</option>
-                                            <option>Tampa Bay Buccaneers</option>
-                                        </optgroup>
-                                        <optgroup label="NFC WEST">
-                                            <option>Arizona Cardinals</option>
-                                            <option>St. Louis Rams</option>
-                                            <option>San Francisco 49ers</option>
-                                            <option>Seattle Seahawks</option>
-                                        </optgroup>
-                                        <optgroup label="AFC EAST">
-                                            <option>Buffalo Bills</option>
-                                            <option>Miami Dolphins</option>
-                                            <option>New England Patriots</option>
-                                            <option>New York Jets</option>
-                                        </optgroup>
-                                        <optgroup label="AFC NORTH">
-                                            <option>Baltimore Ravens</option>
-                                            <option>Cincinnati Bengals</option>
-                                            <option>Cleveland Browns</option>
-                                            <option>Pittsburgh Steelers</option>
-                                        </optgroup>
-                                        <optgroup label="AFC SOUTH">
-                                            <option>Houston Texans</option>
-                                            <option>Indianapolis Colts</option>
-                                            <option>Jacksonville Jaguars</option>
-                                            <option>Tennessee Titans</option>
-                                        </optgroup>
-                                        <optgroup label="AFC WEST">
-                                            <option>Denver Broncos</option>
-                                            <option>Kansas City Chiefs</option>
-                                            <option>Oakland Raiders</option>
-                                            <option>San Diego Chargers</option>
-                                        </optgroup>
-                                    </select>
+                                	<label for="expiry_date">End date for Applicants</label>
+                                    <div class='input-group date post-job-date-control' id="expiry_date_datepicker">
+	                                    <input required name="expiry_date" type='text' class="form-control" />
+	                                    <span class="input-group-addon">
+	                                        <span class="glyphicon glyphicon-calendar"></span>
+	                                    </span>
+	                                </div>
                                 </div>
                             </form>
                         </div>
@@ -151,3 +166,4 @@
         <!-- /.modal-dialog -->
     </div>
     <!-- /.modal -->
+    
