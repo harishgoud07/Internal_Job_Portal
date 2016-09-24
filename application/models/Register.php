@@ -1,5 +1,5 @@
 <?php
-class Application_models_Register{
+class application_models_Register{
 
     private $db;
     public function _construct(){

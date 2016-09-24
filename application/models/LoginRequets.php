@@ -1,5 +1,5 @@
 <?php
-class Application_models_LoginRequests{
+class application_models_LoginRequests{
 
     private $db;
     public function _construct(){
