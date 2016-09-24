@@ -10,7 +10,7 @@ class ManagerController extends Zend_Controller_Action
 
     public function indexAction()
     {
-        echo 'hai manager';
+        $this->_forward('index', 'posts', null);
     }
 
 	public function registerAction()
