@@ -6,8 +6,8 @@
     <meta name="author" content="">
     
 	<?php 
-		echo $this->headScript()->prependFile($this->baseUrl('externals\js\jquery-3.1.0.min.js'))
-                                ->appendFile($this->baseUrl('externals\js\bootstrap.min.js'))
+		echo $this->headScript()->prependFile($this->baseUrl('externals\js\bootstrap.min.js'))
+                                ->prependFile($this->baseUrl('externals\js\jquery-3.1.0.min.js'))
                                 ->appendFile($this->baseUrl('externals\js\moment.min.js'))
                                 ->appendFile($this->baseUrl('externals\js\chosen.jquery.js'))
                                 ->appendFile($this->baseUrl('externals\js\bootstrap-datetimepicker.min.js'))

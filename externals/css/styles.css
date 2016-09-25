@@ -87,6 +87,19 @@ input[type=number]::-webkit-outer-spin-button {
 
 /*Login and signup*/
 
+.login-form-title {
+	font-size:30px;
+	text-align:center;
+	margin-top:10px;
+	margin-bottom:10px;
+}
+
+.register-form-title {
+	font-size:30px;
+	text-align:center;
+	margin-top:10px;
+	margin-bottom:10px;
+}
 
 .login-signup-container {
   margin-top: 7%;
