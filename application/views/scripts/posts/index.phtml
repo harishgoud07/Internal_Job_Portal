@@ -37,7 +37,7 @@ $this->headScript()->appendFile($this->baseUrl('externals\js\admin.js'));
                             	<input type="text" hidden="true" name="job_id">
                                 <div class="form-group">
                                 	<label for="project_name">Project Name</label>
-                                    <select required="" class="form-control" name="project_name" id="project_name">
+                                    <select required class="form-control" name="project_name" id="project_name">
                                     <option value=''>SELECT</option>
                                     <?php
                                     if($projects_list){
@@ -54,7 +54,7 @@ $this->headScript()->appendFile($this->baseUrl('externals\js\admin.js'));
                                 <div class="form-group">
                                     <div class="">
                                     	<label for="job_title">Job Title</label>
-                                        <input required="" type="text" class="form-control" name="job_title" id="job_title" placeholder="">
+                                        <input required type="text" class="form-control" name="job_title" id="job_title" placeholder="">
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -72,13 +72,13 @@ $this->headScript()->appendFile($this->baseUrl('externals\js\admin.js'));
                                 <div class="form-group">
                                     <div class="">
                                     	<label for="job_description">Job Description</label>
-                                        <textarea required="" name="job_description" id="job_description" class="form-control" rows="3"></textarea>
+                                        <textarea required name="job_description" id="job_description" class="form-control" rows="3"></textarea>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                 	<div class="">
                                 		<label for="key_skills">Required Key skills</label>
-                                		<select required="" name="key_skills" id="key_skills" data-placeholder=" " class="form-control chosen-select" multiple="" tabindex="-1" style="display: none;">
+                                		<select required name="key_skills" id="key_skills" data-placeholder=" " class="form-control" multiple tabindex="-1">
 								        <option value="Empty">&nbsp;</option>
 								        <optgroup label="NFC EAST">
 								          <option>Dallas Cowboys</option>
@@ -128,13 +128,13 @@ $this->headScript()->appendFile($this->baseUrl('externals\js\admin.js'));
 								          <option>Oakland Raiders</option>
 								          <option>San Diego Chargers</option>
 								        </optgroup>
-								      </select><div class="chosen-container chosen-container-multi" style="width: 0px;" title="" id="key_skills_chosen"><ul class="chosen-choices"><li class="search-field"><input type="text" value=" " class="default" autocomplete="off" style="width:25px;" tabindex="6"></li></ul><div class="chosen-drop"><ul class="chosen-results"></ul></div></div>
+								      </select>
                                 	</div>
                                 </div>
                                 <div class="form-group">
                                 	<label for="expiry_date">End date for Applicants</label>
                                     <div class="input-group date post-job-date-control" >
-	                                    <input required="" name="expiry_date" type="text" id="expiry_date_datepicker" class="form-control">
+	                                    <input required name="expiry_date" type="text" id="expiry_date_datepicker" class="form-control">
 	                                    <span class="input-group-addon">
 	                                        <span class="glyphicon glyphicon-calendar"></span>
 	                                    </span>
