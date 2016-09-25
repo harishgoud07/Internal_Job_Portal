@@ -19,18 +19,21 @@
         <div class="tab-content">
           <div role="tabpanel" class="tab-pane active" id="login">
             <div class="row col-lg-12 col-md-12 col-sm-12 col-xs-12">
+              <div class="login-form-title">Login</div>	
               <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-8 col-xs-offset-2 login-form-container">
                 <form id="login-form" action="" method="post" role="form">
                   <div class="form-group">
-                    <input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Employee reference" value="">
+                  	<label for="username">Employee reference</label>
+                    <input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="" value="">
                   </div>
                   <div class="form-group">
-                    <input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Password">
+                    <label for="password">Password</label>
+                    <input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="">
                   </div>
 
                   <div class="form-group">
                       <div class="">
-                        <input type="submit" name="login-submit" id="login-submit" tabindex="4" class="form-control btn btn-primary login-submit" value="Log In">
+                        <input type="submit" name="login" id="login" tabindex="4" class="form-control btn btn-primary login-submit" value="Log In">
                     </div>
                   </div>
                   <div class="form-group">
@@ -46,70 +49,77 @@
           </div>
           <div role="tabpanel" class="tab-pane" id="register">
             <div class="row col-lg-12 col-md-12 col-sm-12 col-xs-12">
+              <div class="register-form-title">Register</div>
               <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-8 col-xs-offset-2 register-form-container">
-                <form class="form-horizontal" action="<?php echo $this->url(array('action'=>'index','controller'=>'index'),null,true)?>"  role="form">
+                <form class="form-horizontal" method="POST" enctype="multipart/form-data" action="<?php echo $this->url(array('action'=>'index','controller'=>'index'),null,true)?>"  role="form">
                   <div class="form-group">
                     <div class="">
-                      <input type="text" id="firstName" placeholder="Name" class="form-control" autofocus>
+                      <label for="full_name">Full name</label>
+                      <input type="text" name="full_name" id="full_name" placeholder="" class="form-control" autofocus>
                     </div>
                   </div>
                   <div class="form-group">
                     <div class="">
-                      <input type="email" id="email" placeholder="Email" class="form-control">
+                      <label for="emp_ref">Employee Reference</label>
+                      <input type="text" name="emp_ref" id="emp_ref" placeholder="" class="form-control" autofocus>
                     </div>
                   </div>
                   <div class="form-group">
                     <div class="">
-                      <input type="password" id="password" placeholder="Password" class="form-control">
-                    </div>
-                  </div>
-
-                  <div class="form-group">
-                    <div class="">
-                      <select id="country" class="form-control">  
-                        <option>Admin</option>
-                        <option>Manager</option>
-                        <option>Employee</option>
+                      <label for="user_role">Your role</label>
+                      <select id="user_role" name="user_role" class="form-control">  
+                        <option value="A">Admin</option>
+                        <option value="M">Manager</option>
+                        <option value="E">Employee</option>
                       </select>
                     </div>
                   </div>
                   <div class="form-group">
                     <div class="">
-                      <input type="password" id="password" placeholder="Address" class="form-control">
+                      <label for="email">Email address</label>
+                      <input type="email" id="email" name="email" placeholder="" class="form-control">
                     </div>
                   </div>
                   <div class="form-group">
-                    <label for="Upload image" class="control-label">Upload image</label>
                     <div class="">
+                      <label for="address">Address</label>
+                      <input type="text" id="address" name="address" placeholder="" class="form-control">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="">
+                      <label for="password">Password</label>
+                      <input type="password" id="password" name="password" placeholder="" class="form-control">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="">
+                      <label for="confirm_password">Confirm Password</label>
+                      <input type="password" id="confirm_password" name ="confirm_password" placeholder="" class="form-control">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="">
+                      <label for="Upload image" class="control-label">Upload image</label>
                       <label class="btn btn-default btn-file">
-                        Browse <input type="file" style="display: none;">
+                        Browse <input type="file" name="user_image" style="display: none;">
                       </label>
                     </div>
                   </div>
 
                   <div class="form-group">
-                    <label for="Upload resume" class="control-label">Upload resume</label>
                     <div class="">
+                      <label for="Upload resume" class="control-label">Upload resume</label>
                       <label class="btn btn-default btn-file">
                         Browse 
-                        <input type="file" style="display: none;">
+                        <input type="file"  name="user_resume" style="display: none;">
                       </label>
                     </div>
                   </div>
 
                   <div class="form-group">
                     <div class="">
-                      <select id="country" class="form-control">
-                        <option>Smith</option>
-                        <option>Adam</option>
-                        <option>Vivek</option>
-                      </select>
-                    </div>
-                  </div>
-
-                  <div class="form-group">
-                    <div class="">
-                      <button type="submit" class="btn btn-primary btn-block">Register</button>
+                      <button type="submit" name="register" value="register" class="btn btn-primary btn-block">Register</button>
                     </div>
                   </div>
                 </form>
