@@ -54,6 +54,13 @@ class IndexController extends Zend_Controller_Action {
 		}
 	}
 	
+	public function editprofileAction() {
+		$request_params = $this->getRequest ()->getParams ();
+		if ($this->getRequest ()->isPost ()) {
+			
+		}
+	}
+	
 	public function registerAction() {
 		$request_params = $this->getRequest ()->getParams ();
 		if ($this->getRequest ()->isPost ()) {

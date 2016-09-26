@@ -14,6 +14,25 @@ body {
   border-radius: 0px;
 }
 
+.user-profile-information .row {
+	margin: 10px 0px;
+	font-size: 16px;
+}
+
+.user-profile-information {
+	margin-top: 20px;
+}
+
+.user-profile-manage-btn-group {
+	margin-top: 20px;
+}
+
+.edit-profile-name {
+	font-size: 45px;
+    margin-left: 250px;
+    margin-top: -55px;
+}
+
 input[type=number]::-webkit-inner-spin-button, 
 input[type=number]::-webkit-outer-spin-button { 
   -webkit-appearance: none; 
