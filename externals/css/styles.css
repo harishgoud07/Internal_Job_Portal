@@ -1,3 +1,8 @@
+body {
+	font-family: 'Roboto', sans-serif;
+	font-size: 14px;
+}
+
 /*Dashboard*/
 .navbar-login {
   width: 305px;
@@ -7,6 +12,24 @@
 
 .navbar {
   border-radius: 0px;
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+
+.group-result {
+	font-weight:700;
+}
+
+ .job-info-field-title {
+ 	font-weight:700;
+ }
+
+.job-info-field-set {
+	padding:10px;
 }
 
 .jobs-list-container {
@@ -37,9 +60,9 @@
 }
 
 .job-container {
-  border: 1px solid #959393;
+   border: 1px solid #959393;
   padding:15px 15px 0px 15px;
-  background-color:#f0f0f0
+  background-color:#ccc
 }
 .job-complete-details{
   height:250px;
@@ -70,7 +93,7 @@
   margin-right:20px;
   text-align:center;
 }
-.job-container:hover {
+.job-container:hover, .job-list-item:hover {
 	-webkit-box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.2);
 	-moz-box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.2);
 	box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.2);
