@@ -1,48 +1,91 @@
-<?php 
-
+<?php
 $active_posts_data = $this->active_posts_data;
 
 ?>
 
- <div class="row">
-                <div class="jobs-list">
+<div class="row">
+	<div class="jobs-list">
 <?php
-if($active_posts_data){
-foreach($active_posts_data as $post_data){
-?>
+if ($active_posts_data) {
+	foreach ( $active_posts_data as $post_data ) {
+		?>
 
 <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
-                        <div class="panel panel-default">
-                            <!-- Default panel contents -->
-                            <div class="panel-heading">
-                                <div><?php echo $post_data['project_name'];?></div>
-                            </div>
-                             <div class="panel-body">
-                                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
-                                    <p class="lead"><?php echo $post_data['job_description'];?></p>
-                                    <p><?php echo $post_data['job_skill_set'];?></p>
-                                </div>
-                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 pull-right job-list-item-btn-container">
-                                    <button class="btn btn-info update_posts" data-post-id = '<?php echo $post_data['post_id'];?>'>
-                                        Update details
-                                    </button>
-                                    <button class="btn btn-danger delete_post" data-post-id = '<?php echo $post_data['post_id'];?>'>
-                                        Delete Job
-                                    </button>
-                                </div>
-                                   </div>
-                                   </div>
-                                   </div>
-                        
-        
+			<div class="panel panel-default job-list-item">
+				<!-- Default panel contents -->
+				<div class="panel-heading">
+					<div><?php echo $post_data['project_name'];?></div>
+				</div>
+				<div class="panel-body">
+					<div class="row">
+						<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+							<p class="lead"><?php echo $post_data['job_description'];?></p>
+							<p><?php echo $post_data['job_skill_set'];?></p>
+						</div>
+						<div
+							class="col-lg-3 col-md-3 col-sm-3 col-xs-3 pull-right job-list-item-btn-container">
+							<button class="btn btn-info update_posts"
+								data-post-id='<?php echo $post_data['post_id'];?>'>Update
+								details</button>
+							<button class="btn btn-danger delete_post"
+								data-post-id='<?php echo $post_data['post_id'];?>'>Delete Job</button>
+						</div>
+					</div>
+					<div class="row">
+
+						<div class="row job-info-field-set">
+							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+								<div class="job-info-field">
+									<span class="job-info-field-title">Salary range :</span> 
+									<span class="job-info-field-value"><?php echo '10 222 216'; ?></span>
+								</div>
+							</div>
+							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+								<div class="job-info-field">
+									<span class="job-info-field-title">Location :</span>
+									<span class="job-info-field-value"><?php echo '10 222 216'; ?></span>
+								</div>
+							</div>
+						</div>
+						<div class="row job-info-field-set">
+							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+								<div class="job-info-field">
+									<span class="job-info-field-title">Number of Vacancies :</span>
+									<span class="job-info-field-value"><?php echo '10 222 216'; ?></span>
+								</div>
+							</div>
+							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+								<div class="job-info-field">
+									<span class="job-info-field-title">Project name :</span> 
+									<span class="job-info-field-value"><?php echo '10 222 216'; ?></span>
+								</div>
+							</div>
+						</div>
+						<div class="row job-info-field-set">
+							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+								<div class="job-info-field">
+									<span class="job-info-field-title">Posted date :</span>
+									<span class="job-info-field-value"><?php echo '10 222 216'; ?></span>
+								</div>
+							</div>
+							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+								<div class="job-info-field">
+									<span class="job-info-field-title">Applicants end date :</span> 
+									<span class="job-info-field-value"><?php echo '10 222 216'; ?></span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
                   
 <?php
- }
-}else{
-    echo "<h4><p class='text-center text-info col-lg-12'>No posts to display.</p></h4>";
+	}
+} else {
+	echo "<h4><p class='text-center text-info col-lg-12'>No posts to display.</p></h4>";
 }
 
 ?>
   </div>
-                </div>
-               
+</div>
