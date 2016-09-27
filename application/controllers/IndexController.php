@@ -13,7 +13,6 @@ class IndexController extends Zend_Controller_Action {
 				$adapter->setIdentity ( $request_params ['username'] );
 				$adapter->setCredential ( $request_params ['password'] );
 				$result = $auth->authenticate ( $adapter );
-				// svar_dump($result->isValid());exit;
 				if ($result->isValid ()) {
 					$storage = new Zend_Auth_Storage_Session ();
 					$logged_in_user_details = $adapter->getResultRowObject ();
@@ -56,7 +55,7 @@ class IndexController extends Zend_Controller_Action {
 			}	
 		}
 		
-		$posts = new application_models_Posts();
+			$posts = new application_models_Posts();
 			$projects_list = $posts->get_projects_list ();
 			$this->view->projects_list = $projects_list;
 	}

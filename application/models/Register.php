@@ -19,9 +19,9 @@ class application_models_Register {
 		$last_inserted_emp_id = $this->db->lastInsertID ();
 		$values ['last_inserted_emp_id'] = $last_inserted_emp_id;
 		$this->store_login_request($values);
-		$this->store_emp_project_mapping();
+		$this->store_emp_project_mapping($values);
 		if($values['E'] == 'E'){
-			//$this->store_emp_manager_mapping($values);
+			$this->store_emp_manager_mapping($values);
 		}
 	}
 	function store_login_request($values) {

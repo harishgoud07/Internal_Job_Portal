@@ -27,6 +27,7 @@
 
 <?php
 $projects_list = $this->projects_list;
+var_dump($this->registration_status);
 ?>
 
 <section>
@@ -34,8 +35,8 @@ $projects_list = $this->projects_list;
     <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 col-xs-6 col-xs-offset-3 login-signup-container">
       <div class="">
       <?php
-          if($this->registration_status == 'E'){
-              echo '<h3>Your request is reviewd and confirmed by your Manager</h3>';
+          if($this->registration_status == 'success'){
+              echo '<h3>Your request is reviewd and will confirm by your Manager</h3>';
           }
 
       ?>
