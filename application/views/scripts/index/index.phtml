@@ -27,7 +27,6 @@
 
 <?php
 $projects_list = $this->projects_list;
-var_dump($this->registration_status);
 ?>
 
 <section>
@@ -36,7 +35,7 @@ var_dump($this->registration_status);
       <div class="">
       <?php
           if($this->registration_status == 'success'){
-              echo '<h3>Your request is reviewd and will confirm by your Manager</h3>';
+              echo '<h3>Your request is reviewd and confirmed by your Manager</h3>';
           }
 
       ?>
@@ -87,110 +86,7 @@ var_dump($this->registration_status);
           <div role="tabpanel" class="tab-pane" id="register">
             <div class="row col-lg-12 col-md-12 col-sm-12 col-xs-12">
               <div class="register-form-title">Register</div>
-              <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-8 col-xs-offset-2 register-form-container">
-                <form class="form-horizontal" method="POST" enctype="multipart/form-data" action="<?php echo $this->url(array('action'=>'index','controller'=>'index'),null,true)?>"  role="form">
-                  <div class="form-group">
-                    <div class="">
-                      <label for="full_name">Full name</label>
-                      <input type="text" name="full_name" id="full_name" placeholder="" class="form-control" autofocus>
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <div class="">
-                      <label for="emp_ref">Employee Reference</label>
-                      <input type="text" name="emp_ref" id="emp_ref" placeholder="" class="form-control" autofocus>
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <div class="">
-                      <label for="project_id">Project</label>
-                      <select id="project_id" name="project_id" class="form-control">
-                                    <option value=''>SELECT</option>
-                                    <?php
-                                    if($projects_list){
-                                        foreach($projects_list as $project_data){
-                                           echo "<option value='".$project_data['project_id']."' >".$project_data['name']."</option>"; 
-                                                                                       
-                                        }
-                                    }
-                             	           
-                                	    ?>
-                      </select>
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <div class="">
-                      <label for="Manager">Manager</label>
-                      <select id="manager_id" name="Manager" class="form-control">  
-                      <option value="">Select</option>
-                        <option value="1">Admin</option>
-                        <option value="2">Manager</option>
-                        <option value="3">Employee</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <div class="">
-                      <label for="user_role">role</label>
-                      <select id="user_role" name="user_role" class="form-control">  
-                      <option value="">Select</option>
-                        <option value="A">Admin</option>
-                        <option value="M">Manager</option>
-                        <option value="E">Employee</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <div class="">
-                      <label for="email">Email address</label>
-                      <input type="email" id="email" name="email" placeholder="" class="form-control">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <div class="">
-                      <label for="address">Address</label>
-                      <input type="text" id="address" name="address" placeholder="" class="form-control">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <div class="">
-                      <label for="password">Password</label>
-                      <input type="password" id="password" name="password" placeholder="" class="form-control">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <div class="">
-                      <label for="confirm_password">Confirm Password</label>
-                      <input type="password" id="confirm_password" name ="confirm_password" placeholder="" class="form-control">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <div class="">
-                      <label for="Upload image" class="control-label">Upload image</label>
-                      <label class="btn btn-default btn-file">
-                        Browse <input type="file" name="user_image" style="display: none;">
-                      </label>
-                    </div>
-                  </div>
-
-                  <div class="form-group">
-                    <div class="">
-                      <label for="Upload resume" class="control-label">Upload resume</label>
-                      <label class="btn btn-default btn-file">
-                        Browse 
-                        <input type="file"  name="user_resume" style="display: none;">
-                      </label>
-                    </div>
-                  </div>
-
-                  <div class="form-group">
-                    <div class="">
-                      <button type="submit" name="register" value="register" class="btn btn-primary btn-block">Register</button>
-                    </div>
-                  </div>
-                </form>
-                <!-- /form -->
-              </div>
+              <?php echo $this->partial('index/includes/employee_form.phtml', array('projects_list' => $projects_list)); ?>
             </div>
           </div>
         </div>
@@ -199,4 +95,5 @@ var_dump($this->registration_status);
   </div>
 </section>
 </body>
+
 </html>

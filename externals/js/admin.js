@@ -86,18 +86,20 @@ $(function() {
 
 
 	$(document).on('click','.delete_post',function(){
-		var post_id = $(this).data('post-id');
-		var current_page = $(this).data('current-page');
-		console.log('post_id'+post_id);
-		$.ajax({
-			type: "POST",
-			url: '/posts/delete',
-			data:{'post_id':post_id,'from':current_page}, // serializes the form's elements.
-			success: function(data)
-			{//$('#add_posts').serialize()
-				$('.jobs-list-container').html('').html(data);
-			}
-		});
+		if(confirm('Do you really want to delete this post ?')){
+			var post_id = $(this).data('post-id');
+			var current_page = $(this).data('current-page');
+			console.log('post_id'+post_id);
+			$.ajax({
+				type: "POST",
+				url: '/posts/delete',
+				data:{'post_id':post_id,'from':current_page}, // serializes the form's elements.
+				success: function(data)
+				{//$('#add_posts').serialize()
+					$('.jobs-list-container').html('').html(data);
+				}
+			});
+		}
 	});
 
 	$(document).on('click','#add-job-trigger',function(){
