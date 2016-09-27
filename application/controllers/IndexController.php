@@ -4,6 +4,7 @@ class IndexController extends Zend_Controller_Action {
 	}
 	public function indexAction() {
 		$request_params = $this->getRequest ()->getParams ();
+		$this->_helper->layout ()->disableLayout ();
 		if ($this->getRequest ()->isPost ()) {
 			if ($request_params ['username'] && $request_params ['password'] && $request_params ['login']) {
 				$db = Zend_Db_Table::getDefaultAdapter ();
@@ -31,7 +32,8 @@ class IndexController extends Zend_Controller_Action {
 						$request_params ['emp_ref'] && 
 						$request_params ['email'] && 
 						$request_params ['address'] && 
-						$request_params ['password'] ) {
+						$request_params ['password'] &&
+						$request_params ['project_id'] && $request_params ['user_role'] ) {
 					$upload = new Zend_File_Transfer ();
 					$files = $upload->getFileInfo ();
 					foreach ( $files as $file => $info ) {
@@ -49,9 +51,14 @@ class IndexController extends Zend_Controller_Action {
 					}
 					$register = new application_models_Register();
 					$register->do_register($request_params);
+					$this->view->registration_status = 'success';
 				}
-			}		
+			}	
 		}
+		
+		$posts = new application_models_Posts();
+			$projects_list = $posts->get_projects_list ();
+			$this->view->projects_list = $projects_list;
 	}
 	
 	public function registerAction() {

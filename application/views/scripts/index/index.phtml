@@ -1,9 +1,44 @@
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Job Portal</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700" rel="stylesheet"> 
+	<?php 
+		echo $this->headScript()->prependFile($this->baseUrl('externals\js\bootstrap.min.js'))
+                                ->prependFile($this->baseUrl('externals\js\jquery-3.1.0.min.js'))
+                                ->appendFile($this->baseUrl('externals\js\moment.min.js'))
+                                ->appendFile($this->baseUrl('externals\js\chosen.jquery.js'))
+                                ->appendFile($this->baseUrl('externals\js\bootstrap-datetimepicker.min.js'))
+                                ->appendFile($this->baseUrl('externals\js\dashboard.js'));
+
+		echo $this->headLink()->prependStylesheet($this->baseUrl('externals\css\chosen.css'))
+								->prependStylesheet($this->baseUrl('externals\css\bootstrap.min.css'))
+                                ->appendStylesheet($this->baseUrl('externals\css\bootstrap-datetimepicker.css'))
+                                ->appendStylesheet($this->baseUrl('externals\css\chosen-bootstrap.css'))
+                                ->appendStylesheet($this->baseUrl('externals\css\styles.css'));
+	?>
+	
+</head>
+
+
+<?php
+$projects_list = $this->projects_list;
+?>
+
 <section>
   <div class="container">
     <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 col-xs-6 col-xs-offset-3 login-signup-container">
       <div class="">
+      <?php
+          if($this->registration_status == 'E'){
+              echo '<h3>Your request is reviewd and confirmed by your Manager</h3>';
+          }
 
-        <!-- Nav tabs -->
+      ?>
+              <!-- Nav tabs -->
 
         <div class="btn-group btn-group-justified login-signup-nav-btn-group" role="group">
           <div class="btn-group" role="group">
@@ -66,8 +101,37 @@
                   </div>
                   <div class="form-group">
                     <div class="">
-                      <label for="user_role">Your role</label>
+                      <label for="project_id">Project</label>
+                      <select id="project_id" name="project_id" class="form-control">
+                                    <option value=''>SELECT</option>
+                                    <?php
+                                    if($projects_list){
+                                        foreach($projects_list as $project_data){
+                                           echo "<option value='".$project_data['project_id']."' >".$project_data['name']."</option>"; 
+                                                                                       
+                                        }
+                                    }
+                             	           
+                                	    ?>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="">
+                      <label for="Manager">Manager</label>
+                      <select id="manager_id" name="Manager" class="form-control">  
+                      <option value="">Select</option>
+                        <option value="1">Admin</option>
+                        <option value="2">Manager</option>
+                        <option value="3">Employee</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="">
+                      <label for="user_role">role</label>
                       <select id="user_role" name="user_role" class="form-control">  
+                      <option value="">Select</option>
                         <option value="A">Admin</option>
                         <option value="M">Manager</option>
                         <option value="E">Employee</option>
@@ -132,3 +196,5 @@
     </div>
   </div>
 </section>
+</body>
+</html>

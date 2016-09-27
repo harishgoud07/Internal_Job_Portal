@@ -10,7 +10,7 @@ class AdminController extends Zend_Controller_Action
 
     public function indexAction()
     {
-        $this->_forward('index', 'posts', null);
+     $this->_forward('index', 'posts', null);
     }
 
 	public function registerAction()
