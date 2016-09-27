@@ -44,8 +44,22 @@ $logged_in_user_name = $storage->name;
             <!-- Collection of nav links, forms, and other content for toggling -->
             <div id="navbarCollapse" class="collapse navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
-                    <li class="active"><a href="#">Jobs</a></li>
-                    <li><a href="#">Login Requests</a></li>
+                <?php
+                        $utilities = new application_models_Utilities();
+                        $user_details = $utilities->get_user_details();
+                        if($user_details->user_role == 'A'){
+                                $jobs_href =  $this->url(array('action'=>'index','controller'=>'admin'),null,true);
+                                $login_href = $this->url(array('action'=>'loginrequests','controller'=>'admin'),null,true);
+                        }else if ($user_details->user_role == 'E`'){
+                             $jobs_href =  $this->url(array('action'=>'index','controller'=>'employee'),null,true);
+                        }else if($user_details->user_role == 'M'){
+                             $jobs_href =  $this->url(array('action'=>'index','controller'=>'manager'),null,true);
+                              $login_href = $this->url(array('action'=>'loginrequests','controller'=>'manager'),null,true);
+                        }
+                        
+                ?>
+                    <li class="active"><a href="<?php echo $jobs_href;?>">Jobs</a></li>
+                    <li><a href="<?php echo $login_href;?>">Login Requests</a></li>
                     <!--<li><a href="#">Projects</a></li> -->
                     <li class="dropdown">
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#"> <span class="glyphicon glyphicon-user user-icon"> </span> <?php echo $logged_in_user_name;?><b class="caret"></b></a>

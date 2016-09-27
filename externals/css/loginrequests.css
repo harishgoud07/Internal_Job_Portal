@@ -1,6 +1,6 @@
 .login-requests-list-item {
     border: 1px solid #ccc;
-    border-left-width: 7px;
+    /*border-left-width: 7px;*/
     padding:10px;
 }
 

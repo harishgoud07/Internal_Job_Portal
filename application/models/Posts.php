@@ -5,8 +5,14 @@ class application_models_Posts {
 		$this->db = Zend_Db_Table::getDefaultAdapter ();
 		$utilities = new application_models_Utilities ();
 		$this->user_details = $utilities->get_user_details ();
+		$utilities = new application_models_Utilities();
+        $user_details = $utilities->get_user_details();
+
 	}
 	public function get_posts() {
+		$utilities = new application_models_Utilities();
+                        $user_details = $utilities->get_user_details();
+                       
 		$get_posts_query = $this->db->select ()->from ( array (
 				'emp' => 'ijp_employees_list' 
 		) )->join ( array (
@@ -16,6 +22,10 @@ class application_models_Posts {
 		), 'posts.project_id = projects.project_id', array (
 				'project_name' => 'name' 
 		) )->where ( 'posts.status = ?', 'A' )->order ( 'posts.date_of_creation desc' );
+
+		 if($user_details->user_role == 'M'){
+			$get_posts_query->where ( 'posts.eid = ?', $user_details->eid );				
+		}
 		return $this->db->fetchAll ( $get_posts_query );
 	}
 
@@ -29,6 +39,9 @@ class application_models_Posts {
 		), 'posts.project_id = projects.project_id', array (
 			'project_name' => 'name'
 		) )->where ( 'posts.status = ?', 'P' )->order ( 'posts.date_of_creation desc' );
+		if($this->user_details->user_role == 'M'){
+			$get_posts_query->where ( 'posts.eid = ?', $this->user_details->eid );				
+		}
 		return $this->db->fetchAll ( $get_posts_query );
 	}
 

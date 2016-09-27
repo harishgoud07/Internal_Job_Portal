@@ -12,16 +12,24 @@ class application_models_Loginrequests {
 		) )->join ( array (
 				'request' => 'ijp_login_requests' 
 		), 'emp.eid=request.eid' )->where ( 'emp.user_role = ?', 'M' )->where ( 'request.status = ?', 'P' )->order ( 'request.date_of_creation desc' );
-		echo $get_login_request_query;
+
+		if($user_details->user_role == 'M'){
+			$get_login_request_query->where ( 'request.eid = ?', $user_details->eid );				
+		}
+
 		return $this->db->fetchAll ( $get_login_request_query );
 	}
 	function update_login_request_status($values) {
-		$this->upadte ( 'ijp_login_requests', array (
+		$this->db->update ( 'ijp_login_requests', array (
 				'status' => $values ['status'],
 				'date_of_modification' => new Zend_Db_Expr ( 'now()' ) 
 		), array (
 				'request_id =?' => $values ['request_id'] 
 		) );
+
+		if($values['status'] == 'A'){
+			/*send mail*/
+		}
 	}
 	function store_login_request($values) {
 		$insert_login_request_values ['eid'] = $values ['last_inserted_emp_id'];

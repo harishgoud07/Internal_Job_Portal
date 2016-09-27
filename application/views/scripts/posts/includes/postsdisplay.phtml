@@ -1,6 +1,8 @@
 <?php
 $active_posts_data = $this->active_posts_data;
-
+$utilities = new application_models_Utilities();
+$user_details = $utilities->get_user_details();
+$user_role = $user_details->user_role;
 ?>
 
 <div class="row">
@@ -30,7 +32,7 @@ if ($active_posts_data) {
 						<div
 							class="col-lg-3 col-md-3 col-sm-3 col-xs-3 pull-right job-list-item-btn-container">
 							<button class="btn btn-info <?php echo ($post_data['status'] == 'P')?'approve-post':'update_posts'?>"
-								data-post-id='<?php echo $post_data['post_id'];?>'><?php echo ($post_data['status'] == 'P')? 'Approve post' : 'Update details'?></button>
+								data-post-id='<?php echo $post_data['post_id'];?>'><?php echo ($post_data['status'] == 'P' && $user_role == 'A')? 'Approve post' : 'Update details'?></button>
 							<button class="btn btn-danger delete_post"
 								data-post-id='<?php echo $post_data['post_id'];?>' data-current-page="<?php echo ($post_data['status'] == 'P')?'jobpostrequests':'index'?>">Delete Job</button>
 						</div>

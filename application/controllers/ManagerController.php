@@ -17,6 +17,9 @@ class ManagerController extends Zend_Controller_Action
 	{
 		
 	}
+    public function loginrequestsAction() {
+        $this->_forward('index', 'loginrequests', null);
+    }
 
 	
 }
