@@ -31,7 +31,11 @@ class PostsController extends Zend_Controller_Action {
 			$posts = new application_models_Posts ();
 			$request_params ['status'] = 'D';
 			$posts->update_post_status ( $request_params );
-			$posts_data = $posts->get_posts ();
+			if ($request_params['from'] == 'jobpostrequests') {
+				$posts_data = $posts->get_requested_posts ();
+			} else {
+				$posts_data = $posts->get_posts ();
+			}
 			$this->view->active_posts_data = $posts_data;
 			$this->renderScript ( 'posts/includes/postsdisplay.phtml' );
 		}
@@ -58,6 +62,20 @@ class PostsController extends Zend_Controller_Action {
 			$posts_data = $posts->get_posts ();
 			$this->view->active_posts_data = $posts_data;
 			$this->renderScript ( 'posts/includes/postsdisplay.phtml' );
+		}
+	}
+
+	public function approvepostAction() {
+		$request_params = $this->getRequest ()->getParams ();
+		$this->_helper->layout ()->disableLayout ();
+		$this->_helper->viewRenderer->setNoRender(true);
+		if ($this->getRequest ()->isPost ()) {
+			$posts = new application_models_Posts ();
+			$request_params ['status'] = 'A';
+			$posts->update_post_status ( $request_params );
+			echo json_encode ( ['status' => 'success'] );
+		} else {
+			echo json_encode ( ['status' => 'fail'] );
 		}
 	}
 }

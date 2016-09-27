@@ -14,7 +14,12 @@ if ($active_posts_data) {
 			<div class="panel panel-default job-list-item">
 				<!-- Default panel contents -->
 				<div class="panel-heading">
-					<div><?php echo $post_data['project_name'];?></div>
+					<div class="row">
+						<div class="<?php echo ($post_data['status'] == 'P')? 'col-lg-7 col-md-7 col-sm-7 col-xs-7': 'col-lg-12 col-md-12 col-sm-12 col-xs-12'; ?>"><?php echo $post_data['project_name'];?></div>
+						<?php if ($post_data['status'] == 'P') { ?>
+							<div class="col-lg-5 col-md-5 col-sm-5 col-xs-5"><span class="pull-right">Posted by: <?php echo $post_data['name']; ?></span></div>
+						<?php }?>
+					</div>
 				</div>
 				<div class="panel-body">
 					<div class="row">
@@ -24,11 +29,10 @@ if ($active_posts_data) {
 						</div>
 						<div
 							class="col-lg-3 col-md-3 col-sm-3 col-xs-3 pull-right job-list-item-btn-container">
-							<button class="btn btn-info update_posts"
-								data-post-id='<?php echo $post_data['post_id'];?>'>Update
-								details</button>
+							<button class="btn btn-info <?php echo ($post_data['status'] == 'P')?'approve-post':'update_posts'?>"
+								data-post-id='<?php echo $post_data['post_id'];?>'><?php echo ($post_data['status'] == 'P')? 'Approve post' : 'Update details'?></button>
 							<button class="btn btn-danger delete_post"
-								data-post-id='<?php echo $post_data['post_id'];?>'>Delete Job</button>
+								data-post-id='<?php echo $post_data['post_id'];?>' data-current-page="<?php echo ($post_data['status'] == 'P')?'jobpostrequests':'index'?>">Delete Job</button>
 						</div>
 					</div>
 					<div class="row">

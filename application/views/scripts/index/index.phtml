@@ -12,13 +12,14 @@
                                 ->appendFile($this->baseUrl('externals\js\moment.min.js'))
                                 ->appendFile($this->baseUrl('externals\js\chosen.jquery.js'))
                                 ->appendFile($this->baseUrl('externals\js\bootstrap-datetimepicker.min.js'))
-                                ->appendFile($this->baseUrl('externals\js\dashboard.js'));
+                                ->appendFile($this->baseUrl('externals\js\login.js'));
 
 		echo $this->headLink()->prependStylesheet($this->baseUrl('externals\css\chosen.css'))
 								->prependStylesheet($this->baseUrl('externals\css\bootstrap.min.css'))
                                 ->appendStylesheet($this->baseUrl('externals\css\bootstrap-datetimepicker.css'))
                                 ->appendStylesheet($this->baseUrl('externals\css\chosen-bootstrap.css'))
-                                ->appendStylesheet($this->baseUrl('externals\css\styles.css'));
+                                ->appendStylesheet($this->baseUrl('externals\css\styles.css'))
+                                ->appendStylesheet($this->baseUrl('externals\css\login.css'));
 	?>
 	
 </head>
@@ -42,10 +43,10 @@ $projects_list = $this->projects_list;
 
         <div class="btn-group btn-group-justified login-signup-nav-btn-group" role="group">
           <div class="btn-group" role="group">
-            <button type="button" class="btn btn-default"  data-target="#login" aria-controls="login" role="tab" data-toggle="tab">Login</button>
+            <button type="button" class="btn tab-button active" id="tab-button-login"  data-target="#login" aria-controls="login" role="tab" data-toggle="tab">Login</button>
           </div>
           <div class="btn-group" role="group">
-            <button type="button" class="btn btn-default" data-target="#register" aria-controls="register" role="tab" data-toggle="tab">Register</button>
+            <button type="button" class="btn tab-button" id="tab-button-register" data-target="#register" aria-controls="register" role="tab" data-toggle="tab">Register</button>
           </div>
         </div>
 
