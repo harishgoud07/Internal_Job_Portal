@@ -1,7 +1,7 @@
 <?php
-class application_models_LoginRequests {
+class application_models_Loginrequests {
 	private $db;
-	public function _construct() {
+	public function __construct() {
 		$this->db = Zend_Db_Table::getDefaultAdapter ();
 	}
 	function get_login_requets($values) {
@@ -11,8 +11,8 @@ class application_models_LoginRequests {
 				'emp' => 'ijp_employees_list' 
 		) )->join ( array (
 				'request' => 'ijp_login_requests' 
-		), 'emp.eid=request.eid' )->where ( 'user_role = ?', $user_details ['user_role'] )->where ( 'eid = ?', $user_details ['eid'] )->where ( 'status = ?', 'P' )->order ( 'request.date_of_creation desc' );
-		
+		), 'emp.eid=request.eid' )->where ( 'emp.user_role = ?', 'M' )->where ( 'request.status = ?', 'P' )->order ( 'request.date_of_creation desc' );
+		echo $get_login_request_query;
 		return $this->db->fetchAll ( $get_login_request_query );
 	}
 	function update_login_request_status($values) {

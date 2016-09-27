@@ -1,4 +1,7 @@
-<?php $employee_details = $this->employee_details; ?>
+<?php 
+$employee_details = $this->employee_details;
+$projects_list = $this->projects_list; 
+?>
 <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-8 col-xs-offset-2 register-form-container">
 	<form class="form-horizontal" method="POST"
 		enctype="multipart/form-data"
@@ -20,6 +23,34 @@
 					autofocus>
 			</div>
 		</div>
+		<div class="form-group">
+                    <div class="">
+                      <label for="project_id">Project</label>
+                      <select id="project_id" name="project_id" class="form-control">
+                                    <option value=''>SELECT</option>
+                                    <?php
+                                    if($projects_list){
+                                        foreach($projects_list as $project_data){
+                                           echo "<option value='".$project_data['project_id']."' >".$project_data['name']."</option>"; 
+                                                                                       
+                                        }
+                                    }
+                             	           
+                                	    ?>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="">
+                      <label for="Manager">Manager</label>
+                      <select id="manager_id" name="Manager" class="form-control">  
+                      <option value="">Select</option>
+                        <option value="1">Admin</option>
+                        <option value="2">Manager</option>
+                        <option value="3">Employee</option>
+                      </select>
+                    </div>
+                  </div>
 		<?php if(!$employee_details->eid) {?>
 		<div class="form-group">
 			<div class="">
