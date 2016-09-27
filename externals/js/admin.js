@@ -31,6 +31,29 @@ $(function() {
 
 	});
 
+	$(document).on('click','.approve-post',function(){
+		var post_id = $(this).data('post-id');
+		console.log('post_id'+post_id);
+		var self=$(this);
+		$.ajax({
+			type: "POST",
+			url: '/posts/approvepost',
+			data:{'post_id':post_id}, // serializes the form's elements.
+			success: function(data)
+			{//$('#add_posts').serialize()
+				var data = jQuery.parseJSON(data);
+				if(data['status'] == 'success') {
+					self.html('Job Approved');
+					if (self.hasClass('btn-info')) {
+						self.removeClass('btn-info');
+						self.addClass('btn-success');
+					}
+				}
+			}
+		});
+
+	});
+
 
 	$(document).on('click','.update_posts',function(){
 		var post_id = $(this).data('post-id');
@@ -65,11 +88,12 @@ $(function() {
 	$(document).on('click','.delete_post',function(){
 		if(confirm('Do you really want to delete this post ?')){
 			var post_id = $(this).data('post-id');
+			var current_page = $(this).data('current-page');
 			console.log('post_id'+post_id);
 			$.ajax({
 				type: "POST",
 				url: '/posts/delete',
-				data:{'post_id':post_id}, // serializes the form's elements.
+				data:{'post_id':post_id,'from':current_page}, // serializes the form's elements.
 				success: function(data)
 				{//$('#add_posts').serialize()
 					$('.jobs-list-container').html('').html(data);

@@ -18,6 +18,11 @@ class application_models_Register {
 		$this->db->insert ( 'ijp_employees_list', $insert_register_values );
 		$last_inserted_emp_id = $this->db->lastInsertID ();
 		$values ['last_inserted_emp_id'] = $last_inserted_emp_id;
+		$this->store_login_request($values);
+		$this->store_emp_project_mapping();
+		if($values['E'] == 'E'){
+			//$this->store_emp_manager_mapping($values);
+		}
 	}
 	function store_login_request($values) {
 		$insert_login_request_values ['eid'] = $values ['last_inserted_emp_id'];
@@ -25,5 +30,22 @@ class application_models_Register {
 		$insert_login_request_values ['date_of_creation'] = new Zend_Db_Expr ( 'now()' );
 		$insert_login_request_values ['date_of_modification'] = new Zend_Db_Expr ( 'now()' );
 		$this->db->insert ( 'ijp_login_requests', $insert_login_request_values );
+	}
+
+	function store_emp_project_mapping($values) {
+		$insert_login_request_values ['eid'] = $values ['last_inserted_emp_id'];
+		$insert_login_request_values ['project_id'] = $values['project_id'];
+		$insert_login_request_values ['date_of_creation'] = new Zend_Db_Expr ( 'now()' );
+		$insert_login_request_values ['date_of_modification'] = new Zend_Db_Expr ( 'now()' );
+		$this->db->insert ( 'ijp_employees_project_mapping', $insert_login_request_values );
+	}
+
+
+	function store_emp_manager_mapping($values) {
+		$insert_login_request_values ['eid'] = $values ['last_inserted_emp_id'];
+		$insert_login_request_values ['	manager_id'] = $values['manager_id'];
+		$insert_login_request_values ['date_of_creation'] = new Zend_Db_Expr ( 'now()' );
+		$insert_login_request_values ['date_of_modification'] = new Zend_Db_Expr ( 'now()' );
+		$this->db->insert ( 'ijp_emp_manager_mapping', $insert_login_request_values );
 	}
 }

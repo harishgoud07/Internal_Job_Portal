@@ -18,6 +18,20 @@ class application_models_Posts {
 		) )->where ( 'posts.status = ?', 'A' )->order ( 'posts.date_of_creation desc' );
 		return $this->db->fetchAll ( $get_posts_query );
 	}
+
+	public function get_requested_posts() {
+		$get_posts_query = $this->db->select ()->from ( array (
+			'emp' => 'ijp_employees_list'
+		) )->join ( array (
+			'posts' => 'ijp_job_posts'
+		), 'emp.eid = posts.eid' )->join ( array (
+			'projects' => 'ijp_projects_list'
+		), 'posts.project_id = projects.project_id', array (
+			'project_name' => 'name'
+		) )->where ( 'posts.status = ?', 'P' )->order ( 'posts.date_of_creation desc' );
+		return $this->db->fetchAll ( $get_posts_query );
+	}
+
 	function get_projects_list() {
 		$select_pojects_query = $this->db->select ()->from ( 'ijp_projects_list' );
 		return $this->db->fetchAll ( $select_pojects_query );
@@ -75,7 +89,7 @@ class application_models_Posts {
 	function get_requested_posts_count() {
 		$select_post_requests_count_query = $this->db->select ()->from ( 'ijp_job_posts', array (
 				'requested_posts_count' => 'count(*)' 
-		) )->where ( 'status = ?', 'P' );
+		) )->where ( 'status = ?', 'P') ->where('posted_by = ?','M');
 		return $this->db->fetchRow ( $select_post_requests_count_query );
 	}
 	function get_post_data($values) {

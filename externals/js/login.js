@@ -15,4 +15,17 @@ $(function() {
 		e.preventDefault();
 	});
 
+	$('#tab-button-login').click(function(event){
+		if(!$('#tab-button-login').hasClass('active')) {
+			$('#tab-button-register').removeClass('active');
+			$('#tab-button-login').addClass('active');
+		}
+	});
+	$('#tab-button-register').click(function(event){
+		if(!$('#tab-button-register').hasClass('active')) {
+			$('#tab-button-login').removeClass('active');
+			$('#tab-button-register').addClass('active');
+		}
+	});
+
 });
