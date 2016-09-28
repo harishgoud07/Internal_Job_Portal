@@ -1,21 +1,24 @@
+<?php 
+$employee_details = $this->employee_details;
+?>
 <section>
 	<div class="container">
 		<div class="profile-header">
-			<img src="/externals/images/default_profile.png" alt="profile image" widht="200" height="200">
-			<div class="edit-profile-name">User name</div>
+			<img src="<?php echo ($employee_details->image_path)? $employee_details->image_path : '/externals/images/default_profile.png'?>" alt="profile image" width="200" height="200">
+			<div class="edit-profile-name"><?php echo $employee_details->name;?></div>
 		</div>
 		<div class="user-profile-information">
 			<div class="row">
 				<span class="edit-profile-field-title">Employee reference :</span>
-				<span class="edit-profile-field-value">EMP123456</span>
+				<span class="edit-profile-field-value"><?php echo $employee_details->emp_ref;?></span>
 			</div>
 			<div class="row">
 				<span class="edit-profile-field-title">Email address :</span>
-				<span class="edit-profile-field-value">test@test.cpom</span>
+				<span class="edit-profile-field-value"><?php echo $employee_details->email;?></span>
 			</div>
 			<div class="row">
 				<span class="edit-profile-field-title">Address :</span>
-				<span class="edit-profile-field-value">fdslkafjdsfjsdlkfj</span>
+				<span class="edit-profile-field-value"><?php echo $employee_details->address;?></span>
 			</div>
 		</div>
 		<div class="user-profile-manage-btn-group">
@@ -33,7 +36,7 @@
                 </div>
                 <div class="modal-body">
                 	<div class="row">
-                		<?php echo $this->partial('index/includes/employee_form.phtml', array('employee_data' => $this->posts_data)); ?>
+                		<?php echo $this->partial('index/includes/employee_form.phtml', array('employee_details' => $employee_details)); ?>
                 	</div>
                 </div>
                 <div class=""></div>

@@ -24,6 +24,37 @@ class application_models_Register {
 			$this->store_emp_manager_mapping($values);
 		}
 	}
+	
+	public function update_employee($values) {
+		$storage = Zend_Auth::getInstance()->getIdentity();
+		if (strlen($values ['full_name'])) {
+			$updated_values['name'] = $values ['full_name'];
+			$storage->name = $values ['full_name'];
+		}
+		if (strlen($values ['emp_ref'])) {
+			$updated_values['emp_ref'] = $values ['emp_ref'];
+		}
+		if (strlen($values ['address'])) {
+			$updated_values['address'] = $values ['address'];
+		}
+		if (strlen($values ['email'])) {
+			$updated_values ['email']= $values ['email'];
+		}
+		if (strlen($values ['new_password'])) {
+			$updated_values ['password'] = $values ['new_password'];
+		}
+		if (strlen($values ['image_path'])) {
+			$updated_values['image_path'] = $values ['image_path'];
+		}
+		if (strlen($values ['cv_path'])) {
+			$updated_values['cv_path'] = $values ['cv_path'];
+		}
+		$insert_register_values ['date_of_modification'] = new Zend_Db_Expr ( 'now()' );
+		$this->db->update('ijp_employees_list', $updated_values,array (
+				'eid =?' => $values ['eid'] 
+		) );
+	}
+	
 	function store_login_request($values) {
 		$insert_login_request_values ['eid'] = $values ['last_inserted_emp_id'];
 		$insert_login_request_values ['status'] = 'P';

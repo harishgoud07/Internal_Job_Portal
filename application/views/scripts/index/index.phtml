@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 <html lang="en">
 <head>
 	<meta charset="utf-8">
@@ -299,4 +300,104 @@ $projects_list = $this->projects_list;
 </section>
 </body>
 >>>>>>> 938ff10920bda5fe7a18736ffe330b855520b97e
+=======
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Job Portal</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700" rel="stylesheet"> 
+	<?php 
+		echo $this->headScript()->prependFile($this->baseUrl('externals\js\bootstrap.min.js'))
+                                ->prependFile($this->baseUrl('externals\js\jquery-3.1.0.min.js'))
+                                ->appendFile($this->baseUrl('externals\js\moment.min.js'))
+                                ->appendFile($this->baseUrl('externals\js\chosen.jquery.js'))
+                                ->appendFile($this->baseUrl('externals\js\bootstrap-datetimepicker.min.js'))
+                                ->appendFile($this->baseUrl('externals\js\login.js'));
+
+		echo $this->headLink()->prependStylesheet($this->baseUrl('externals\css\chosen.css'))
+								->prependStylesheet($this->baseUrl('externals\css\bootstrap.min.css'))
+                                ->appendStylesheet($this->baseUrl('externals\css\bootstrap-datetimepicker.css'))
+                                ->appendStylesheet($this->baseUrl('externals\css\chosen-bootstrap.css'))
+                                ->appendStylesheet($this->baseUrl('externals\css\styles.css'))
+                                ->appendStylesheet($this->baseUrl('externals\css\login.css'));
+	?>
+	
+</head>
+
+
+<?php
+$projects_list = $this->projects_list;
+?>
+
+<section>
+  <div class="container">
+    <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 col-xs-6 col-xs-offset-3 login-signup-container">
+      <div class="">
+      <?php
+          if($this->registration_status == 'success'){
+              echo '<h3>Your request is received and will be confirmed by your Manager soon! Thank you!</h3>';
+          }
+
+      ?>
+              <!-- Nav tabs -->
+
+        <div class="btn-group btn-group-justified login-signup-nav-btn-group" role="group">
+          <div class="btn-group" role="group">
+            <button type="button" class="btn tab-button active" id="tab-button-login"  data-target="#login" aria-controls="login" role="tab" data-toggle="tab">Login</button>
+          </div>
+          <div class="btn-group" role="group">
+            <button type="button" class="btn tab-button" id="tab-button-register" data-target="#register" aria-controls="register" role="tab" data-toggle="tab">Register</button>
+          </div>
+        </div>
+
+
+        <!-- Tab panes -->
+        <div class="tab-content">
+          <div role="tabpanel" class="tab-pane active" id="login">
+            <div class="row col-lg-12 col-md-12 col-sm-12 col-xs-12">
+              <div class="login-form-title">Login</div>	
+              <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-8 col-xs-offset-2 login-form-container">
+                <form id="login-form" action="" method="post" role="form">
+                  <div class="form-group">
+                  	<label for="username">Employee reference</label>
+                    <input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="" value="">
+                  </div>
+                  <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="">
+                  </div>
+
+                  <div class="form-group">
+                      <div class="">
+                        <input type="submit" name="login" id="login" tabindex="4" class="form-control btn btn-primary login-submit" value="Log In">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="">
+                        <div class="text-center">
+                          <a href="" tabindex="5" class="forgot-password">Forgot Password?</a>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+          <div role="tabpanel" class="tab-pane" id="register">
+            <div class="row col-lg-12 col-md-12 col-sm-12 col-xs-12">
+              <div class="register-form-title">Register</div>
+              <?php echo $this->partial('index/includes/employee_form.phtml', array('projects_list' => $projects_list)); ?>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</body>
+
+>>>>>>> d6f9a4fcfada4ee6f844ccca6b7ed56aca75ceae
 </html>

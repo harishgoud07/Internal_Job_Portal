@@ -59,19 +59,50 @@ class IndexController extends Zend_Controller_Action {
 			$projects_list = $posts->get_projects_list ();
 			$this->view->projects_list = $projects_list;
 	}
-	
+							
 	public function editprofileAction() {
 		$request_params = $this->getRequest ()->getParams ();
 		if ($this->getRequest ()->isPost ()) {
-			
+			if ($request_params ['update']) {
+				if ( $request_params ['full_name'] &&
+						$request_params ['emp_ref'] &&
+						$request_params ['email'] &&
+						$request_params ['address'] &&
+						$request_params ['eid']) {
+							$upload = new Zend_File_Transfer ();
+							$files = $upload->getFileInfo ();
+							foreach ( $files as $file => $info ) {
+								if (! $upload->isUploaded ( $file ) && ! $upload->isValid ( $file )) {
+									continue;
+								}
+								if($file=='user_image') {
+									$request_params['image_path'] = APPLICATION_PATH.'\\..\\upload\\user_images\\'.$request_params['emp_ref'].'_'.$info['name'];
+									$upload->addFilter('Rename', array('target' => $request_params['image_path'], 'overwrite' => true), $file);
+								} else {
+									$request_params['cv_path'] = APPLICATION_PATH.'\\..\\upload\\user_cvs\\'.$request_params['emp_ref'].'_'.$info['name'];
+									$upload->addFilter('Rename', array('target' => $request_params['cv_path'], 'overwrite' => true), $file);
+								}
+								$upload->receive ($file);
+							}
+							$register = new application_models_Register();
+							$register->update_employee($request_params);
+							
+						}
+			}
 		}
+		$employee = new application_models_Employee();
+		$storage = Zend_Auth::getInstance()->getIdentity();
+		if($storage->eid){
+			$emp_id = $storage->eid;
+		}
+// 		$object = new stdClass();
+// 		foreach ($employee as $key => $value)
+// 		{
+// 			$object->$key = $value;
+// 		}
+		$this->view->employee_details = json_decode(json_encode($employee->getEmployeeDetails($emp_id)), FALSE);
 	}
 	
-	public function registerAction() {
-		$request_params = $this->getRequest ()->getParams ();
-		if ($this->getRequest ()->isPost ()) {
-		}
-	}
 	public function logoutAction() {
 		Zend_Auth::getInstance ()->clearIdentity ();
 		$this->_redirect ( '/' );

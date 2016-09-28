@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .login-requests-list-item {
     border: 1px solid #ccc;
     /*border-left-width: 7px;*/
@@ -21,4 +22,29 @@
 }
 .login-requests-btn-group button {
     margin: 0px 5px 10px 5px;
+=======
+.login-requests-list-item {
+    border: 1px solid #ccc;
+    border-left-width: 7px;
+    padding:10px;
+}
+
+.login-requests-list-item-field-title {
+    font-weight:bold;
+}
+
+.login-requests-list-item-details {
+    margin-top:6px
+}
+
+.login-requests-list-item-header {
+    border-bottom:1px solid #ccc;
+}
+
+.login-requests-list-item-field {
+    padding: 6px 10px;
+}
+.login-requests-btn-group button {
+    margin: 0px 5px 10px 5px;
+>>>>>>> d6f9a4fcfada4ee6f844ccca6b7ed56aca75ceae
 }
