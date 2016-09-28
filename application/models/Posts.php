@@ -38,7 +38,7 @@ class application_models_Posts {
 			'projects' => 'ijp_projects_list'
 		), 'posts.project_id = projects.project_id', array (
 			'project_name' => 'name'
-		) )->where ( 'posts.status = ?', 'P' )->order ( 'posts.date_of_creation desc' );
+		) )->where ( 'posts.status = ?', 'P' )->where('posted_by = ?','M')->order ( 'posts.date_of_creation desc' );
 		if($this->user_details->user_role == 'M'){
 			$get_posts_query->where ( 'posts.eid = ?', $this->user_details->eid );				
 		}

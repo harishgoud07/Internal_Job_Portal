@@ -1,6 +1,10 @@
 <?php
 class IndexController extends Zend_Controller_Action {
 	public function init() {
+		$storage = Zend_Auth::getInstance()->getIdentity();
+		if($storage){
+			$storage->active_page="profile";
+		}
 	}
 	public function indexAction() {
 		$request_params = $this->getRequest ()->getParams ();
@@ -95,11 +99,6 @@ class IndexController extends Zend_Controller_Action {
 		if($storage->eid){
 			$emp_id = $storage->eid;
 		}
-// 		$object = new stdClass();
-// 		foreach ($employee as $key => $value)
-// 		{
-// 			$object->$key = $value;
-// 		}
 		$this->view->employee_details = json_decode(json_encode($employee->getEmployeeDetails($emp_id)), FALSE);
 	}
 	

@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <?php
 $login_requests_data = $this->login_requests_data;
 
@@ -13,58 +12,4 @@ $login_requests_data = $this->login_requests_data;
         <?php echo $this->partial('loginrequests/includes/loginrequestsdisplay.phtml', array(
     'login_requests_data' => $this->login_requests_data)); ?>
 </div>
-=======
-<?php
-$login_requests_data = $this->login_requests_data;
 
-?>
-
-<?php
-     $this->headLink()->appendStylesheet($this->baseUrl('externals\css\loginrequests.css'));
-?>
-
-<div class ='col-lg-12 no-padding login-requests-container'>
-<?php 
-if($login_requests_data){
-    foreach($login_requests_data as $login_request){
-
-    ?>
-<div class="row login-requests-list-item">
-            <div class="col-lg-12 col-md-12 col-xs-12 colsm-12 login-requests-list-item-header">
-                <div class="col-lg-6 col-md-6 col-xs-6 colsm-6">
-                    <span class="lead"><?php echo $login_request['user_role']=='M'?"Manager":"Employee";?></span>
-                </div>
-                <div class="col-lg-6 col-md-6 col-xs-6 colsm-6 login-requests-btn-group">
-                    <button class="btn btn-danger pull-right" data-request-id ="<?php echo $login_request['request_id'];?>" >Delete request</button>
-                    <button class="btn btn-info pull-right" data-request-id ="<?php echo $login_request['request_id'];?>">Accept request</button>
-                </div>
-            </div>
-            <div class="col-lg-12 col-md-12 col-xs-12 colsm-12 login-requests-list-item-details">
-                <div class="col-lg-6 col-md-6 col-xs-6 colsm-6 login-requests-list-item-field">
-                    <span class="login-requests-list-item-field-title">Employee Name :</span>
-                    <span><?php echo $login_request['name'];?></span>
-                </div>
-                <div class="col-lg-6 col-md-6 col-xs-6 colsm-6 login-requests-list-item-field">
-                    <span class="login-requests-list-item-field-title">Employee Reference :</span>
-                    <span><?php echo $login_request['emp_ref'];?></span>
-                </div>
-                <div class="col-lg-6 col-md-6 col-xs-6 colsm-6 login-requests-list-item-field">
-                    <span class="login-requests-list-item-field-title">Email :</span>
-                    <span><?php echo $login_request['email'];?></span>
-                </div>
-                <div class="col-lg-6 col-md-6 col-xs-6 colsm-6 login-requests-list-item-field">
-                    <span class="login-requests-list-item-field-title">Manager :</span>
-                    <span><?php echo $login_request['name'];?></span>
-                </div>
-            </div>
-        </div>
-
-<?php
-}
-}else{
-
-}
-
-?>
-        
->>>>>>> d6f9a4fcfada4ee6f844ccca6b7ed56aca75ceae
