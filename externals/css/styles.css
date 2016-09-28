@@ -127,3 +127,9 @@ input[type=number]::-webkit-outer-spin-button {
 
 .chosen-container { width: 100% !important; }
 
+
+
+.register-form-container .form-group, #add_posts .form-group{
+	margin-right: 0px;
+	margin-left: 0px;
+}

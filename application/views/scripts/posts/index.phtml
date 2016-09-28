@@ -31,43 +31,57 @@ $this->headScript()->appendFile($this->baseUrl('externals\js\admin.js'));
                 </div>
                 <div class="modal-body">
                     <div class="row">
-                        <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-8 col-xs-offset-2">
+                        <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
                             <form class="form-horizontal" id='add_posts' method = 'POST'>
                             	<input type="text" hidden="true" name="job_id">
-                                <div class="form-group">
-                                	<label for="project_name">Project Name</label>
-                                    <select required class="form-control" name="project_name" id="project_name">
-                                    <option value=''>SELECT</option>
-                                    <?php
-                                    if($projects_list){
-                                        foreach($projects_list as $project_data){
-                                           echo "<option value='".$project_data['project_id']."' >".$project_data['name']."</option>"; 
-                                                                                       
-                                        }
-                                    }
-                             	           
-                                	    ?>
-                                            
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <div class="">
-                                    	<label for="job_title">Job Title</label>
-                                        <input required type="text" class="form-control" name="job_title" id="job_title" placeholder="">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="">
-                                    	<label for="no_of_vacancies">Number of vacancies</label>
-                                        <input type="number" class="form-control" name="no_of_vacancies" id="no_of_vacancies" placeholder="">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="">
-                                    	<label for="salary">Salary</label>
-                                        <input type="text" class="form-control" name="salary" id="salary" placeholder="">
-                                    </div>
-                                </div>
+                            	<div class="row">
+                            		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                            			<div class="form-group">
+		                                	<label for="project_name">Project Name</label>
+		                                    <select required class="form-control" name="project_name" id="project_name">
+		                                    <option value=''>SELECT</option>
+		                                    <?php
+		                                    if($projects_list){
+		                                        foreach($projects_list as $project_data){
+		                                           echo "<option value='".$project_data['project_id']."' >".$project_data['name']."</option>"; 
+		                                                                                       
+		                                        }
+		                                    }
+		                             	           
+		                                	    ?>
+		                                            
+		                                    </select>
+		                                </div>
+                            		</div>
+                            		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                            				<div class="form-group">
+			                                    <div class="">
+			                                    	<label for="job_title">Job Title</label>
+			                                        <input required type="text" class="form-control" name="job_title" id="job_title" placeholder="">
+			                                    </div>
+			                                </div>
+                            		</div>
+                            	</div>
+                                
+                                <div class="row">
+                            		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                            			<div class="form-group">
+		                                    <div class="">
+		                                    	<label for="no_of_vacancies">Number of vacancies</label>
+		                                        <input type="number" class="form-control" name="no_of_vacancies" id="no_of_vacancies" placeholder="">
+		                                    </div>
+		                                </div>
+                            		</div>
+                            		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                            			<div class="form-group">
+		                                    <div class="">
+		                                    	<label for="salary">Salary</label>
+		                                        <input type="text" class="form-control" name="salary" id="salary" placeholder="">
+		                                    </div>
+		                                </div>
+                            		</div>
+                            	</div>
+                                
                                 <div class="form-group">
                                     <div class="">
                                     	<label for="job_description">Job Description</label>

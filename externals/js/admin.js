@@ -71,11 +71,15 @@ $(function() {
 				$('#no_of_vacancies').val(data['no_of_vacancies']);
 				$('#salary').val(data['salary']);
 				$('#job_description').val(data['job_description']);
-				$('.chosen-container-multi').val(data['job_skill_set']);
+				
+				if (data['job_skill_set']) {
+					var skills = data['job_skill_set'].split(',');
+					$('#key_skills').val(skills).trigger('chosen:updated');
+				}
+				
 				$('#key_skills:contains(Base)').prop('selected','selected');
 
 				$('#expiry_date_datepicker').val(data['date_of_creation']);
-				$('.chosen-container-multi').trigger('chosen:updated');
 				$('#save_post').data('post-id',data['post_id']);
 				$('#save_post').prop('id','update_post');
 				$('#add-new-job').modal('show');
