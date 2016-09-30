@@ -31,10 +31,17 @@ if ($active_posts_data) {
 						</div>
 						<div
 							class="col-lg-3 col-md-3 col-sm-3 col-xs-3 pull-right job-list-item-btn-container">
-							<button class="btn btn-info <?php echo ($post_data['status'] == 'P')?'approve-post':'update_posts'?>"
-								data-post-id='<?php echo $post_data['post_id'];?>'><?php echo ($post_data['status'] == 'P' && $user_role == 'A')? 'Approve post' : 'Update details'?></button>
-							<button class="btn btn-danger delete_post"
+							<button class="btn btn-info <?php echo ($post_data['status'] == 'P' && $user_role == 'A')?'approve-post':($user_role != 'E' ?'update_posts' :'apply_job_post'); ?>"
+								data-post-id='<?php echo $post_data['post_id'];?>'><?php echo ($post_data['status'] == 'P' && $user_role == 'A')? 'Approve post' : ($user_role != 'E' ?'Update details' :'Appply') ?></button>
+								<?php
+								if($user_role != 'E'){
+									?>
+<button class="btn btn-danger delete_post"
 								data-post-id='<?php echo $post_data['post_id'];?>' data-current-page="<?php echo ($post_data['status'] == 'P')?'jobpostrequests':'index'?>">Delete Job</button>
+							<?php
+								}
+								?>
+							
 						</div>
 					</div>
 					<div class="row">
