@@ -16,19 +16,20 @@ $(function() {
    });
 
    $(document).on('click','.delete-login-request',function(){
-       alert();
-       var url = '/loginrequests/deleteloginrequest';
-       var request_id = $(this).data('request-id');
-       console.log('d'+request_id);
-       $.ajax({
-			type: "POST",
-			url: url,
-			data:{'request_id':request_id}, // serializes the form's elements.
-			success: function(data)
-			{
-				$('.login-requests-container').html('').html(data);
-			}
-		});
+       if(confirm('Are you sure ? Do you really want to delete the request ?')) {
+    	   var url = '/loginrequests/deleteloginrequest';
+           var request_id = $(this).data('request-id');
+           console.log('d'+request_id);
+           $.ajax({
+    			type: "POST",
+    			url: url,
+    			data:{'request_id':request_id}, // serializes the form's elements.
+    			success: function(data)
+    			{
+    				$('.login-requests-container').html('').html(data);
+    			}
+    		});
+       }
    });
 
 });
