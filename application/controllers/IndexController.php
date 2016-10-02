@@ -61,10 +61,10 @@ class IndexController extends Zend_Controller_Action {
 		
 			$posts = new application_models_Posts();
 			$projects_list = $posts->get_projects_list ();
-			$managers = new application_models_Employee();
-			$managers_list = $managers->getAvailableManagers();
+			//$managers = new application_models_Employee();
+			//$managers_list = $managers->getAvailableManagers();
 			$this->view->projects_list = $projects_list;
-			$this->view->managers_list = $managers_list;
+			$this->view->managers_list = array();//$managers_list;
 	}
 							
 	public function editprofileAction() {
@@ -131,5 +131,17 @@ class IndexController extends Zend_Controller_Action {
 	public function logoutAction() {
 		Zend_Auth::getInstance ()->clearIdentity ();
 		$this->_redirect ( '/' );
+	}
+
+	public function getmanagersAction(){
+		
+		 $request_params = $this->getRequest()->getParams();
+        $this->_helper->layout()->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+        if ($this->getRequest()->isPost()) {
+            $managers = new application_models_Employee();
+		    $managers_list = $managers->get_managers_of_project($request_params);
+			echo json_encode($managers_list);
+        }
 	}
 }

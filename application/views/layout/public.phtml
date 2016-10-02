@@ -62,7 +62,13 @@ if ($storage->active_page) {
                         
                 ?>
                     <li class="<?php echo ($active_page == 'posts')?'active':''?>"><a href="<?php echo $jobs_href;?>">Jobs</a></li>
-                    <li class="<?php echo ($active_page == 'login_requests')?'active':''?>"><a href="<?php echo $login_href;?>">Login Requests</a></li>
+                    <?php
+                    if($user_details->user_role !='E'){
+                        ?>
+                      <li class="<?php echo ($active_page == 'login_requests')?'active':''?>"><a href="<?php echo $login_href;?>">Login Requests</a></li>
+                    <?php  
+                    }
+                    ?>
                     <!--<li><a href="#">Projects</a></li> -->
                     <li class="<?php echo ($active_page == 'profile')?'dropdown active':'dropdown'?>">
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#"> <span class="glyphicon glyphicon-user user-icon"> </span> <?php echo $logged_in_user_name;?><b class="caret"></b></a>
