@@ -63,13 +63,15 @@ class application_models_Posts {
 		$insert_post_values ['job_description'] = $values ['job_description'];
 		$insert_post_values ['job_skill_set'] = implode ( ',', $values ['key_skills'] );
 		$insert_post_values ['salary'] = $values ['salary'];
-		$insert_post_values ['experience'] = '12'; // $values['experience'];
+		$insert_post_values ['experience'] = $values['experience'];
 		$insert_post_values ['status'] = $this->user_details->user_role == 'M' ? 'P' : 'A';
 		$insert_post_values ['project_id'] = $values ['project_id'];
 		$insert_post_values ['eid'] = $this->user_details->eid;
 		$insert_post_values ['no_of_vacancies'] = $values ['no_of_vacancies'];
 		$insert_post_values ['posted_by'] = $this->user_details->user_role;
+		$insert_post_values ['last_date_for_applicants'] = $values['last_date_for_applicants'];
 		$insert_post_values ['date_of_creation'] = new Zend_Db_Expr ( 'now()' );
+		var_dump($insert_post_values);
 		$insert_post_values ['date_of_modification'] = new Zend_Db_Expr ( 'now()' );
 		$this->db->insert ( 'ijp_job_posts', $insert_post_values );
 	}
@@ -79,8 +81,8 @@ class application_models_Posts {
 		$update_post_values ['job_description'] = $values ['job_description'];
 		$update_post_values ['job_skill_set'] = implode ( ',', $values ['key_skills'] );
 		$update_post_values ['salary'] = $values ['salary'];
-		$update_post_values ['experience'] = 12;
-		$values ['experience'];
+		$update_post_values ['experience'] = $values['experience'];
+		$update_post_values ['last_date_for_applicants'] = $values['last_date_for_applicants'];
 		$update_post_values ['project_id'] = $values ['project_id'];
 		$update_post_values ['date_of_modification'] = new Zend_Db_Expr ( 'now()' );
 		$this->db->update ( 'ijp_job_posts', $update_post_values, array (

@@ -11,8 +11,8 @@ class application_models_Register {
 		$insert_register_values ['emp_ref'] = $values ['emp_ref'];
 		$insert_register_values ['password'] = $values ['password'];
 		$insert_register_values ['user_role'] = $values ['user_role'];
-		$insert_register_values ['image_path'] = $values ['image_path'];
-		$insert_register_values ['cv_path'] = $values ['cv_path'];
+		$insert_register_values ['image_path'] = $values ['image_path']?:'';
+		$insert_register_values ['cv_path'] = $values ['cv_path']?:'';
 		$insert_register_values ['date_of_creation'] = new Zend_Db_Expr ( 'now()' );
 		$insert_register_values ['date_of_modification'] = new Zend_Db_Expr ( 'now()' );
 		$this->db->insert ( 'ijp_employees_list', $insert_register_values );
@@ -23,6 +23,11 @@ class application_models_Register {
 		if($values['E'] == 'E'){
 			$this->store_emp_manager_mapping($values);
 		}
+	}
+	
+	public function getEmployeeWithRef($emp_ref) {
+		$selection_query = $this->db->select()->from('ijp_employees_list')->where('emp_ref = ?', $emp_ref);
+		return $this->db->fetchRow($selection_query);
 	}
 	
 	public function update_employee($values) {
