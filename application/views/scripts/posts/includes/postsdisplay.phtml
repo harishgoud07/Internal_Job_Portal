@@ -10,6 +10,22 @@ $user_role = $user_details->user_role;
 <?php
 if ($active_posts_data) {
 	foreach ( $active_posts_data as $post_data ) {
+
+		if(isset($post_data['applied_job_id'])){
+			if($post_data['applied_job_status'] == 'P'){
+				$applied_job_status = 'Not viewed yet..!!';
+				$status_text_color = 'color: #1491BA;';
+			}else if ($post_data['applied_job_status'] == 'A'){
+				$applied_job_status = 'Congrats..! Your application is approved';
+				$status_text_color = 'color: #209966;';
+			}else if($post_data['applied_job_status'] == 'V'){
+				$applied_job_status = 'Viewed but desicion is pending';
+				$status_text_color = 'color: #0D30C9;' ;
+			}else if($post_data['applied_job_status'] == 'R'){
+				$applied_job_status = 'Sorry..! your application is rejected';
+				$status_text_color = 'color: #F2231B;';
+			}
+		}
 		?>
 
 <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
@@ -17,9 +33,9 @@ if ($active_posts_data) {
 				<!-- Default panel contents -->
 				<div class="panel-heading">
 					<div class="row">
-						<div class="<?php echo ($post_data['status'] == 'P')? 'col-lg-7 col-md-7 col-sm-7 col-xs-7': 'col-lg-12 col-md-12 col-sm-12 col-xs-12'; ?>"><?php echo $post_data['project_name'];?></div>
-						<?php if ($post_data['status'] == 'P') { ?>
-							<div class="col-lg-5 col-md-5 col-sm-5 col-xs-5"><span class="pull-right">Posted by: <?php echo $post_data['name']; ?></span></div>
+						<div class="<?php echo ($post_data['status'] == 'P' || $post_data['applied_job_id'])? 'col-lg-7 col-md-7 col-sm-7 col-xs-7': 'col-lg-12 col-md-12 col-sm-12 col-xs-12'; ?>"><?php echo $post_data['project_name']; ?></div>
+						<?php if ($post_data['status'] == 'P' || $post_data['applied_job_id']) { ?>
+							<div class="col-lg-5 col-md-5 col-sm-5 col-xs-5"><span class="pull-right"><?php echo !$post_data['applied_job_id'] ? 'Posted by: '.$post_data['name'] :  '<span style="font-weight: 700;">Status:</span><span style ="'.$status_text_color.'"> '.$applied_job_status .'</span>'; ?></span></div>
 						<?php }?>
 					</div>
 				</div>
@@ -31,8 +47,8 @@ if ($active_posts_data) {
 						</div>
 						<div
 							class="col-lg-3 col-md-3 col-sm-3 col-xs-3 pull-right job-list-item-btn-container">
-							<button class="btn btn-info <?php echo ($post_data['status'] == 'P' && $user_role == 'A')?'approve-post':($user_role != 'E' ?'update_posts' :'apply_job_post'); ?>"
-								data-post-id='<?php echo $post_data['post_id'];?>'><?php echo ($post_data['status'] == 'P' && $user_role == 'A')? 'Approve post' : ($user_role != 'E' ?'Update details' :'Appply') ?></button>
+							<button class="btn btn-info <?php echo ($post_data['status'] == 'P' && $user_role == 'A')?'approve-post':($user_role != 'E' ?'update_posts' :(!isset($post_data['applied_post_id'])?'apply_job_post':'withdraw_post')); ?>"
+								data-post-id='<?php echo !isset($post_data['applied_job_id'])? $post_data['post_id'] : $post_data['applied_job_id'];?>'><?php echo ($post_data['status'] == 'P' && $user_role == 'A')? 'Approve post' : ($user_role != 'E' ?'Update details' :(!isset($post_data['applied_post_id'])?'Appply':'withdraw') )?></button>
 								<?php
 								if($user_role != 'E'){
 									?>

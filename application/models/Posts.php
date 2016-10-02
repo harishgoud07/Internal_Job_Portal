@@ -27,22 +27,14 @@ class application_models_Posts {
 		}
 
 		if($user_details->user_role == 'E'){
-			if(!isset($values['display_applied_posts'])){
-				$get_posts_query->joinLeft ( array (
+
+			$get_posts_query->joinLeft ( array (
 				'applied_jobs' => 'ijp_job_applied_emp_details' 
 		), 'applied_jobs.post_id = posts.post_id', array (
 				'not_applied_post_id' => 'post_id' 
 		) )->where ( 'applied_jobs.post_id is null' );
-			}else{
-				$get_posts_query->join ( array (
-				'applied_jobs' => 'ijp_job_applied_emp_details' 
-		), 'applied_jobs.post_id = posts.post_id', array (
-				'applied_post_id' => 'post_id' 
-		) )->where ( 'applied_jobs.eid = ?', $user_details->eid );
-			}
-							
 		}
-		echo $get_posts_query;
+		//echo $get_posts_query;
 		return $this->db->fetchAll ( $get_posts_query );
 	}
 
@@ -112,9 +104,9 @@ class application_models_Posts {
 	}
 	function upadte_applied_job_post_status($values) {
 		$this->db->update ( 'ijp_job_applied_emp_details', array (
-				'status' => $values ['statuss'] 
+				'status' => $values ['status'] 
 		), array (
-				'id =?' => $values ['id'] 
+				'id =?' => $values ['applied_job_id'] 
 		) );
 	}
 	function get_requested_posts_count() {
@@ -137,25 +129,48 @@ class application_models_Posts {
 	}
 
 
-	function get_applied_posts_data($values) {
-		$select_post_query = $this->db->select ()->from ( array (
-				'posts' => 'ijp_job_posts' 
-		) )->join ( array (
-				'applied_posts' => 'ijp_job_applied_emp_details' 
-		), 'applied_posts.post_id = posts.post_id',array('applied_job_status' => 'applied_posts.status' ) )->where ( 'applied_posts.eid = ?', $this->user_details->eid )
-			->where ( 'posts.status = ?', 'A' );
-		
-		return $this->db->fetchRow ( $select_post_query );
-	}
-
 	function get_applied_posts_count(){
 		$select_applied_posts_count_query = $this->db->select ()->from ( array (
 				'posts' => 'ijp_job_posts' 
 		), array ('applied_posts_count' => 'count(*)' ) )->join ( array (
 				'applied_posts' => 'ijp_job_applied_emp_details' 
 		), 'applied_posts.post_id = posts.post_id',array('applied_job_status' => 'applied_posts.status' ) )->where ( 'applied_posts.eid = ?', $this->user_details->eid )
-			->where ( 'posts.status = ?', 'A' );
+			->where ( 'posts.status = ?', 'A' )->where ( 'applied_posts.status != ?', 'D' );
 		
 		return $this->db->fetchRow ( $select_applied_posts_count_query );
 	}
+
+
+	function get_applied_job_posts(){
+
+		$utilities = new application_models_Utilities();
+        $user_details = $utilities->get_user_details();
+                       
+		$get_posts_query = $this->db->select ()->from ( array (
+				'emp' => 'ijp_employees_list' 
+		) )->join ( array (
+				'applied_jobs' => 'ijp_job_applied_emp_details' 
+		), 'applied_jobs.eid = emp.eid', array (
+				'applied_post_id' => 'post_id','applied_job_status'=>'status','applied_job_id'=>'id' 
+		) )->join ( array (
+				'posts' => 'ijp_job_posts' 
+		), 'applied_jobs.post_id = posts.post_id' )->join ( array (
+				'projects' => 'ijp_projects_list' 
+		), 'posts.project_id = projects.project_id', array (
+				'project_name' => 'name' 
+		) )->where ( 'applied_jobs.eid = ?', $user_details->eid )
+		->where ( 'posts.status = ?', 'A' )->where ( 'applied_jobs.status != ?', 'D' )->order ( 'posts.date_of_creation desc' );
+
+		 if($user_details->user_role == 'M'){
+			//$get_posts_query->where ( 'posts.eid = ?', $user_details->eid );				
+		}
+
+		if($user_details->user_role == 'E'){
+			$get_posts_query->where ( 'applied_jobs.eid = ?', $user_details->eid );
+		}
+		//echo $get_posts_query;
+		return $this->db->fetchAll ( $get_posts_query );
+	}
+
+	
 }

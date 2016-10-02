@@ -34,12 +34,21 @@ if($user_role == 'E'){
                 </div>
 <?php
  }else{
+	 if(!$this->display_applied_posts){
 ?>
 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                     <button onclick="window.location='/posts/displayappliedjobposts'" class="btn">View Applied Job posts <span class="badge"><?php echo $display_count;?></span></button>
                 </div>
 
 <?php
+	 }else{
+		 ?>
+<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                    <button onclick="window.location='/'" class="btn">Browse all posts </span></button>
+                </div>
+
+<?php		 
+	 }
  }
  ?>
 
