@@ -15,7 +15,13 @@ class LoginrequestsController extends Zend_Controller_Action
         //$this->_helper->layout ()->disableLayout ();
         //$this->_helper->viewRenderer->setNoRender(true);
         $login_request = new application_models_Loginrequests();
-        $login_requests_data = $login_request->get_login_requets();
+        $utilities = new application_models_Utilities ();
+        $user_details = $utilities->get_user_details ();
+        if($user_details->user_role == 'A') {
+        	$login_requests_data = $login_request->get_login_requets();
+        } else if($user_details->user_role == 'M') {
+        	$login_requests_data = $login_request->get_login_requests_for_manager();
+        }
         $this->view->login_requests_data = $login_requests_data;
     }
 
