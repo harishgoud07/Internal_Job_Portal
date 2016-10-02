@@ -1,6 +1,7 @@
 <?php 
 $employee_details = $this->employee_details;
 $projects_list = $this->projects_list; 
+$managers_list = $this->managers_list;
 ?>
 <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1 register-form-container">
 	<form class="form-horizontal" method="POST"
@@ -12,7 +13,8 @@ $projects_list = $this->projects_list;
 			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
 				<div class="form-group">
 					<div class="">
-						<label for="full_name">Full name</label> <input type="text"
+						<label for="full_name">Full name</label> 
+						<input type="text" required
 							name="full_name" id="full_name" placeholder="" value="<?php echo $employee_details->name?>" class="form-control"
 							autofocus>
 					</div>
@@ -22,20 +24,21 @@ $projects_list = $this->projects_list;
 				<div class="form-group">
 					<div class="">
 						<label for="emp_ref">Employee Reference</label> 
-						<input type="text" value="<?php echo $employee_details->emp_ref?>"
+						<input type="text" required value="<?php echo $employee_details->emp_ref?>"
 							name="emp_ref" id="emp_ref" placeholder="" class="form-control"
 							autofocus>
 					</div>
 				</div>
 			</div>
 		</div>
+		<?php if(!$employee_details->eid) {?>
 		<div class="row">
 			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
 				<div class="form-group">
                     <div class="">
                       <label for="project_id">Project</label>
-                      <select id="project_id" name="project_id" class="form-control">
-                                    <option value=''>SELECT</option>
+                      <select required id="project_id" name="project_id" class="form-control">
+                                    <option value=''>Select</option>
                                     <?php
                                     if($projects_list){
                                         foreach($projects_list as $project_data){
@@ -53,16 +56,22 @@ $projects_list = $this->projects_list;
 				<div class="form-group">
                     <div class="">
                       <label for="Manager">Manager</label>
-                      <select id="manager_id" name="Manager" class="form-control">  
-                      <option value="">Select</option>
-                        <option value="1">Admin</option>
-                        <option value="2">Manager</option>
-                        <option value="3">Employee</option>
+                      <select required id="manager_id" name="Manager" value ="" class="form-control">  
+                      <option value=''>Select</option>
+                                    <?php
+                                    if($projects_list){
+                                        foreach($managers_list as $manager_data){
+                                           echo "<option value='".$manager_data['eid']."' >".$manager_data['name']."</option>"; 
+                                                                                    
+                                        }
+                                    }
+                             	    ?>
                       </select>
                     </div>
                   </div>
 			</div>
 		</div>
+		<?php }?>
 		<div class="row">
 			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
 				<div class="form-group">

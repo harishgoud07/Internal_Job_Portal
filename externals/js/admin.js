@@ -75,6 +75,8 @@ $(function() {
 				if (data['job_skill_set']) {
 					var skills = data['job_skill_set'].split(',');
 					$('#key_skills').val(skills).trigger('chosen:updated');
+				} else {
+					$('#key_skills').val([]).trigger('chosen:updated');
 				}
 				
 				$('#key_skills:contains(Base)').prop('selected','selected');
@@ -113,7 +115,7 @@ $(function() {
 		$('#no_of_vacancies').val('');
 		$('#salary').val('');
 		$('#job_description').val('');
-		$('#key_skills').val('');
+		$('#key_skills').val([]).trigger('chosen:updated');
 		$('#expiry_date_datepicker').val('');
 		$('#add-new-job').modal('show');
 	});

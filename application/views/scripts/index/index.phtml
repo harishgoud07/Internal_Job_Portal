@@ -27,6 +27,7 @@
 
 <?php
 $projects_list = $this->projects_list;
+$managers_list = $this->managers_list;
 ?>
 
 <section>
@@ -86,7 +87,7 @@ $projects_list = $this->projects_list;
           <div role="tabpanel" class="tab-pane" id="register">
             <div class="row col-lg-12 col-md-12 col-sm-12 col-xs-12">
               <div class="register-form-title">Register</div>
-              <?php echo $this->partial('index/includes/employee_form.phtml', array('projects_list' => $projects_list)); ?>
+              <?php echo $this->partial('index/includes/employee_form.phtml', array('projects_list' => $projects_list, 'managers_list' => $managers_list)); ?>
             </div>
           </div>
         </div>
