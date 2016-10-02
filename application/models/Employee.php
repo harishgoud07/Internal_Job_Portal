@@ -16,4 +16,14 @@ class application_models_Employee {
 		), 'employee.eid = login_requests.eid' )->where ( 'employee.user_role = ?', 'M' )->where ( 'login_requests.status = ?', 'A' );
 		return $this->db->fetchAll($get_manager_detals);
 	}
+
+
+	public function get_managers_of_project($values){
+				$get_manager_detals = $this->db->select ()->from ( array (
+				'employee' => 'ijp_employees_list' 
+		),array('name','eid') )->join ( array (
+				'mapping' => 'ijp_employees_project_mapping' 
+		), 'mapping.eid = employee.eid' )->where ( 'employee.user_role = ?', 'M' )->where ( 'mapping.project_id =?', $values['project_id'] );
+		return $this->db->fetchAll($get_manager_detals);
+	}
 }

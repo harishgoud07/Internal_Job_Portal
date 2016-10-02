@@ -4,8 +4,7 @@ class application_plugins_session extends Zend_Controller_Plugin_Abstract {
 		$module = $request->getModuleName ();
 		$controller = $request->getControllerName ();
 		$action = $request->getActionName ();
-        
-        if(!($controller == 'error' && $action == 'error')){
+        if(!($action == 'error'|| $action = 'getmanagers')) {
              if(!(($controller == 'index' && $action == 'index'))){
              $storage = Zend_Auth::getInstance()->getIdentity();
              
@@ -30,7 +29,5 @@ class application_plugins_session extends Zend_Controller_Plugin_Abstract {
              }
         }
         }
-       
-		
 	}
 } 
