@@ -1,5 +1,7 @@
 <?php 
 $employee_details = $this->employee_details;
+$projects_list = $this->projects_list;
+$managers_list = $this->managers_list;
 ?>
 <section>
 	<div class="container">
@@ -36,7 +38,7 @@ $employee_details = $this->employee_details;
                 </div>
                 <div class="modal-body">
                 	<div class="row">
-                		<?php echo $this->partial('index/includes/employee_form.phtml', array('employee_details' => $employee_details)); ?>
+                		<?php echo $this->partial('index/includes/employee_form.phtml', array('employee_details' => $employee_details));?>
                 	</div>
                 </div>
                 <div class=""></div>

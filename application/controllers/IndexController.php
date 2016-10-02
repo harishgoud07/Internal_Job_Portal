@@ -61,7 +61,10 @@ class IndexController extends Zend_Controller_Action {
 		
 			$posts = new application_models_Posts();
 			$projects_list = $posts->get_projects_list ();
+			$managers = new application_models_Employee();
+			$managers_list = $managers->getAvailableManagers();
 			$this->view->projects_list = $projects_list;
+			$this->view->managers_list = $managers_list;
 	}
 							
 	public function editprofileAction() {
@@ -99,6 +102,12 @@ class IndexController extends Zend_Controller_Action {
 		if($storage->eid){
 			$emp_id = $storage->eid;
 		}
+		$posts = new application_models_Posts();
+		$projects_list = $posts->get_projects_list ();
+		$managers = new application_models_Employee();
+		$managers_list = $managers->getAvailableManagers();
+		$this->view->projects_list = $projects_list;
+		$this->view->managers_list = $managers_list;
 		$this->view->employee_details = json_decode(json_encode($employee->getEmployeeDetails($emp_id)), FALSE);
 	}
 	
