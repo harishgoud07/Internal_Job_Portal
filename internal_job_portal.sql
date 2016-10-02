@@ -161,6 +161,7 @@ CREATE TABLE IF NOT EXISTS `ijp_job_posts` (
   `job_skill_set` varchar(1000) DEFAULT NULL,
   `salary` varchar(255) DEFAULT NULL,
   `experience` varchar(255) DEFAULT NULL,
+   `last_date_for_applicants` datetime NOT NULL,
   `status` enum('P','A','D','') NOT NULL,
   `project_id` int(11) NOT NULL,
   `eid` int(11) NOT NULL,
