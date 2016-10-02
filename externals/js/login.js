@@ -1,31 +1,50 @@
 $(function() {
 
-    $('#login-form-link').click(function(e) {
-		$("#login-form").delay(100).fadeIn(100);
- 		$("#register-form").fadeOut(100);
-		$('#register-form-link').removeClass('active');
-		$(this).addClass('active');
-		e.preventDefault();
-	});
-	$('#register-form-link').click(function(e) {
-		$("#register-form").delay(100).fadeIn(100);
- 		$("#login-form").fadeOut(100);
-		$('#login-form-link').removeClass('active');
-		$(this).addClass('active');
-		e.preventDefault();
-	});
-
 	$('#tab-button-login').click(function(event){
 		if(!$('#tab-button-login').hasClass('active')) {
 			$('#tab-button-register').removeClass('active');
 			$('#tab-button-login').addClass('active');
+		} else {
+			$('#username').focus();
 		}
 	});
 	$('#tab-button-register').click(function(event){
 		if(!$('#tab-button-register').hasClass('active')) {
 			$('#tab-button-login').removeClass('active');
 			$('#tab-button-register').addClass('active');
+		}else {
+			$('#full_name').focus();
 		}
+	});
+	
+	$('#emp_ref').focusout(function(event){
+		var url='index/isemployeerefexists';
+		var emp_ref = $('#emp_ref').val();
+		if(emp_ref.trim().length > 0) {
+			$.ajax({
+				type: "POST",
+				url: url,
+				data:{'emp_ref':emp_ref}, // serializes the form's elements.
+				success: function(data)
+				{
+					var data = jQuery.parseJSON(data);
+					if(data['exists'] == true) {
+						alert('Employee reference already exists!');
+						$('#emp_ref').focus();
+					}
+				}
+			});
+		}
+	});
+	
+	$('#employee_registration_form').submit(function(event){
+		var password = $('#password').val();
+		var confirm_password = $('#confirm_password').val();
+		if (password != confirm_password){
+			alert('Passwords doesn\'t match');
+			return false
+		}
+		return true;
 	});
 
 });

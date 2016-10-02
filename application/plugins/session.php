@@ -4,9 +4,9 @@ class application_plugins_session extends Zend_Controller_Plugin_Abstract {
 		$module = $request->getModuleName ();
 		$controller = $request->getControllerName ();
 		$action = $request->getActionName ();
-        
+		
         if(!($controller == 'error' && $action == 'error')){
-             if(!(($controller == 'index' && $action == 'index'))){
+             if(!(($controller == 'index' && ($action == 'index' || $action == 'isemployeerefexists')))){
              $storage = Zend_Auth::getInstance()->getIdentity();
              
             if(!$storage->user_role){

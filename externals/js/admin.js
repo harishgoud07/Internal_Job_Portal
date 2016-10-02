@@ -9,7 +9,8 @@ $(function() {
 		var salary = $('#salary').val();
 		var job_description = $('#job_description').val();
 		var key_skills = $('#key_skills').val();
-		var expiry_date_datepicker = $('#expiry_date_datepicker').val();
+		var experience = $('#experience').val();
+		var last_date_for_applicants = $('#expiry_date_datepicker').val();
 		console.log('project_id'+project_id);
 		console.log('job_title'+job_title);
 		console.log('no_of_vacancies'+no_of_vacancies);
@@ -20,7 +21,7 @@ $(function() {
 		$.ajax({
 			type: "POST",
 			url: url,
-			data:{'project_id':project_id,'job_title':job_title,'no_of_vacancies':no_of_vacancies,'salary':salary,'job_description':job_description,'key_skills':key_skills,'expiry_date_datepicker':expiry_date_datepicker}, // serializes the form's elements.
+			data:{'project_id':project_id,'job_title':job_title,'no_of_vacancies':no_of_vacancies,'salary':salary, 'experience':experience,'job_description':job_description,'key_skills':key_skills,'last_date_for_applicants':last_date_for_applicants }, // serializes the form's elements.
 			success: function(data)
 			{//$('#add_posts').serialize()
 				$('#add-new-job').modal('hide');
@@ -71,6 +72,7 @@ $(function() {
 				$('#no_of_vacancies').val(data['no_of_vacancies']);
 				$('#salary').val(data['salary']);
 				$('#job_description').val(data['job_description']);
+				$('#experience').val(data['experience']);
 				
 				if (data['job_skill_set']) {
 					var skills = data['job_skill_set'].split(',');
@@ -81,7 +83,7 @@ $(function() {
 				
 				$('#key_skills:contains(Base)').prop('selected','selected');
 
-				$('#expiry_date_datepicker').val(data['date_of_creation']);
+				$('#expiry_date_datepicker').val(data['last_date_for_applicants']);
 				$('#save_post').data('post-id',data['post_id']);
 				$('#save_post').prop('id','update_post');
 				$('#add-new-job').modal('show');
@@ -115,6 +117,7 @@ $(function() {
 		$('#no_of_vacancies').val('');
 		$('#salary').val('');
 		$('#job_description').val('');
+		$('#experience').val('');
 		$('#key_skills').val([]).trigger('chosen:updated');
 		$('#expiry_date_datepicker').val('');
 		$('#add-new-job').modal('show');
@@ -129,7 +132,8 @@ $(function() {
 		var salary = $('#salary').val();
 		var job_description = $('#job_description').val();
 		var key_skills = $('#key_skills').val();
-		var expiry_date_datepicker = $('#expiry_date_datepicker').val();
+		var experience = $('#experience').val();
+		var last_date_for_applicants = $('#expiry_date_datepicker').val();
 		var post_id = $(this).data('post-id');
 		console.log('project_id'+project_id);
 		console.log('job_title'+job_title);
@@ -141,7 +145,7 @@ $(function() {
 		$.ajax({
 			type: "POST",
 			url: url,
-			data:{'post_id':post_id,'project_id':project_id,'job_title':job_title,'no_of_vacancies':no_of_vacancies,'salary':salary,'job_description':job_description,'key_skills':key_skills,'expiry_date_datepicker':expiry_date_datepicker}, // serializes the form's elements.
+			data:{'post_id':post_id,'project_id':project_id,'job_title':job_title,'no_of_vacancies':no_of_vacancies,'salary':salary,'job_description':job_description, 'experience':experience, 'key_skills':key_skills,'last_date_for_applicants':last_date_for_applicants}, // serializes the form's elements.
 			success: function(data)
 			{//$('#add_posts').serialize()
 				$('#add-new-job').modal('hide');

@@ -94,7 +94,7 @@ class IndexController extends Zend_Controller_Action {
 							$register = new application_models_Register();
 							$register->update_employee($request_params);
 							
-						}
+					}
 			}
 		}
 		$employee = new application_models_Employee();
@@ -109,6 +109,23 @@ class IndexController extends Zend_Controller_Action {
 		$this->view->projects_list = $projects_list;
 		$this->view->managers_list = $managers_list;
 		$this->view->employee_details = json_decode(json_encode($employee->getEmployeeDetails($emp_id)), FALSE);
+	}
+	
+	public function isemployeerefexistsAction() {
+		$request_params = $this->getRequest ()->getParams ();
+		$this->_helper->layout ()->disableLayout ();
+		$this->_helper->viewRenderer->setNoRender ( true );
+		if ($this->getRequest ()->isPost ()) {
+			if ($request_params['emp_ref']) {
+				$register = new application_models_Register();
+				$emp_details = $register->getEmployeeWithRef($request_params['emp_ref']);
+				if($emp_details['eid']) {
+					echo json_encode(['exists' => true]);
+				} else {
+					echo json_encode(['exists' => false]);
+				}
+			}
+		}
 	}
 	
 	public function logoutAction() {
