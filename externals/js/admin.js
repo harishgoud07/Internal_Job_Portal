@@ -1,16 +1,18 @@
 $(function() {
 
-	$(document).on('click','#save_post',function(){
+	$(document).on('submit','#add_posts',function(){
 		var url = "/posts/add"; // the script where you handle the form input.
 
 		var project_id = $('#project_name').val();
 		var job_title = $('#job_title').val();
+		var job_location = $('#job_location').val();
 		var no_of_vacancies = $('#no_of_vacancies').val();
 		var salary = $('#salary').val();
 		var job_description = $('#job_description').val();
 		var key_skills = $('#key_skills').val();
 		var experience = $('#experience').val();
 		var last_date_for_applicants = $('#expiry_date_datepicker').val();
+		var current_page = $('#add-job-request-source').val();
 		console.log('project_id'+project_id);
 		console.log('job_title'+job_title);
 		console.log('no_of_vacancies'+no_of_vacancies);
@@ -21,7 +23,18 @@ $(function() {
 		$.ajax({
 			type: "POST",
 			url: url,
-			data:{'project_id':project_id,'job_title':job_title,'no_of_vacancies':no_of_vacancies,'salary':salary, 'experience':experience,'job_description':job_description,'key_skills':key_skills,'last_date_for_applicants':last_date_for_applicants }, // serializes the form's elements.
+			data:{
+				'project_id':project_id,
+				'job_title':job_title,
+				'job_location':job_location,
+				'no_of_vacancies':no_of_vacancies,
+				'salary':salary,
+				'experience':experience,
+				'job_description':job_description,
+				'key_skills':key_skills,
+				'last_date_for_applicants':last_date_for_applicants,
+				'current_page':current_page
+			}, // serializes the form's elements.
 			success: function(data)
 			{//$('#add_posts').serialize()
 				$('#add-new-job').modal('hide');
@@ -69,11 +82,12 @@ $(function() {
 				console.log(data['job_skill_set']);
 				$('#project_name').val(data['project_id']);
 				$('#job_title').val(data['job_title']);
+				$('#job_location').val(data['job_location']);
 				$('#no_of_vacancies').val(data['no_of_vacancies']);
 				$('#salary').val(data['salary']);
 				$('#job_description').val(data['job_description']);
 				$('#experience').val(data['experience']);
-				
+
 				if (data['job_skill_set']) {
 					var skills = data['job_skill_set'].split(',');
 					$('#key_skills').val(skills).trigger('chosen:updated');
@@ -111,9 +125,9 @@ $(function() {
 	});
 
 	$(document).on('click','#add-job-trigger',function(){
-
 		$('#project_name').val('');
 		$('#job_title').val('');
+		$('#job_location').val('');
 		$('#no_of_vacancies').val('');
 		$('#salary').val('');
 		$('#job_description').val('');
@@ -128,6 +142,7 @@ $(function() {
 
 		var project_id = $('#project_name').val();
 		var job_title = $('#job_title').val();
+		var job_location = $('#job_location').val();
 		var no_of_vacancies = $('#no_of_vacancies').val();
 		var salary = $('#salary').val();
 		var job_description = $('#job_description').val();
@@ -145,7 +160,18 @@ $(function() {
 		$.ajax({
 			type: "POST",
 			url: url,
-			data:{'post_id':post_id,'project_id':project_id,'job_title':job_title,'no_of_vacancies':no_of_vacancies,'salary':salary,'job_description':job_description, 'experience':experience, 'key_skills':key_skills,'last_date_for_applicants':last_date_for_applicants}, // serializes the form's elements.
+			data:{
+				'post_id':post_id,
+				'project_id':project_id,
+				'job_title':job_title,
+				'job_location':job_location,
+				'no_of_vacancies':no_of_vacancies,
+				'salary':salary,
+				'job_description':job_description,
+				'experience':experience,
+				'key_skills':key_skills,
+				'last_date_for_applicants':last_date_for_applicants
+			}, // serializes the form's elements.
 			success: function(data)
 			{//$('#add_posts').serialize()
 				$('#add-new-job').modal('hide');

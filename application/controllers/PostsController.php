@@ -11,7 +11,6 @@ class PostsController extends Zend_Controller_Action {
 		$posts = new application_models_Posts ();
 		$posts_data = $posts->get_posts ();
 		$projects_list = $posts->get_projects_list ();
-		$requested_posts_count = $posts->get_requested_posts_count ();
 		if($this->user_details->user_role == 'E'){
 				$applied_posts_count = $posts->get_applied_posts_count();
 		        $this->view->applied_posts_count = $applied_posts_count['applied_posts_count'];
@@ -31,7 +30,11 @@ class PostsController extends Zend_Controller_Action {
 		if ($this->getRequest ()->isPost ()) {
 			$posts = new application_models_Posts ();
 			$posts->add_posts ( $request_params );
-			$posts_data = $posts->get_posts ();
+			if ($request_params['current_page'] == 'JOB_POST_REQUESTS') {
+				$posts_data = $posts->get_requested_posts ();
+			} else {
+				$posts_data = $posts->get_posts ();
+			}
 			$this->view->active_posts_data = $posts_data;
 			$this->renderScript ( 'posts/includes/postsdisplay.phtml' );
 		}

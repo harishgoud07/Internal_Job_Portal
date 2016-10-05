@@ -138,7 +138,7 @@ class application_models_Posts {
 				'applied_posts' => 'ijp_job_applied_emp_details' 
 		), 'applied_posts.post_id = posts.post_id',array('applied_job_status' => 'applied_posts.status' ) )->where ( 'applied_posts.eid = ?', $this->user_details->eid )
 			->where ( 'posts.status = ?', 'A' )->where ( 'applied_posts.status != ?', 'D' );
-		
+		echo $select_applied_posts_count_query;exit;
 		return $this->db->fetchRow ( $select_applied_posts_count_query );
 	}
 

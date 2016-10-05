@@ -156,6 +156,7 @@ DROP TABLE IF EXISTS `ijp_job_posts`;
 CREATE TABLE IF NOT EXISTS `ijp_job_posts` (
   `post_id` int(11) NOT NULL AUTO_INCREMENT,
   `job_title` varchar(255) NOT NULL,
+  `job_location` varchar(255) NOT NULL,
   `no_of_vacancies` int(6) NOT NULL,
   `job_description` varchar(1000) DEFAULT NULL,
   `job_skill_set` varchar(1000) DEFAULT NULL,

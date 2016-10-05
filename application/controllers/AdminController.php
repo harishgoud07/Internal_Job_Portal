@@ -15,8 +15,10 @@ class AdminController extends Zend_Controller_Action
     }
     public function jobpostrequestsAction() {
         $posts = new application_models_Posts ();
-        $posts_data = $posts->get_requested_posts ();
-        $this->view->posts_data = $posts_data;
+        $projects_list = $posts->get_projects_list ();
+        $active_posts_data = $posts->get_requested_posts ();
+        $this->view->projects_list = $projects_list;
+        $this->view->active_posts_data = $active_posts_data;
     }
     public function loginrequestsAction()
     {
