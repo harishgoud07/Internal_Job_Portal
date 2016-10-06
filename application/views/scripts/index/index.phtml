@@ -32,14 +32,17 @@ $managers_list = $this->managers_list;
 
 <section>
   <div class="container">
-    <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1 login-signup-container">
-      <div class="">
-      <?php
+<?php
           if($this->registration_status == 'success'){
-              echo '<h3>Your request is received and will be confirmed by your Manager soon! Thank you!</h3>';
+          	?>
+          	<div class="alert alert-success" role="alert">Your request is received and will be confirmed by your Manager soon! Thank you!</div>
+          	<?php 
           }
 
       ?>
+    <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1 login-signup-container">
+      <div class="">
+      
               <!-- Nav tabs -->
 
         <div class="btn-group btn-group-justified login-signup-nav-btn-group" role="group">

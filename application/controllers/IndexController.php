@@ -45,10 +45,12 @@ class IndexController extends Zend_Controller_Action {
  						}
 						if($file=='user_image') {
 							$request_params['image_path'] = $_SERVER['server_name'].'\\upload\\user_images\\'.$request_params['emp_ref'].'_'.$info['name'];
-							$upload->addFilter('Rename', array('target' => $request_params['image_path'], 'overwrite' => true), $file);
+							$image_storage_path = APPLICATION_PATH.'\\..\\upload\\user_images\\'.$request_params['emp_ref'].'_'.$info['name'];
+							$upload->addFilter('Rename', array('target' => $image_storage_path, 'overwrite' => true), $file);
 						} else {
 							$request_params['cv_path'] = $_SERVER['server_name'].'\\upload\\user_cvs\\'.$request_params['emp_ref'].'_'.$info['name'];
-							$upload->addFilter('Rename', array('target' => $request_params['cv_path'], 'overwrite' => true), $file);
+							$cv_storage_path = APPLICATION_PATH.'\\..\\upload\\user_cvs\\'.$request_params['emp_ref'].'_'.$info['name'];
+							$upload->addFilter('Rename', array('target' => $cv_storage_path, 'overwrite' => true), $file);
 						}
 						$upload->receive ($file);
 					}
@@ -82,13 +84,15 @@ class IndexController extends Zend_Controller_Action {
 								if (! $upload->isUploaded ( $file ) && ! $upload->isValid ( $file )) {
 									continue;
 								}
-								if($file=='user_image') {
-									$request_params['image_path'] = APPLICATION_PATH.'\\..\\upload\\user_images\\'.$request_params['emp_ref'].'_'.$info['name'];
-									$upload->addFilter('Rename', array('target' => $request_params['image_path'], 'overwrite' => true), $file);
-								} else {
-									$request_params['cv_path'] = APPLICATION_PATH.'\\..\\upload\\user_cvs\\'.$request_params['emp_ref'].'_'.$info['name'];
-									$upload->addFilter('Rename', array('target' => $request_params['cv_path'], 'overwrite' => true), $file);
-								}
+							if($file=='user_image') {
+								$request_params['image_path'] = $_SERVER['server_name'].'\\upload\\user_images\\'.$request_params['emp_ref'].'_'.$info['name'];
+								$image_storage_path = APPLICATION_PATH.'\\..\\upload\\user_images\\'.$request_params['emp_ref'].'_'.$info['name'];
+								$upload->addFilter('Rename', array('target' => $image_storage_path, 'overwrite' => true), $file);
+							} else {
+								$request_params['cv_path'] = $_SERVER['server_name'].'\\upload\\user_cvs\\'.$request_params['emp_ref'].'_'.$info['name'];
+								$cv_storage_path = APPLICATION_PATH.'\\..\\upload\\user_cvs\\'.$request_params['emp_ref'].'_'.$info['name'];
+								$upload->addFilter('Rename', array('target' => $cv_storage_path, 'overwrite' => true), $file);
+							}
 								$upload->receive ($file);
 							}
 							$register = new application_models_Register();

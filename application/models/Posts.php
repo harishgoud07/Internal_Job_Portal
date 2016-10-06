@@ -62,7 +62,7 @@ class application_models_Posts {
 		$insert_post_values ['job_title'] = $values ['job_title'];
 		$insert_post_values ['job_location'] = $values ['job_location'];
 		$insert_post_values ['job_description'] = $values ['job_description'];
-		if (strlen($values ['key_skills'])>0) {
+		if (count($values ['key_skills']) > 0) {
 			$insert_post_values ['job_skill_set'] = implode ( ',', $values ['key_skills'] );
 		}
 		$insert_post_values ['salary'] = $values ['salary'];
@@ -83,7 +83,9 @@ class application_models_Posts {
 		$update_post_values ['job_location'] = $values ['job_location'];
 		$update_post_values ['no_of_vacancies'] = $values ['no_of_vacancies'];
 		$update_post_values ['job_description'] = $values ['job_description'];
-		$update_post_values ['job_skill_set'] = implode ( ',', $values ['key_skills'] );
+		if (count($values ['key_skills']) > 0) {
+			$update_post_values ['job_skill_set'] = implode ( ',', $values ['key_skills'] );
+		}
 		$update_post_values ['salary'] = $values ['salary'];
 		$update_post_values ['experience'] = $values['experience'];
 		$update_post_values ['last_date_for_applicants'] = $values['last_date_for_applicants'];

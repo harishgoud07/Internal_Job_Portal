@@ -36,7 +36,8 @@ if($user_role == 'E'){
 <?php
             }
             ?>
-                    <button  id='add-job-trigger'  data-toggle="modal" class="btn pull-right">Add a new Job post</button>
+                   
+                    <button  id='add-job-trigger'  data-toggle="modal" class="btn pull-right"><?php echo $user_role != 'M'? 'Add a new Job post' : 'Request a new Job post'?></button>
                 </div>
 <?php
  }else{
