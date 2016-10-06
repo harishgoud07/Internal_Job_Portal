@@ -32,7 +32,8 @@ class application_models_Posts {
 				'applied_jobs' => 'ijp_job_applied_emp_details' 
 		), 'applied_jobs.post_id = posts.post_id', array (
 				'not_applied_post_id' => 'post_id' 
-		) )->where ( 'applied_jobs.post_id is null' );
+		) )->where ( 'applied_jobs.post_id is null' )
+		->where('posts.last_date_for_applicants >= ?',new Zend_Db_Expr ( 'now()' ));;
 		}
 		//echo $get_posts_query;
 		return $this->db->fetchAll ( $get_posts_query );
@@ -74,7 +75,6 @@ class application_models_Posts {
 		$insert_post_values ['posted_by'] = $this->user_details->user_role;
 		$insert_post_values ['last_date_for_applicants'] = $values['last_date_for_applicants'];
 		$insert_post_values ['date_of_creation'] = new Zend_Db_Expr ( 'now()' );
-		var_dump($insert_post_values);
 		$insert_post_values ['date_of_modification'] = new Zend_Db_Expr ( 'now()' );
 		$this->db->insert ( 'ijp_job_posts', $insert_post_values );
 	}
@@ -143,7 +143,7 @@ class application_models_Posts {
 		), array ('applied_posts_count' => 'count(*)' ) )->join ( array (
 				'applied_posts' => 'ijp_job_applied_emp_details' 
 		), 'applied_posts.post_id = posts.post_id',array('applied_job_status' => 'applied_posts.status' ) )->where ( 'applied_posts.eid = ?', $this->user_details->eid )
-			->where ( 'posts.status = ?', 'A' )->where ( 'applied_posts.status != ?', 'D' );
+			->where ( 'posts.status = ?', 'A' )->where ( 'applied_posts.status != ?', 'D' );;
 		return $this->db->fetchRow ( $select_applied_posts_count_query );
 	}
 
@@ -158,7 +158,7 @@ class application_models_Posts {
 		) )->join ( array (
 				'applied_jobs' => 'ijp_job_applied_emp_details' 
 		), 'applied_jobs.eid = emp.eid', array (
-				'applied_post_id' => 'post_id','applied_job_status'=>'status','applied_job_id'=>'id' 
+				'applied_post_id' => 'post_id','applied_job_status'=>'status','applied_job_id'=>'id','applied_date' =>'date_of_creation' 
 		) )->join ( array (
 				'posts' => 'ijp_job_posts' 
 		), 'applied_jobs.post_id = posts.post_id' )->join ( array (
@@ -173,6 +173,7 @@ class application_models_Posts {
 
 		if($user_details->user_role == 'E'){
 			$get_posts_query->where ( 'applied_jobs.eid = ?', $user_details->eid );
+							//->where('posts.last_date_for_applicants >= ?',new Zend_Db_Expr ( 'now()' ));
 							
 
 		}

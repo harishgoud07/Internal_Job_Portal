@@ -66,8 +66,8 @@ if($applied_job_posts_data){
             <span class="lead"><?php echo $applied_job_post_data['name'];?></span>
         </div>
         <div class="col-lg-6 col-md-6 col-xs-6 colsm-6 login-requests-btn-group">
-            <button class="btn btn-danger pull-right delete-login-request" data-request-id ="<?php echo $login_request['request_id'];?>" >Delete request</button>
-            <button class="btn btn-info pull-right approve-login-request " data-request-id ="<?php echo $login_request['request_id'];?>">Accept request</button>
+            <button class="btn btn-danger pull-right decline-emp-job-post" data-applied-id ="<?php echo $applied_job_post_data['applied_job_id'];?>" >Decline</button>
+            <button class="btn btn-info pull-right approve-emp-job-post " data-applied-id ="<?php echo $applied_job_post_data['applied_job_id'];?>">Accept</button>
         </div>
     </div>
     <div class="col-lg-12 col-md-12 col-xs-12 colsm-12 login-requests-list-item-details">
@@ -84,8 +84,8 @@ if($applied_job_posts_data){
             <span><?php echo $applied_job_post_data['email'];?></span>
         </div>
         <div class="col-lg-6 col-md-6 col-xs-6 colsm-6 login-requests-list-item-field">
-            <span class="login-requests-list-item-field-title">Manager :</span>
-            <span><?php echo $applied_job_post_data['name'];?></span>
+            <span class="login-requests-list-item-field-title">Applied date:</span>
+            <span><?php echo $applied_job_post_data['applied_date'];?></span>
         </div>
     </div>
 </div>
