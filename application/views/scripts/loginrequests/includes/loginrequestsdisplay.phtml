@@ -5,34 +5,34 @@ if($login_requests_data){
 
     ?>
 <div class="row login-requests-list-item" style='margin-bottom: 20px;'>
-            <div class="col-lg-12 col-md-12 col-xs-12 colsm-12 login-requests-list-item-header" >
-                <div class="col-lg-6 col-md-6 col-xs-6 colsm-6">
-                    <span class="lead"><?php echo $login_request['user_role']=='M'?"Manager":"Employee";?></span>
-                </div>
-                <div class="col-lg-6 col-md-6 col-xs-6 colsm-6 login-requests-btn-group">
-                    <button class="btn btn-danger pull-right delete-login-request" data-request-id ="<?php echo $login_request['request_id'];?>" >Delete request</button>
-                    <button class="btn btn-info pull-right approve-login-request " data-request-id ="<?php echo $login_request['request_id'];?>">Accept request</button>
-                </div>
-            </div>
-            <div class="col-lg-12 col-md-12 col-xs-12 colsm-12 login-requests-list-item-details">
-                <div class="col-lg-6 col-md-6 col-xs-6 colsm-6 login-requests-list-item-field">
-                    <span class="login-requests-list-item-field-title">Employee Name :</span>
-                    <span><?php echo $login_request['name'];?></span>
-                </div>
-                <div class="col-lg-6 col-md-6 col-xs-6 colsm-6 login-requests-list-item-field">
-                    <span class="login-requests-list-item-field-title">Employee Reference :</span>
-                    <span><?php echo $login_request['emp_ref'];?></span>
-                </div>
-                <div class="col-lg-6 col-md-6 col-xs-6 colsm-6 login-requests-list-item-field">
-                    <span class="login-requests-list-item-field-title">Email :</span>
-                    <span><?php echo $login_request['email'];?></span>
-                </div>
-                <div class="col-lg-6 col-md-6 col-xs-6 colsm-6 login-requests-list-item-field">
-                    <span class="login-requests-list-item-field-title">Manager :</span>
-                    <span><?php echo $login_request['name'];?></span>
-                </div>
-            </div>
+    <div class="col-lg-12 col-md-12 col-xs-12 colsm-12 login-requests-list-item-header" >
+        <div class="col-lg-6 col-md-6 col-xs-6 colsm-6">
+            <span class="lead"><?php echo $login_request['user_role']=='M'?"Manager":"Employee";?></span>
         </div>
+        <div class="col-lg-6 col-md-6 col-xs-6 colsm-6 login-requests-btn-group">
+            <button class="btn btn-danger pull-right delete-login-request" data-request-id ="<?php echo $login_request['request_id'];?>" >Delete request</button>
+            <button class="btn btn-info pull-right approve-login-request " data-request-id ="<?php echo $login_request['request_id'];?>">Accept request</button>
+        </div>
+    </div>
+    <div class="col-lg-12 col-md-12 col-xs-12 colsm-12 login-requests-list-item-details">
+        <div class="col-lg-6 col-md-6 col-xs-6 colsm-6 login-requests-list-item-field">
+            <span class="login-requests-list-item-field-title">Employee Name :</span>
+            <span><?php echo $login_request['name'];?></span>
+        </div>
+        <div class="col-lg-6 col-md-6 col-xs-6 colsm-6 login-requests-list-item-field">
+            <span class="login-requests-list-item-field-title">Employee Reference :</span>
+            <span><?php echo $login_request['emp_ref'];?></span>
+        </div>
+        <div class="col-lg-6 col-md-6 col-xs-6 colsm-6 login-requests-list-item-field">
+            <span class="login-requests-list-item-field-title">Email :</span>
+            <span><?php echo $login_request['email'];?></span>
+        </div>
+        <div class="col-lg-6 col-md-6 col-xs-6 colsm-6 login-requests-list-item-field">
+            <span class="login-requests-list-item-field-title">Manager :</span>
+            <span><?php echo $login_request['name'];?></span>
+        </div>
+    </div>
+</div>
 
 <?php
 }

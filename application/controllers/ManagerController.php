@@ -27,10 +27,13 @@ class ManagerController extends Zend_Controller_Action
 
     public function chooseemployeesforjobAction() {
         $posts = new application_models_Posts ();
-        $projects_list = $posts->get_projects_list ();
-        $requested_posts_count = $posts->get_requested_posts_count ();
-        $this->view->requested_posts_count = $requested_posts_count['requested_posts_count'];
+        $projects_list = $posts->get_manager_related_projects ();
+        $posts_data = $posts->get_posts ();
+        $applied_job_posts_data = $posts->get_applied_job_posts();
+        $this->view->posts_data = $posts_data;
         $this->view->projects_list = $projects_list;
+        $this->view->applied_job_posts_data = $applied_job_posts_data;
+       // var_dump($applied_job_posts_data);
     }
 	
 }

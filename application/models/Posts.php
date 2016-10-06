@@ -142,12 +142,11 @@ class application_models_Posts {
 				'applied_posts' => 'ijp_job_applied_emp_details' 
 		), 'applied_posts.post_id = posts.post_id',array('applied_job_status' => 'applied_posts.status' ) )->where ( 'applied_posts.eid = ?', $this->user_details->eid )
 			->where ( 'posts.status = ?', 'A' )->where ( 'applied_posts.status != ?', 'D' );
-		echo $select_applied_posts_count_query;exit;
 		return $this->db->fetchRow ( $select_applied_posts_count_query );
 	}
 
 
-	function get_applied_job_posts(){
+	function get_applied_job_posts($values = array()){
 
 		$utilities = new application_models_Utilities();
         $user_details = $utilities->get_user_details();
@@ -164,19 +163,30 @@ class application_models_Posts {
 				'projects' => 'ijp_projects_list' 
 		), 'posts.project_id = projects.project_id', array (
 				'project_name' => 'name' 
-		) )->where ( 'applied_jobs.eid = ?', $user_details->eid )
-		->where ( 'posts.status = ?', 'A' )->where ( 'applied_jobs.status != ?', 'D' )->order ( 'posts.date_of_creation desc' );
+		) )		->where ( 'posts.status = ?', 'A' )->where ( 'applied_jobs.status != ?', 'D' )->order ( 'posts.date_of_creation desc' );
 
 		 if($user_details->user_role == 'M'){
-			//$get_posts_query->where ( 'posts.eid = ?', $user_details->eid );				
+			$get_posts_query->where ( 'posts.eid = ?', $user_details->eid );				
 		}
 
 		if($user_details->user_role == 'E'){
 			$get_posts_query->where ( 'applied_jobs.eid = ?', $user_details->eid );
+							
+
 		}
 		//echo $get_posts_query;
 		return $this->db->fetchAll ( $get_posts_query );
 	}
 
+public function get_manager_related_projects($values){
+				$get_manager_project_details = $this->db->select ()->from ( array (
+				'projects' => 'ijp_projects_list' 
+		),array('name','project_id') )->join ( array (
+				'mapping' => 'ijp_employees_project_mapping' 
+		), 'projects.project_id = mapping.project_id' )->where ( 'mapping.eid = ?', $this->user_details->eid );
+		//echo $get_manager_project_details;
+		return $this->db->fetchAll($get_manager_project_details);
+	}
+	
 	
 }
