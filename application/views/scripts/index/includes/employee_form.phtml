@@ -38,7 +38,6 @@ $managers_list = $this->managers_list;
 				<select id="user_role"
 					name="user_role" class="form-control">
 					<option value ="">Select</option>
-					<option value="A">Admin</option>
 					<option value="M">Manager</option>
 					<option value="E">Employee</option>
 				</select>
@@ -107,7 +106,50 @@ $managers_list = $this->managers_list;
 				</div>
 			</div>
 		</div>
-		
+		<div class="form-group">
+                                <div class="">
+                                    <label for="key_skills">Required Key skills</label>
+                                    <select required name="key_skills" id="key_skills" data-placeholder=" " class="form-control" multiple tabindex="-1">
+                                        <option value="Empty">&nbsp;</option>
+                                        <option>Objective C</option>
+                                        <option>JSP</option>
+                                        <option>JavaScript</option>
+                                        <option>XML</option>
+                                        <option>Struts</option>
+                                        <option>Hibernate</option>
+                                        <option>AJAX</option>
+                                        <option>PHP4/5</option>
+                                        <option>JavaSE</option>
+                                        <option>Servlets</option>
+                                        <option>Oracle</option>
+                                        <option>Spring</option>
+                                        <option>jQuery</option>
+                                        <option>Bootstrap</option>
+                                        <option>MVC</option>
+                                        <option>C#</option>
+                                        <option>Ruby</option>
+                                        <option>Rails</option>
+                                        <option>Groovy</option>
+                                        <option>Hive</option>
+                                        <option>Spark</option>
+                                        <option>Hadoop</option>
+                                        <option>Pig</option>
+                                        <option>R</option>
+                                        <option>weblogic</option>
+                                        <option>Apache</option>
+                                        <option>Tomcat</option>
+                                        <option>Derby</option>
+                                        <option>MySQL</option>
+                                        <option>SQLite</option>
+                                        <option>Mangodb</option>
+                                        <option>Erlang</option>
+                                        <option>Linux</option>
+                                        <option>Windows</option>
+                                        <option>Mac</option>
+                                        <option>Android</option>
+                                    </select>
+                                </div>
+                            </div>
 		<?php if(!$employee_details->eid) {?>
 		<div class="row">
 			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
@@ -153,35 +195,20 @@ $managers_list = $this->managers_list;
 			</div>
 		</div>
 		<?php }?>
-		<?php if(!$employee_details->eid) {?>
 		<div class="form-group">
 			<div class="">
-				<label for="user_role">Your role</label> 
-				<select required id="user_role"
-					name="user_role" class="form-control">
-					<option value="A">Admin</option>
-					<option value="M">Manager</option>
-					<option value="E">Employee</option>
-				</select>
-			</div>
-		</div>
-		<?php }?>
-		<div class="form-group">
-			<div class="">
-				<label for="Upload image" class="control-label">Upload image</label>
-				<label class="btn btn-default btn-file"> Browse 
-				<input type="file"
-					name="user_image" style="display: none;">
+				<label style="width: 100%"> Upload Profile image 
+				<input class="btn btn-default btn-file" type="file"
+					name="user_image">
 				</label>
 			</div>
 		</div>
 
 		<div class="form-group">
 			<div class="">
-				<label for="Upload resume" class="control-label">Upload resume</label>
-				<label class="btn btn-default btn-file"> Browse 
-				<input type="file"
-					name="user_resume" style="display: none;">
+				<label style="width: 100%"> Upload resume 
+				<input class="btn btn-default btn-file" type="file"
+					name="user_resume">
 				</label>
 			</div>
 		</div>

@@ -44,10 +44,10 @@ class IndexController extends Zend_Controller_Action {
  							continue;
  						}
 						if($file=='user_image') {
-							$request_params['image_path'] = APPLICATION_PATH.'\\..\\upload\\user_images\\'.$request_params['emp_ref'].'_'.$info['name'];
+							$request_params['image_path'] = $_SERVER['server_name'].'\\upload\\user_images\\'.$request_params['emp_ref'].'_'.$info['name'];
 							$upload->addFilter('Rename', array('target' => $request_params['image_path'], 'overwrite' => true), $file);
 						} else {
-							$request_params['cv_path'] = APPLICATION_PATH.'\\..\\upload\\user_cvs\\'.$request_params['emp_ref'].'_'.$info['name'];
+							$request_params['cv_path'] = $_SERVER['server_name'].'\\upload\\user_cvs\\'.$request_params['emp_ref'].'_'.$info['name'];
 							$upload->addFilter('Rename', array('target' => $request_params['cv_path'], 'overwrite' => true), $file);
 						}
 						$upload->receive ($file);

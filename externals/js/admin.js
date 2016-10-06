@@ -1,6 +1,7 @@
 $(function() {
 
-	$(document).on('submit','#add_posts',function(){
+	$(document).on('submit','#add_post',function(event){
+		event.preventDefault();
 		var url = "/posts/add"; // the script where you handle the form input.
 
 		var project_id = $('#project_name').val();
@@ -10,6 +11,10 @@ $(function() {
 		var salary = $('#salary').val();
 		var job_description = $('#job_description').val();
 		var key_skills = $('#key_skills').val();
+		if(!key_skills.length) {
+			alert('Please add atleast one key skills');
+			return;
+		}
 		var experience = $('#experience').val();
 		var last_date_for_applicants = $('#expiry_date_datepicker').val();
 		var current_page = $('#add-job-request-source').val();
@@ -99,7 +104,7 @@ $(function() {
 
 				$('#expiry_date_datepicker').val(data['last_date_for_applicants']);
 				$('#save_post').data('post-id',data['post_id']);
-				$('#save_post').prop('id','update_post');
+				$('#add_post').prop('id','update_post');
 				$('#add-new-job').modal('show');
 			}
 		});
@@ -134,10 +139,12 @@ $(function() {
 		$('#experience').val('');
 		$('#key_skills').val([]).trigger('chosen:updated');
 		$('#expiry_date_datepicker').val('');
+		$('#update_post').prop('id','add_post');
 		$('#add-new-job').modal('show');
 	});
 
-	$(document).on('click','#update_post',function(){
+	$(document).on('submit','#update_post',function(event){
+		event.preventDefault();
 		var url = "/posts/update"; // the script where you handle the form input.
 
 		var project_id = $('#project_name').val();
@@ -147,9 +154,13 @@ $(function() {
 		var salary = $('#salary').val();
 		var job_description = $('#job_description').val();
 		var key_skills = $('#key_skills').val();
+		if(!key_skills.length) {
+			alert('Please add atleast one key skills');
+			return;
+		}
 		var experience = $('#experience').val();
 		var last_date_for_applicants = $('#expiry_date_datepicker').val();
-		var post_id = $(this).data('post-id');
+		var post_id = $('#save_post').data('post-id');
 		console.log('project_id'+project_id);
 		console.log('job_title'+job_title);
 		console.log('no_of_vacancies'+no_of_vacancies);

@@ -33,6 +33,7 @@ CREATE TABLE IF NOT EXISTS `ijp_employees_list` (
   `address` varchar(1000) NOT NULL,
   `email` varchar(255) NOT NULL,
   `emp_ref` varchar(255) NOT NULL,
+  `key_skills` TEXT NOT NULL,
   `password` varchar(255) NOT NULL,
   `user_role` enum('A','M','E','') NOT NULL,
   `image_path` varchar(500) NOT NULL,
