@@ -9,6 +9,9 @@ class application_models_Register {
 		$insert_register_values ['address'] = $values ['address'];
 		$insert_register_values ['email'] = $values ['email'];
 		$insert_register_values ['emp_ref'] = $values ['emp_ref'];
+		if (count($values ['key_skills']) > 0) {
+			$insert_register_values ['key_skills'] = implode ( ',', $values ['key_skills'] );
+		}
 		$insert_register_values ['password'] = $values ['password'];
 		$insert_register_values ['user_role'] = $values ['user_role'];
 		$insert_register_values ['image_path'] = $values ['image_path']?:'';
@@ -45,6 +48,9 @@ class application_models_Register {
 		if (strlen($values ['email'])) {
 			$updated_values ['email']= $values ['email'];
 		}
+		if (count($values ['key_skills']) > 0) {
+			$updated_values ['key_skills'] = implode ( ',', $values ['key_skills'] );
+		}
 		if (strlen($values ['new_password'])) {
 			$updated_values ['password'] = $values ['new_password'];
 		}
@@ -54,7 +60,8 @@ class application_models_Register {
 		if (strlen($values ['cv_path'])) {
 			$updated_values['cv_path'] = $values ['cv_path'];
 		}
-		$insert_register_values ['date_of_modification'] = new Zend_Db_Expr ( 'now()' );
+		
+		$updated_values ['date_of_modification'] = new Zend_Db_Expr ( 'now()' );
 		$this->db->update('ijp_employees_list', $updated_values,array (
 				'eid =?' => $values ['eid'] 
 		) );

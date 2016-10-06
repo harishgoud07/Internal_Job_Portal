@@ -109,7 +109,7 @@ $managers_list = $this->managers_list;
 		<div class="form-group">
                                 <div class="">
                                     <label for="key_skills">Required Key skills</label>
-                                    <select required name="key_skills" id="key_skills" data-placeholder=" " class="form-control" multiple tabindex="-1">
+                                    <select required name="key_skills[]" id="key_skills" data-placeholder=" " class="form-control" multiple tabindex="-1">
                                         <option value="Empty">&nbsp;</option>
                                         <option>Objective C</option>
                                         <option>JSP</option>
@@ -175,20 +175,20 @@ $managers_list = $this->managers_list;
 		
 		<?php } else { ?>
 		<div class="row">
-			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-				<div class="form-group">
-					<div class="">
-						<label for="old_password">Old Password</label> 
-						<input required type="password"
-							id="password" name="old_password" placeholder="" class="form-control">
-					</div>
-				</div>
-			</div>
-			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+<!-- 			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"> -->
+<!-- 				<div class="form-group"> -->
+<!-- 					<div class=""> -->
+<!-- 						<label for="old_password">Old Password</label>  -->
+<!-- 						<input required type="password" -->
+<!-- 							id="password" name="old_password" placeholder="" class="form-control"> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 				<div class="form-group">
 					<div class="">
 						<label for="new_password">New Password</label>
-						<input required type="password" id="new_password" name="new_password"
+						<input type="password" id="new_password" name="new_password"
 							placeholder="" class="form-control">
 					</div>
 				</div>
@@ -222,3 +222,14 @@ $managers_list = $this->managers_list;
 	</form>
 	<!-- /form -->
 </div>
+<script>
+
+	var emp_skill_set = '<?php echo $employee_details->key_skills; ?>';
+	if (emp_skill_set) {
+		var skills = emp_skill_set.split(',');
+		$('#key_skills').val(skills).trigger('chosen:updated');
+	} else {
+		$('#key_skills').val([]).trigger('chosen:updated');
+	}
+
+</script>

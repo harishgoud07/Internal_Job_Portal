@@ -30,7 +30,7 @@ if($user_role == 'E'){
                     <button onclick="window.location='/admin/jobpostrequests'" class="btn"><?php echo $user_role != 'M'? 'Job post requests' : 'Requested Job Posts'?><span class="badge"><?php echo $display_count;?></span></button>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                    <button  id='add-job-trigger'  data-toggle="modal" class="btn pull-right">Add a new Job post</button>
+                    <button  id='add-job-trigger'  data-toggle="modal" class="btn pull-right"><?php echo $user_role != 'M'? 'Add a new Job post' : 'Request a new Job post'?></button>
                 </div>
 <?php
  }else{
