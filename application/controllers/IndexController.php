@@ -20,14 +20,19 @@ class IndexController extends Zend_Controller_Action {
 				if ($result->isValid ()) {
 					$storage = new Zend_Auth_Storage_Session ();
 					$logged_in_user_details = $adapter->getResultRowObject ();
-					unset ( $logged_in_user_details->password );
-					$storage->write ( $logged_in_user_details );
-					if ($logged_in_user_details->user_role == 'A') {
-						$this->_redirect ( 'admin' );
-					} else if ($logged_in_user_details->user_role == 'M') {
-						$this->_redirect ( 'manager' );
-					} else if ($logged_in_user_details->user_role == 'E') {
-						$this->_redirect ( 'employee' );
+					$employee = new application_models_Employee();
+					if (!($logged_in_user_details->user_role != 'A' && !$employee->is_employee_authenticated($logged_in_user_details->eid))) {
+						unset ( $logged_in_user_details->password );
+						$storage->write ( $logged_in_user_details );
+						if ($logged_in_user_details->user_role == 'A') {
+							$this->_redirect ( 'admin' );
+						} else if ($logged_in_user_details->user_role == 'M') {
+							$this->_redirect ( 'manager' );
+						} else if ($logged_in_user_details->user_role == 'E') {
+							$this->_redirect ( 'employee' );
+						}
+					} else {
+						$this->view->not_authenticated = 'yes';
 					}
 				}
 			} else if ($request_params ['register']) {
@@ -44,12 +49,12 @@ class IndexController extends Zend_Controller_Action {
  							continue;
  						}
 						if($file=='user_image') {
-							$request_params['image_path'] = $_SERVER['server_name'].'\\upload\\user_images\\'.$request_params['emp_ref'].'_'.$info['name'];
-							$image_storage_path = APPLICATION_PATH.'\\..\\upload\\user_images\\'.$request_params['emp_ref'].'_'.$info['name'];
+							$request_params['image_path'] = $_SERVER['server_name'].DIRECTORY_SEPARATOR.'upload'.DIRECTORY_SEPARATOR.'user_images'.DIRECTORY_SEPARATOR.''.$request_params['emp_ref'].'_'.$info['name'];
+							$image_storage_path = APPLICATION_PATH.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'upload'.DIRECTORY_SEPARATOR.'user_images'.DIRECTORY_SEPARATOR.''.$request_params['emp_ref'].'_'.$info['name'];
 							$upload->addFilter('Rename', array('target' => $image_storage_path, 'overwrite' => true), $file);
 						} else {
-							$request_params['cv_path'] = $_SERVER['server_name'].'\\upload\\user_cvs\\'.$request_params['emp_ref'].'_'.$info['name'];
-							$cv_storage_path = APPLICATION_PATH.'\\..\\upload\\user_cvs\\'.$request_params['emp_ref'].'_'.$info['name'];
+							$request_params['cv_path'] = $_SERVER['server_name'].DIRECTORY_SEPARATOR.'upload'.DIRECTORY_SEPARATOR.'user_cvs'.DIRECTORY_SEPARATOR.''.$request_params['emp_ref'].'_'.$info['name'];
+							$cv_storage_path = APPLICATION_PATH.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'upload'.DIRECTORY_SEPARATOR.'user_cvs'.DIRECTORY_SEPARATOR.''.$request_params['emp_ref'].'_'.$info['name'];
 							$upload->addFilter('Rename', array('target' => $cv_storage_path, 'overwrite' => true), $file);
 						}
 						$upload->receive ($file);
@@ -58,9 +63,9 @@ class IndexController extends Zend_Controller_Action {
 					$register->do_register($request_params);
 					$this->view->registration_status = 'success';
 				}
-			}	
+			}
 		}
-		
+
 			$posts = new application_models_Posts();
 			$projects_list = $posts->get_projects_list ();
 			//$managers = new application_models_Employee();
@@ -68,7 +73,7 @@ class IndexController extends Zend_Controller_Action {
 			$this->view->projects_list = $projects_list;
 			$this->view->managers_list = array();//$managers_list;
 	}
-							
+
 	public function editprofileAction() {
 		$request_params = $this->getRequest ()->getParams ();
 		if ($this->getRequest ()->isPost ()) {
@@ -84,15 +89,15 @@ class IndexController extends Zend_Controller_Action {
 								if (! $upload->isUploaded ( $file ) && ! $upload->isValid ( $file )) {
 									continue;
 								}
-							if($file=='user_image') {
-								$request_params['image_path'] = $_SERVER['server_name'].'\\upload\\user_images\\'.$request_params['emp_ref'].'_'.$info['name'];
-								$image_storage_path = APPLICATION_PATH.'\\..\\upload\\user_images\\'.$request_params['emp_ref'].'_'.$info['name'];
-								$upload->addFilter('Rename', array('target' => $image_storage_path, 'overwrite' => true), $file);
-							} else {
-								$request_params['cv_path'] = $_SERVER['server_name'].'\\upload\\user_cvs\\'.$request_params['emp_ref'].'_'.$info['name'];
-								$cv_storage_path = APPLICATION_PATH.'\\..\\upload\\user_cvs\\'.$request_params['emp_ref'].'_'.$info['name'];
-								$upload->addFilter('Rename', array('target' => $cv_storage_path, 'overwrite' => true), $file);
-							}
+								if($file=='user_image') {
+									$request_params['image_path'] = $_SERVER['server_name'].DIRECTORY_SEPARATOR.'upload'.DIRECTORY_SEPARATOR.'user_images'.DIRECTORY_SEPARATOR.''.$request_params['emp_ref'].'_'.$info['name'];
+									$image_storage_path = APPLICATION_PATH.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'upload'.DIRECTORY_SEPARATOR.'user_images'.DIRECTORY_SEPARATOR.''.$request_params['emp_ref'].'_'.$info['name'];
+									$upload->addFilter('Rename', array('target' => $image_storage_path, 'overwrite' => true), $file);
+								} else {
+									$request_params['cv_path'] = $_SERVER['server_name'].DIRECTORY_SEPARATOR.'upload'.DIRECTORY_SEPARATOR.'user_cvs'.DIRECTORY_SEPARATOR.''.$request_params['emp_ref'].'_'.$info['name'];
+									$cv_storage_path = APPLICATION_PATH.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'upload'.DIRECTORY_SEPARATOR.'user_cvs'.DIRECTORY_SEPARATOR.''.$request_params['emp_ref'].'_'.$info['name'];
+									$upload->addFilter('Rename', array('target' => $cv_storage_path, 'overwrite' => true), $file);
+								}
 								$upload->receive ($file);
 							}
 							$register = new application_models_Register();

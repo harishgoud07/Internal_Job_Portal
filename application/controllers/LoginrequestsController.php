@@ -33,7 +33,7 @@ class LoginrequestsController extends Zend_Controller_Action
         if ($this->getRequest()->isPost()) {
             $request_params ['status'] = 'A';
             $login_request = new application_models_Loginrequests();
-            $login_requests_data = $login_request->update_login_request_status($request_params);
+            $login_request->update_login_request_status($request_params);
             $login_requests_data = $login_request->get_login_requets();
             $this->view->login_requests_data = $login_requests_data;
             $this->renderScript('loginrequests/includes/loginrequestsdisplay.phtml');

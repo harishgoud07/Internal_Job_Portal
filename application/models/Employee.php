@@ -17,6 +17,14 @@ class application_models_Employee {
 		return $this->db->fetchAll($get_manager_detals);
 	}
 
+	public function is_employee_authenticated($employee_id) {
+		$get_employee_status_query = $get_manager_detals = $this->db->select ()->from('ijp_login_requests')->where('eid = ?',$employee_id);
+		$user_status = $this->db->fetchRow($get_employee_status_query);
+		if ($user_status['status'] == 'A') {
+			return true;
+		}
+		return false;
+	}
 
 	public function get_managers_of_project($values){
 				$get_manager_detals = $this->db->select ()->from ( array (
