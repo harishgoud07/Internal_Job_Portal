@@ -34,6 +34,8 @@ class IndexController extends Zend_Controller_Action {
 					} else {
 						$this->view->not_authenticated = 'yes';
 					}
+				} else {
+					$this->view->invalid_user = 'yes';
 				}
 			} else if ($request_params ['register']) {
 				if ( $request_params ['full_name'] && 

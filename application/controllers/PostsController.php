@@ -7,6 +7,7 @@ class PostsController extends Zend_Controller_Action {
         $this->user_details = $utilities->get_user_details();
 
 	}
+	
 	public function indexAction() {
 		$posts = new application_models_Posts ();
 		$posts_data = $posts->get_posts ();
@@ -20,9 +21,8 @@ class PostsController extends Zend_Controller_Action {
 			$this->view->projects_list = $projects_list;
 		}
 		$this->view->posts_data = $posts_data;
-		
-		
 	}
+	
 	public function addAction() {
 		$request_params = $this->getRequest ()->getParams ();
 		$this->_helper->layout ()->disableLayout ();
@@ -34,6 +34,14 @@ class PostsController extends Zend_Controller_Action {
 				$posts_data = $posts->get_requested_posts ();
 			} else {
 				$posts_data = $posts->get_posts ();
+			}
+			$applied_posts_count = $posts->get_applied_posts_count();
+			if($this->user_details->user_role == 'E'){
+				$applied_posts_count = $posts->get_applied_posts_count();
+				$this->view->display_count = $applied_posts_count['applied_posts_count'];
+			}else {
+				$requested_posts_count = $posts->get_requested_posts_count ();
+				$this->view->display_count = $requested_posts_count['requested_posts_count'];
 			}
 			$this->view->active_posts_data = $posts_data;
 			$this->renderScript ( 'posts/includes/postsdisplay.phtml' );

@@ -27,7 +27,7 @@ if($user_role == 'E'){
              if($user_role == 'M' || $user_role == 'A'){
 ?>
              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                    <button onclick="window.location='/admin/jobpostrequests'" class="btn"><?php echo $user_role != 'M'? 'Job post requests' : 'Requested Job Posts'?><span class="badge"><?php echo $display_count;?></span></button>
+                    <button onclick="window.location='/admin/jobpostrequests'" class="btn"><?php echo $user_role != 'M'? 'Job post requests' : 'Requested Job Posts'?><span class="badge number-of-requested-posts"><?php echo $display_count;?></span></button>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                 <?php 
@@ -44,7 +44,7 @@ if($user_role == 'E'){
 	 if(!$this->display_applied_posts){
 ?>
 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                    <button onclick="window.location='/posts/displayappliedjobposts'" class="btn">View Applied Job posts <span class="badge"><?php echo $display_count;?></span></button>
+                    <button onclick="window.location='/posts/displayappliedjobposts'" class="btn">View Applied Job posts <span class="badge number-of-requested-posts"><?php echo $display_count;?></span></button>
                 </div>
 
 <?php
@@ -64,7 +64,7 @@ if($user_role == 'E'){
  </div>
  <div class='col-lg-12 jobs-list-container'>
 <?php echo $this->partial('posts/includes/postsdisplay.phtml', array(
-    'active_posts_data' => $this->posts_data)); ?>
+    'active_posts_data' => $this->posts_data, 'display_count'=>$display_count)); ?>
 </div>
 <?php if($user_role != 'E'){
 	echo $this->partial('posts/includes/addnewpost.phtml', array(
