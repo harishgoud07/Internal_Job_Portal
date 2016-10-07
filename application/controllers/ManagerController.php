@@ -30,7 +30,7 @@ class ManagerController extends Zend_Controller_Action
         $projects_list = $posts->get_manager_related_projects ();
         $posts_data = $posts->get_posts ();
         $applied_job_posts_data = $posts->get_applied_job_posts();
-        $this->view->posts_data = $posts_data;
+        //$this->view->posts_data = $posts_data;
         $this->view->projects_list = $projects_list;
         $this->view->applied_job_posts_data = $applied_job_posts_data;
     }
@@ -54,18 +54,17 @@ class ManagerController extends Zend_Controller_Action
         $request_params = $this->getRequest ()->getParams ();
 		$this->_helper->layout ()->disableLayout ();
 		$this->_helper->viewRenderer->setNoRender(true);
-		if ($this->getRequest ()->isPost ()) {
+		if ($this->getRequest ()->isGet ()) {
 			$posts = new application_models_Posts ();
             $emp_details = $posts->get_emp_details($request_params);
             $file = $emp_details['cv_path'];
-		header('Content-Description: File Transfer');
-        header('Content-Type: application/octet-stream');
-        header('Content-Disposition: attachment; filename='.basename($file));
-        header('Content-Transfer-Encoding: binary');
-        header('Expires: 0');
-        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
-        header('Pragma: public');
-        header('Content-Length: ' . filesize($file));
+            $file = APPLICATION_PATH .DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.$file;
+           
+    		header ( 'Content-Type: application/octet-stream' );
+    		header ( 'Content-Disposition: attachment; filename="' . basename ( $file ) . '"' );
+    		header ( 'Content-Length: ' . filesize ( $file ) );
+            
+    		readfile ( $file );
 			
 			
 		} 
@@ -94,8 +93,9 @@ class ManagerController extends Zend_Controller_Action
 		$this->_helper->viewRenderer->setNoRender(true);
 		if ($this->getRequest ()->isPost ()) {
 	    $posts = new application_models_Posts ();
-        $applied_job_posts_data = $posts->get_applied_job_posts();
+        $applied_job_posts_data = $posts->get_applied_job_posts($request_params);
         $this->view->applied_job_posts_data = $applied_job_posts_data;
+        $this->renderScript ( 'manager/includes/applied_posts_display.phtml' );
 			
 		} 
     }
