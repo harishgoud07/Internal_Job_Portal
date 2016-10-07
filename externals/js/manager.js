@@ -10,7 +10,8 @@ $(function() {
 			data:{'applied_job_id':applied_id,'status':'A'}, 
 			success: function(data)
 			{
-				$('#applied-job-posts-container').html('').html(data);
+				//$('#applied-job-posts-container').html('').html(data);
+				$('#post_id').trigger('change');
 			}
 		});
 	});
@@ -25,7 +26,8 @@ $(function() {
 			data:{'applied_job_id':applied_id,'status':'R'}, 
 			success: function(data)
 			{
-				$('#applied-job-posts-container').html('').html(data);
+				//$('#applied-job-posts-container').html('').html(data);
+				$('#post_id').trigger('change');
 			}
 		});
 	});
@@ -34,15 +36,7 @@ $(function() {
 		var eid = $(this).data('applied-id');
 		console.log('eid'+eid);
 		var self=$(this);
-		$.ajax({
-			type: "POST",
-			url: '/manager/downloadcv',
-			data:{'eid':eid}, 
-			success: function(data)
-			{
-				
-			}
-		});
+		window.location='/manager/downloadcv?eid='+eid;
 	});
 
  $(document).on('change','#project_id',function(){
@@ -55,7 +49,14 @@ $(function() {
 			data:{'project_id':project_id}, 
 			success: function(data)
 			{
-				alert(data);
+				var data = jQuery.parseJSON(data);
+					if(data != null){
+						var options = '<option value ="">Select Job</option>';
+						jQuery.each(data,function(index,value){
+							options = options + '<option value = "'+value.post_id+'">'+value.job_title+'</option>';	  
+						});
+						$('#post_id').html('').html(options);
+					} 
 			}
 		});
 		});
@@ -72,7 +73,7 @@ $(function() {
 			data:{'project_id':project_id,'post_id':post_id}, 
 			success: function(data)
 			{
-				alert(data);
+				$('#applied-job-posts-container').html('').html(data);
 			}
 		});
 		}

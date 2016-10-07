@@ -8,10 +8,10 @@ if($applied_job_posts_data){
 <div class="row login-requests-list-item" style='margin-bottom: 20px;'>
     <div class="col-lg-12 col-md-12 col-xs-12 colsm-12 login-requests-list-item-header" >
         <div class="col-lg-6 col-md-6 col-xs-6 colsm-6">
-            <span class="lead"><?php echo $applied_job_post_data['name'];?></span>
+            <span class="lead"><?php echo $applied_job_post_data['name'] .' - '.$applied_job_post_data['job_title'];?></span>
         </div>
         <div class="col-lg-6 col-md-6 col-xs-6 colsm-6 login-requests-btn-group">
-        <button class="btn btn-danger pull-right view-emp-cv" data-applied-id ="<?php echo $applied_job_post_data['eid'];?>" >View CV</button>
+        <button class="btn btn-danger pull-right view-emp-cv" data-applied-id ="<?php echo $applied_job_post_data['employee_id'];?>" >View CV</button>
         <?php if($applied_job_post_data['applied_job_status'] == 'P'){ ?>
          <button class="btn btn-danger pull-right decline-emp-job-post" data-applied-id ="<?php echo $applied_job_post_data['applied_job_id'];?>" >Decline</button>
             <button class="btn btn-info pull-right approve-emp-job-post " data-applied-id ="<?php echo $applied_job_post_data['applied_job_id'];?>">Accept</button>
@@ -51,7 +51,7 @@ if($applied_job_posts_data){
 <?php
 }
 }else{
-    echo "<h4><p class='text-center text-info col-lg-12'>No login requests to display.</p></h4>";
+    echo "<h4><p class='text-center text-info col-lg-12'>No job application found.</p></h4>";
 }
 
 ?>
