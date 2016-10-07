@@ -50,4 +50,53 @@ class ManagerController extends Zend_Controller_Action
 		} 
     }
 	
+    public function downloadcvAction(){
+        $request_params = $this->getRequest ()->getParams ();
+		$this->_helper->layout ()->disableLayout ();
+		$this->_helper->viewRenderer->setNoRender(true);
+		if ($this->getRequest ()->isPost ()) {
+			$posts = new application_models_Posts ();
+            $emp_details = $posts->get_emp_details($request_params);
+            $file = $emp_details['cv_path'];
+		header('Content-Description: File Transfer');
+        header('Content-Type: application/octet-stream');
+        header('Content-Disposition: attachment; filename='.basename($file));
+        header('Content-Transfer-Encoding: binary');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Pragma: public');
+        header('Content-Length: ' . filesize($file));
+			
+			
+		} 
+    }
+
+
+     public function getpostsofprojectAction(){
+        $request_params = $this->getRequest ()->getParams ();
+		$this->_helper->layout ()->disableLayout ();
+		$this->_helper->viewRenderer->setNoRender(true);
+		if ($this->getRequest ()->isPost ()) {
+			$posts = new application_models_Posts ();
+          $posts_data =  $posts->get_posts_for_project($request_params);
+
+			echo json_encode($posts_data);
+			
+		} 
+    }
+
+    function getappliedpostsdataAction(){
+        $this->_helper->layout ()->disableLayout ();
+		$this->_helper->viewRenderer->setNoRender(true);
+       
+        $request_params = $this->getRequest ()->getParams ();
+		$this->_helper->layout ()->disableLayout ();
+		$this->_helper->viewRenderer->setNoRender(true);
+		if ($this->getRequest ()->isPost ()) {
+	    $posts = new application_models_Posts ();
+        $applied_job_posts_data = $posts->get_applied_job_posts();
+        $this->view->applied_job_posts_data = $applied_job_posts_data;
+			
+		} 
+    }
 }
