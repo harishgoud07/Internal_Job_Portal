@@ -2,6 +2,7 @@
 $active_posts_data = $this->posts_data;
 $projects_list = $this->projects_list;
 $this->headScript()->appendFile($this->baseUrl('externals\js\admin.js'));
+$this->headScript()->appendFile($this->baseUrl('externals\js\manager.js'));
 $this->headScript()->appendFile($this->baseUrl('externals\js\employee.js'));
 $this->headLink()->appendStylesheet($this->baseUrl('externals\css\loginrequests.css'));
 $utilities = new application_models_Utilities();
@@ -53,49 +54,7 @@ $user_role = $user_details->user_role;
             </div>
     </div>
 </div>
-<div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1 no-padding login-requests-container">
-<?php
-$applied_job_posts_data =  $this->applied_job_posts_data; 
-if($applied_job_posts_data){
-    foreach($applied_job_posts_data as $applied_job_post_data){
-
-    ?>
-<div class="row login-requests-list-item" style='margin-bottom: 20px;'>
-    <div class="col-lg-12 col-md-12 col-xs-12 colsm-12 login-requests-list-item-header" >
-        <div class="col-lg-6 col-md-6 col-xs-6 colsm-6">
-            <span class="lead"><?php echo $applied_job_post_data['name'];?></span>
-        </div>
-        <div class="col-lg-6 col-md-6 col-xs-6 colsm-6 login-requests-btn-group">
-            <button class="btn btn-danger pull-right decline-emp-job-post" data-applied-id ="<?php echo $applied_job_post_data['applied_job_id'];?>" >Decline</button>
-            <button class="btn btn-info pull-right approve-emp-job-post " data-applied-id ="<?php echo $applied_job_post_data['applied_job_id'];?>">Accept</button>
-        </div>
-    </div>
-    <div class="col-lg-12 col-md-12 col-xs-12 colsm-12 login-requests-list-item-details">
-        <div class="col-lg-6 col-md-6 col-xs-6 colsm-6 login-requests-list-item-field">
-            <span class="login-requests-list-item-field-title">Key skills :</span>
-            <span><?php echo $applied_job_post_data['key_skills'];?></span>
-        </div>
-        <div class="col-lg-6 col-md-6 col-xs-6 colsm-6 login-requests-list-item-field">
-            <span class="login-requests-list-item-field-title">Employee Reference :</span>
-            <span><?php echo $applied_job_post_data['emp_ref'];?></span>
-        </div>
-        <div class="col-lg-6 col-md-6 col-xs-6 colsm-6 login-requests-list-item-field">
-            <span class="login-requests-list-item-field-title">Email :</span>
-            <span><?php echo $applied_job_post_data['email'];?></span>
-        </div>
-        <div class="col-lg-6 col-md-6 col-xs-6 colsm-6 login-requests-list-item-field">
-            <span class="login-requests-list-item-field-title">Applied date:</span>
-            <span><?php echo $applied_job_post_data['applied_date'];?></span>
-        </div>
-    </div>
-</div>
-
-<?php
-}
-}else{
-    echo "<h4><p class='text-center text-info col-lg-12'>No login requests to display.</p></h4>";
-}
-
-?>
+<div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1 no-padding login-requests-container" id ='applied-job-posts-container'>
+ <?php echo $this->partial('manager/includes/applied_posts_display.phtml', array('applied_job_posts_data' => $this->applied_job_posts_data, )); ?>
 </div>
 </div>

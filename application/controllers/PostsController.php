@@ -134,7 +134,6 @@ class PostsController extends Zend_Controller_Action {
 			$posts = new application_models_Posts ();
 			$request_params['status'] = 'D';
 			$posts->upadte_applied_job_post_status ($request_params);
-			var_dump($posts_data);
 			$posts_data = $posts->get_applied_job_posts ();
 			$this->view->posts_data = $posts_data;
 			$this->view->display_applied_posts =1;

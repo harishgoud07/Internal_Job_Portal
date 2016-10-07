@@ -33,7 +33,21 @@ class ManagerController extends Zend_Controller_Action
         $this->view->posts_data = $posts_data;
         $this->view->projects_list = $projects_list;
         $this->view->applied_job_posts_data = $applied_job_posts_data;
-       // var_dump($applied_job_posts_data);
+    }
+
+    public function updateappliedjobstatusAction(){
+        $request_params = $this->getRequest ()->getParams ();
+		$this->_helper->layout ()->disableLayout ();
+		$this->_helper->viewRenderer->setNoRender(true);
+		if ($this->getRequest ()->isPost ()) {
+			$posts = new application_models_Posts ();
+			$posts->upadte_applied_job_post_status ($request_params);
+			$applied_job_posts_data = $posts->get_applied_job_posts ();
+            $this->view->applied_job_posts_data = $applied_job_posts_data;
+			$this->renderScript ( 'manager/includes/applied_posts_display.phtml' );
+			
+			
+		} 
     }
 	
 }
