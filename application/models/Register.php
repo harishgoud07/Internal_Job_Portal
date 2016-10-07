@@ -12,7 +12,7 @@ class application_models_Register {
 		if (count($values ['key_skills']) > 0) {
 			$insert_register_values ['key_skills'] = implode ( ',', $values ['key_skills'] );
 		}
-		$insert_register_values ['password'] = $values ['password'];
+		$insert_register_values ['password'] = md5($values ['password']);
 		$insert_register_values ['user_role'] = $values ['user_role'];
 		$insert_register_values ['image_path'] = $values ['image_path']?:'';
 		$insert_register_values ['cv_path'] = $values ['cv_path']?:'';
@@ -52,7 +52,7 @@ class application_models_Register {
 			$updated_values ['key_skills'] = implode ( ',', $values ['key_skills'] );
 		}
 		if (strlen($values ['new_password'])) {
-			$updated_values ['password'] = $values ['new_password'];
+			$updated_values ['password'] = md5($values ['new_password']);
 		}
 		if (strlen($values ['image_path'])) {
 			$updated_values['image_path'] = $values ['image_path'];

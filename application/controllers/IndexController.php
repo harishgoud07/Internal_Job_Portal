@@ -15,7 +15,7 @@ class IndexController extends Zend_Controller_Action {
 				$auth = Zend_Auth::getInstance ();
 				$adapter = new Zend_Auth_Adapter_DbTable ( $db, 'ijp_employees_list', 'emp_ref', 'password' );
 				$adapter->setIdentity ( $request_params ['username'] );
-				$adapter->setCredential ( $request_params ['password'] );
+				$adapter->setCredential ( md5($request_params ['password']) );
 				$result = $auth->authenticate ( $adapter );
 				if ($result->isValid ()) {
 					$storage = new Zend_Auth_Storage_Session ();
