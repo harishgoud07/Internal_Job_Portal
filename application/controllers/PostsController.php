@@ -83,7 +83,11 @@ class PostsController extends Zend_Controller_Action {
 			$posts = new application_models_Posts ();
 			
 			$data = $posts->update_posts ( $request_params );
-			$posts_data = $posts->get_posts ();
+			if ($request_params['current_page'] == 'JOB_POST_REQUESTS') {
+				$posts_data = $posts->get_requested_posts ();
+			} else {
+				$posts_data = $posts->get_posts ();
+			}
 			$this->view->active_posts_data = $posts_data;
 			$this->renderScript ( 'posts/includes/postsdisplay.phtml' );
 		}

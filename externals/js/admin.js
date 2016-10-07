@@ -161,6 +161,7 @@ $(function() {
 		var experience = $('#experience').val();
 		var last_date_for_applicants = $('#expiry_date_datepicker').val();
 		var post_id = $('#save_post').data('post-id');
+		var current_page = $('#add-job-request-source').val();
 		console.log('project_id'+project_id);
 		console.log('job_title'+job_title);
 		console.log('no_of_vacancies'+no_of_vacancies);
@@ -181,7 +182,8 @@ $(function() {
 				'job_description':job_description,
 				'experience':experience,
 				'key_skills':key_skills,
-				'last_date_for_applicants':last_date_for_applicants
+				'last_date_for_applicants':last_date_for_applicants,
+				'current_page' : current_page
 			}, // serializes the form's elements.
 			success: function(data)
 			{//$('#add_posts').serialize()
