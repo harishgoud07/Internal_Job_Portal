@@ -131,8 +131,11 @@ class application_models_Posts {
 				'posts' => 'ijp_job_posts' 
 		) )->join ( array (
 				'projects' => 'ijp_projects_list' 
-		), 'posts.project_id = projects.project_id' )->where ( 'post_id = ?', $values ['post_id'] )->where ( 'status = ?', 'A' );
-		
+		), 'posts.project_id = projects.project_id' )->where ( 'post_id = ?', $values ['post_id'] );
+		 if($this->user_details->user_role != 'M'){
+			$select_post_query->where ( 'status = ?', 'A' );				
+		}
+		//echo $select_post_query;
 		return $this->db->fetchRow ( $select_post_query );
 	}
 
@@ -168,7 +171,10 @@ class application_models_Posts {
 		) )		->where ( 'posts.status = ?', 'A' )->where ( 'applied_jobs.status != ?', 'D' )->order ( 'posts.date_of_creation desc' );
 
 		 if($user_details->user_role == 'M'){
-			$get_posts_query->where ( 'posts.eid = ?', $user_details->eid );				
+			$get_posts_query->where ( 'posts.eid = ?', $user_details->eid );
+			if($values['post_id'] && $values['project_id']){
+				$get_posts_query->where ( 'posts.post_id = ?', $values['post_ids'] )->where ( 'posts.project_id = ?',$values['project_id'] );
+			}
 		}
 
 		if($user_details->user_role == 'E'){
@@ -191,5 +197,20 @@ public function get_manager_related_projects($values){
 		return $this->db->fetchAll($get_manager_project_details);
 	}
 	
-	
+	public function get_emp_details($values){
+		$get_emp_details = $this->db->select ()->from ( array (
+				'ijp_employees_list' 
+		),array('name','eid','cv_path') )->where ( 'eid = ?', $values['eid'] );
+		//echo $get_manager_project_details;
+		return $this->db->fetchRow($get_emp_details);
+	}
+
+	function get_posts_for_project($values){
+	$get_posts_details = $this->db->select ()->from ( array (
+				'ijp_job_posts' 
+		),array('post_id','eid','job_title') )->where ( 'status = ?', 'A' )->where ( 'eid = ?',$this->user_details->eid  )
+		->where ( 'project_id = ?', $values['project_id'] );
+		//echo $get_manager_project_details;
+		return $this->db->fetchRow($get_posts_details);
+	}
 }

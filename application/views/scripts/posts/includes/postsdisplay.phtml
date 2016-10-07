@@ -47,18 +47,17 @@ if ($active_posts_data) {
 							<p><?php echo $post_data['job_skill_set'];?></p>
 						</div>
 						<div
-							class="col-lg-3 col-md-3 col-sm-3 col-xs-3 pull-right job-list-item-btn-container">
-							<button class="btn btn-info <?php echo ($post_data['status'] == 'P' && $user_role == 'A')?'approve-post':($user_role != 'E' ?'update_posts' :(!isset($post_data['applied_post_id'])?'apply_job_post':'withdraw_post')); ?>"
-								data-post-id='<?php echo !isset($post_data['applied_job_id'])? $post_data['post_id'] : $post_data['applied_job_id'];?>'><?php echo ($post_data['status'] == 'P' && $user_role == 'A')? 'Approve post' : ($user_role != 'E' ?'Update details' :(!isset($post_data['applied_post_id'])?'Appply':'withdraw') )?></button>
-								<?php
+							class="col-lg-4 col-md-4 col-sm-4 col-xs-4 job-list-item-btn-container">
+							<?php
 								if($user_role != 'E'){
 									?>
-<button class="btn btn-danger delete_post"
+								<button style="min-width: 100px; margin:0px 10px;" class="btn btn-danger delete_post pull-right"
 								data-post-id='<?php echo $post_data['post_id'];?>' data-current-page="<?php echo ($post_data['status'] == 'P')?'jobpostrequests':'index'?>">Delete Job</button>
 							<?php
 								}
 								?>
-							
+							<button style="min-width: 100px;" class="btn btn-info pull-right  <?php echo ($post_data['status'] == 'P' && $user_role == 'A')?'approve-post':($user_role != 'E' ?'update_posts' :(!isset($post_data['applied_post_id'])?'apply_job_post':'withdraw_post')); ?>"
+								data-post-id='<?php echo !isset($post_data['applied_job_id'])? $post_data['post_id'] : $post_data['applied_job_id'];?>'><?php echo ($post_data['status'] == 'P' && $user_role == 'A')? 'Approve post' : ($user_role != 'E' ?'Update details' :(!isset($post_data['applied_post_id'])?'Apply':'withdraw') )?></button>
 						</div>
 					</div>
 					<div class="row">
