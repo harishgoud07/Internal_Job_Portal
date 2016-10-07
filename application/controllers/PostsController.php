@@ -5,7 +5,10 @@ class PostsController extends Zend_Controller_Action {
 	public function init() {
 		$utilities = new application_models_Utilities();
         $this->user_details = $utilities->get_user_details();
-
+        $storage = Zend_Auth::getInstance()->getIdentity();
+        if($storage){
+        	$storage->active_page="posts";
+        }
 	}
 	
 	public function indexAction() {
@@ -115,6 +118,10 @@ class PostsController extends Zend_Controller_Action {
 		if ($this->getRequest ()->isPost ()) {
 			$posts = new application_models_Posts ();
 			$posts->apply_job_post ( $request_params );
+			if($this->user_details->user_role == 'E'){
+				$applied_posts_count = $posts->get_applied_posts_count();
+				$this->view->display_count = $applied_posts_count['applied_posts_count'];
+			}
 			$posts_data = $posts->get_posts ();
 			$this->view->active_posts_data = $posts_data;
 			$this->renderScript ( 'posts/includes/postsdisplay.phtml' );
@@ -149,8 +156,7 @@ class PostsController extends Zend_Controller_Action {
 			$posts_data = $posts->get_applied_job_posts ();
 			$this->view->posts_data = $posts_data;
 			$this->view->display_applied_posts =1;
-			$this->renderScript ( 'posts/includes/postsdisplay.phtml' );
-			
+			$this->renderScript ( 'posts/index.phtml' );
 			
 		} 
 	}

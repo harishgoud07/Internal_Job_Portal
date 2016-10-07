@@ -86,7 +86,7 @@ class application_models_Register {
 
 	function store_emp_manager_mapping($values) {
 		$insert_login_request_values ['eid'] = $values ['last_inserted_emp_id'];
-		$insert_login_request_values ['	manager_id'] = $values['manager_id'];
+		$insert_login_request_values ['manager_id'] = $values['manager_id'];
 		$insert_login_request_values ['date_of_creation'] = new Zend_Db_Expr ( 'now()' );
 		$insert_login_request_values ['date_of_modification'] = new Zend_Db_Expr ( 'now()' );
 		$this->db->insert ( 'ijp_emp_manager_mapping', $insert_login_request_values );

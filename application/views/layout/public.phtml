@@ -53,7 +53,7 @@ if ($storage->active_page) {
                         if($user_details->user_role == 'A'){
                                 $jobs_href =  $this->url(array('action'=>'index','controller'=>'admin'),null,true);
                                 $login_href = $this->url(array('action'=>'loginrequests','controller'=>'admin'),null,true);
-                        }else if ($user_details->user_role == 'E`'){
+                        }else if ($user_details->user_role == 'E'){
                              $jobs_href =  $this->url(array('action'=>'index','controller'=>'employee'),null,true);
                         }else if($user_details->user_role == 'M'){
                              $jobs_href =  $this->url(array('action'=>'index','controller'=>'manager'),null,true);

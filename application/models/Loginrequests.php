@@ -33,7 +33,7 @@ class application_models_Loginrequests {
 				'emp' => 'ijp_employees_list'
 		) )->join ( array (
 				'request' => 'ijp_login_requests'
-		), 'emp.eid=request.eid' )->join(array('mapping' => 'ijp_emp_manager_mapping'), 'mapping.manager_id = ' . $user_details->eid )->where ( 'emp.user_role = ?', 'E' )->where ( 'request.status = ?', 'P' )->order ( 'request.date_of_creation desc' );
+		), 'emp.eid=request.eid' )->join(array('mapping' => 'ijp_emp_manager_mapping'),  'mapping.eid = request.eid')->where('mapping.manager_id = ?', $user_details->eid)->where ( 'emp.user_role = ?', 'E' )->where ( 'request.status = ?', 'P' )->order ( 'request.date_of_creation desc' );
 	
 		return $this->db->fetchAll ( $get_login_request_query );
 	}
@@ -59,13 +59,18 @@ class application_models_Loginrequests {
 			/*send mail*/
 			$emp_details = $this->get_employee_details_with_request_id($values ['request_id']);
 			if ($emp_details['email']) {
-				$mail = new Zend_Mail();
-				$body = '<p>Hi '.$emp_details['name'].'</p><p>Your login request has been accepted by the admin. Now, you can login and request for new posts using the Portal</p><br><p>Cheers,<br>Internal job portal team</p>';
-				$mail->setBodyHtml($body);
-				$mail->setFrom('info@test.com', 'Internal Job Portal');
-				$mail->addTo($emp_details['email'], $emp_details['name']);
-				$mail->setSubject('Your login request has accepted');
-				$mail->send();
+				try {
+					$mail = new Zend_Mail();
+					$body = '<p>Hi '.$emp_details['name'].'</p><p>Your login request has been accepted by the admin. Now, you can login and request for new posts using the Portal</p><br><p>Cheers,<br>Internal job portal team</p>';
+					$mail->setBodyHtml($body);
+					$mail->setFrom('info@test.com', 'Internal Job Portal');
+					$mail->addTo($emp_details['email'], $emp_details['name']);
+					$mail->setSubject('Your login request has accepted');
+					$mail->send();
+				}
+				catch(Exception $e) {
+					echo "<script>alert('Unable to send email!');</script>";
+				}
 			}
 		}
 	}

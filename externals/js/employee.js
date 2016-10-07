@@ -28,7 +28,7 @@ $(function() {
 				data:{'applied_job_id':applied_job_id}, // serializes the form's elements.
 				success: function(data)
 				{//$('#add_posts').serialize()
-					$('.jobs-list-container').html('').html(data);
+					$('.main-container').html('').html(data);
 				}
 			});
 		}

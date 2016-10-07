@@ -75,7 +75,7 @@ $(function() {
 					if(data != null){
 						var options = '<option value ="">Select</option>';
 						jQuery.each(data,function(index,value){
-							options = options + '<option values = "'+value.eid+'">'+value.name+'</option>';	  
+							options = options + '<option value = "'+value.eid+'">'+value.name+'</option>';	  
 						});
 						$('#manager_id').html('').html(options);
 					}
