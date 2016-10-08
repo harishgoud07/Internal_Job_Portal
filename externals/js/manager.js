@@ -2,6 +2,8 @@ $(function() {
 
 	$(document).on('click','.approve-emp-job-post',function(){
 		var applied_id = $(this).data('applied-id');
+		var post_id = $(this).val();
+		var project_id = $('#project_id').val();
 		console.log('applied_id'+applied_id);
 		var self=$(this);
 		$.ajax({
@@ -10,14 +12,19 @@ $(function() {
 			data:{'applied_job_id':applied_id,'status':'A'}, 
 			success: function(data)
 			{
-				//$('#applied-job-posts-container').html('').html(data);
-				$('#post_id').trigger('change');
+				if(post_id =='' || project_id =='') {
+					$('#applied-job-posts-container').html('').html(data);
+				} else {
+					$('#post_id').trigger('change');
+				}
 			}
 		});
 	});
 
     $(document).on('click','.decline-emp-job-post',function(){
 		var applied_id = $(this).data('applied-id');
+		var post_id = $(this).val();
+		var project_id = $('#project_id').val();
 		console.log('applied_id'+applied_id);
 		var self=$(this);
 		$.ajax({
@@ -26,8 +33,11 @@ $(function() {
 			data:{'applied_job_id':applied_id,'status':'R'}, 
 			success: function(data)
 			{
-				//$('#applied-job-posts-container').html('').html(data);
-				$('#post_id').trigger('change');
+				if(post_id =='' || project_id =='') {
+					$('#applied-job-posts-container').html('').html(data);
+				} else {
+					$('#post_id').trigger('change');
+				}
 			}
 		});
 	});
