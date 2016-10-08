@@ -146,7 +146,7 @@ class application_models_Posts {
 		), array ('applied_posts_count' => 'count(*)' ) )->join ( array (
 				'applied_posts' => 'ijp_job_applied_emp_details' 
 		), 'applied_posts.post_id = posts.post_id',array('applied_job_status' => 'applied_posts.status' ) )->where ( 'applied_posts.eid = ?', $this->user_details->eid )
-			->where ( 'posts.status = ?', 'A' )->where ( 'applied_posts.status != ?', 'D' );;
+			->where ( 'posts.status = ?', 'A' )->where ( 'applied_posts.status != ?', 'D' )->group('applied_job_status');;
 		return $this->db->fetchRow ( $select_applied_posts_count_query );
 	}
 
