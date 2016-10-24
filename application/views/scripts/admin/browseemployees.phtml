@@ -1,0 +1,41 @@
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+            <div class="form-group">
+                <div class="">
+                    <label for="project_id">Project</label>
+                    <select required id="project_id" name="project_id" class="form-control">
+                        <option value=''>Select</option>
+                        <?php
+                        if($projects_list){
+                            foreach($projects_list as $project_data){
+                                echo "<option value='".$project_data['project_id']."' >".$project_data['name']."</option>";
+
+                            }
+                        }
+
+                        ?>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+            <div class="form-group">
+                <div class="">
+                    <label for="Manager">Manager</label>
+                    <select required id="manager_id" name="manager_id" class="form-control">
+                        <option value=''>Select</option>
+                        <?php
+                        if($projects_list){
+                            foreach($managers_list as $manager_data){
+                                echo "<option value='".$manager_data['eid']."' >".$manager_data['name']."</option>";
+
+                            }
+                        }
+                        ?>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
