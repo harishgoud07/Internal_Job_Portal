@@ -1,9 +1,11 @@
 <?php 
 $projects_list = $this->projects_list; 
 $managers_list = $this->managers_list;
+$employees_list = $this->employees_list;
 $this->headScript()->appendFile($this->baseUrl('externals\js\browseemployees.js'));
+$this->headLink()->appendStylesheet($this->baseUrl('externals\css\loginrequests.css'));
 ?>
-<div class="row login-requests-container">
+
 	<div class="container">
 	    <div class="row">
 	        <div class="col-lg-4 col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-md-4 col-sm-4 col-xs-4">
@@ -16,10 +18,8 @@ $this->headScript()->appendFile($this->baseUrl('externals\js\browseemployees.js'
 	                        if($projects_list){
 	                            foreach($projects_list as $project_data){
 	                                echo "<option value='".$project_data['project_id']."' >".$project_data['name']."</option>";
-	
 	                            }
 	                        }
-	
 	                        ?>
 	                    </select>
 	                </div>
@@ -35,7 +35,6 @@ $this->headScript()->appendFile($this->baseUrl('externals\js\browseemployees.js'
 	                        if($projects_list){
 	                            foreach($managers_list as $manager_data){
 	                                echo "<option value='".$manager_data['eid']."' >".$manager_data['name']."</option>";
-	
 	                            }
 	                        }
 	                        ?>
@@ -45,44 +44,7 @@ $this->headScript()->appendFile($this->baseUrl('externals\js\browseemployees.js'
 	        </div>
 	    </div>
 	</div>
-
-<?php 
-if($employees_list){
-    foreach($employees_list as $employees_data){
-
-    ?>
-    
-		<div class="row login-requests-list-item" style='margin-bottom: 20px;'>
-		    <div class="col-lg-12 col-md-12 col-xs-12 colsm-12 login-requests-list-item-header" >
-		        <div class="col-lg-6 col-md-6 col-xs-6 colsm-6">
-		            <span class="lead"><?php echo $employees_data['user_role']=='M'?"Manager":"Employee";?></span>
-		        </div>
-		    </div>
-		    <div class="col-lg-12 col-md-12 col-xs-12 colsm-12 login-requests-list-item-details">
-		        <div class="col-lg-6 col-md-6 col-xs-6 colsm-6 login-requests-list-item-field">
-		            <span class="login-requests-list-item-field-title">Employee Name :</span>
-		            <span><?php echo $employees_data['name'];?></span>
-		        </div>
-		        <div class="col-lg-6 col-md-6 col-xs-6 colsm-6 login-requests-list-item-field">
-		            <span class="login-requests-list-item-field-title">Employee Reference :</span>
-		            <span><?php echo $employees_data['emp_ref'];?></span>
-		        </div>
-		        <div class="col-lg-6 col-md-6 col-xs-6 colsm-6 login-requests-list-item-field">
-		            <span class="login-requests-list-item-field-title">Email :</span>
-		            <span><?php echo $employees_data['email'];?></span>
-		        </div>
-		        <div class="col-lg-6 col-md-6 col-xs-6 colsm-6 login-requests-list-item-field">
-		            <span class="login-requests-list-item-field-title">Address :</span>
-		            <span><?php echo $employees_data['address'];?></span>
-		        </div>
-		    </div>
-		</div>
-	</div>
-
-<?php
-}
-}else{
-    echo "<h4><p class='text-center text-info col-lg-12'>No employees to display!</p></h4>";
-}
-
-?>
+    <div class="row login-requests-container">
+<?php echo $this->partial('admin/includes/employees_list.phtml', array(
+    'employees_list' => $employees_list));?>
+        </div>
