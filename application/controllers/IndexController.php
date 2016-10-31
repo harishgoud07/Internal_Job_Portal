@@ -117,6 +117,14 @@ class IndexController extends Zend_Controller_Action {
 		$projects_list = $posts->get_projects_list ();
 		$managers = new application_models_Employee();
 		$managers_list = $managers->getAvailableManagers();
+		$utilities = new application_models_Utilities ();
+		$user_details = $utilities->get_user_details();
+		if($user_details->user_role =='E'){
+			$this->view->current_project = $posts->get_current_project_details();
+			$this->view->current_manager = $posts->get_current_manager_details();
+			$this->view->previous_project = $posts->get_previous_project_details();
+			$this->view->previous_manager = $posts->get_previous_manager_details();
+		}
 		$this->view->projects_list = $projects_list;
 		$this->view->managers_list = $managers_list;
 		$this->view->employee_details = json_decode(json_encode($employee->getEmployeeDetails($emp_id)), FALSE);

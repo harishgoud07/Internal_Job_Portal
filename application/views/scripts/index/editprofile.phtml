@@ -2,6 +2,14 @@
 $employee_details = $this->employee_details;
 $projects_list = $this->projects_list;
 $managers_list = $this->managers_list;
+$utilities = new application_models_Utilities ();
+$user_details = $utilities->get_user_details();
+		if($user_details->user_role =='E'){
+			$current_project = $this->view->current_project;
+			$current_manager = $this->current_manager;
+			$previous_project = $this->previous_project;
+			$previous_manager = $this->previous_manager;
+		}
 ?>
 <section>
 	<div class="container">
@@ -11,17 +19,44 @@ $managers_list = $this->managers_list;
 		</div>
 		<div class="user-profile-information">
 			<div class="row">
-				<span class="edit-profile-field-title">Employee reference :</span>
+				<span class="edit-profile-field-title col-lg-3 bold">Employee ID 	<span class='pull-right'>:</span></span>
 				<span class="edit-profile-field-value"><?php echo $employee_details->emp_ref;?></span>
 			</div>
 			<div class="row">
-				<span class="edit-profile-field-title">Email address :</span>
+				<span class="edit-profile-field-title col-lg-3">Email address <span class='pull-right'>:</span></span>
 				<span class="edit-profile-field-value"><?php echo $employee_details->email;?></span>
 			</div>
 			<div class="row">
-				<span class="edit-profile-field-title">Address :</span>
+				<span class="edit-profile-field-title col-lg-3" >Address <span class='pull-right'>:</span></span>
 				<span class="edit-profile-field-value"><?php echo $employee_details->address;?></span>
 			</div>
+			<?php if(isset($current_project)){?>
+			<div class="row">
+				<span class="edit-profile-field-title col-lg-3" >Current project <span class='pull-right'>:</span></span>
+				<span class="edit-profile-field-value"><?php echo $employee_details->address;?></span>
+			</div>
+	<?php } 
+		if(isset($current_manager)){
+	?>		
+			<div class="row">
+				<span class="edit-profile-field-title col-lg-3" >Current manager <span class='pull-right'>:</span></span>
+				<span class="edit-profile-field-value"><?php echo $employee_details->address;?></span>
+			</div>
+			<?php } ?>
+
+			<?php if(isset($previous_project)){?>
+			<div class="row">
+				<span class="edit-profile-field-title col-lg-3" >Previous project <span class='pull-right'>:</span></span>
+				<span class="edit-profile-field-value"><?php echo $employee_details->address;?></span>
+			</div>
+	<?php } 
+		if(isset($previous_manager)){
+	?>		
+			<div class="row">
+				<span class="edit-profile-field-title col-lg-3" >Previous manager <span class='pull-right'>:</span></span>
+				<span class="edit-profile-field-value"><?php echo $employee_details->address;?></span>
+			</div>
+			<?php } ?>
 		</div>
 		<div class="user-profile-manage-btn-group">
 			<button class="btn btn-primary" data-toggle="modal" data-target="#edit-profile">Update profile</button>

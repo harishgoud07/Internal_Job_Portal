@@ -214,4 +214,44 @@ public function get_manager_related_projects($values){
 		//echo $get_manager_project_details;
 		return $this->db->fetchAll($get_posts_details);
 	}
+
+
+	function get_current_project_details(){
+		$get_project_details = $this->db->select ()->from ( array (
+				'ijp_employees_project_mapping' 
+		))->where ( 'eid = ?', $this->user_details->eid )
+		->where ( 'is_deleted = ?', 0 );;
+		//echo $get_manager_project_details;
+		return $this->db->fetchRow($get_project_details);
+	}
+
+	function get_current_manager_details(){
+		$get_project_details = $this->db->select ()->from ( array (
+				'ijp_emp_manager_mapping' 
+		))->where ( 'eid = ?', $this->user_details->eid )
+		->where ( 'is_deleted = ?', 0 );;
+		//echo $get_manager_project_details;
+		return $this->db->fetchRow($get_project_details);
+	}
+
+
+
+	function get_previous_project_details(){
+		$get_project_details = $this->db->select ()->from ( array (
+				'ijp_employees_project_mapping' 
+		))->where ( 'eid = ?', $this->user_details->eid )
+		->where ( 'is_deleted = ?', 1 )->order('date_of_modification desc');;
+		//echo $get_manager_project_details;
+		return $this->db->fetchRow($get_project_details);
+	}
+
+	function get_previous_manager_details(){
+		$get_project_details = $this->db->select ()->from ( array (
+				'ijp_emp_manager_mapping' 
+		))->where ( 'eid = ?', $this->user_details->eid )
+		->where ( 'is_deleted = ?', 1 )->order('date_of_modification desc');;
+		//echo $get_manager_project_details;
+		return $this->db->fetchRow($get_project_details);
+	}
+	
 }

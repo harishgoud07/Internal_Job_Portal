@@ -29,7 +29,7 @@ $(function() {
 				{
 					var data = jQuery.parseJSON(data);
 					if(data['exists'] == true) {
-						alert('Employee reference already exists!');
+						alert('Employee ID already exists!');
 						$('#emp_ref').focus();
 					}
 				}
