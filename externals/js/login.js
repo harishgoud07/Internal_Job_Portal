@@ -57,7 +57,6 @@ $(function() {
 	});
 
 	$(document).on('change','#project_id',function(){
-
 		var url = '/index/getmanagers';
 		var project_id = $(this).val();
 		console.log('d'+project_id);

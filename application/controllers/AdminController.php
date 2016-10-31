@@ -20,6 +20,27 @@ class AdminController extends Zend_Controller_Action
         $this->view->projects_list = $projects_list;
         $this->view->active_posts_data = $active_posts_data;
     }
+
+    public function browseemployeesAction() {
+        $storage = Zend_Auth::getInstance()->getIdentity();
+        if($storage) {
+            $storage->active_page = "browse_employees";
+        }
+        $request_params = $this->getRequest ()->getParams ();
+        $posts = new application_models_Posts();
+        $projects_list = $posts->get_projects_list ();
+        $this->view->projects_list = $projects_list;
+        $employee = new application_models_Employee();
+        $employees_list = $employee->getEmployeesList($request_params);
+        $this->view->managers_list = array();
+        $this->view->employees_list = $employees_list;
+        if ($this->getRequest ()->isPost ()) {
+            $this->_helper->layout ()->disableLayout ();
+            $this->_helper->viewRenderer->setNoRender(true);
+            $this->renderScript('admin/includes/employees_list.phtml');
+        }
+    }
+
     public function loginrequestsAction()
     {
         $this->_forward('index', 'loginrequests', null);

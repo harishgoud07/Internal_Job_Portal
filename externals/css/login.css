@@ -3,13 +3,8 @@
 .tab-button {
 	background-color: #FFffff;
 	font-size: 18px;
-	border: 1px solid #ccc;
 }
 
-.tab-button.active {
-	background-color: #337ab7;
-	color: white;
-}
 
 .login-form-title {
 	font-size:30px;

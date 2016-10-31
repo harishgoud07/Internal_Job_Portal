@@ -27,11 +27,30 @@ class application_models_Employee {
 	}
 
 	public function get_managers_of_project($values){
-				$get_manager_detals = $this->db->select ()->from ( array (
+		$get_manager_detals = $this->db->select ()->from ( array (
 				'employee' => 'ijp_employees_list' 
 		),array('name','eid') )->join ( array (
 				'mapping' => 'ijp_employees_project_mapping' 
 		), 'mapping.eid = employee.eid' )->where ( 'employee.user_role = ?', 'M' )->where ( 'mapping.project_id =?', $values['project_id'] );
+		return $this->db->fetchAll($get_manager_detals);
+	}
+	
+	public function getEmployeesList($values) {
+
+		$get_manager_detals = $this->db->select ()->from ( array (
+			'employee' => 'ijp_employees_list'
+		),array('employee_name'=>'name','employee_id'=>'eid','user_role','email','employee_ref'=>'emp_ref','address') )->join ( array (
+			'mapping' => 'ijp_employees_project_mapping'
+		), 'mapping.eid = employee.eid' )->joinLeft(array('manager_mapping'=> 'ijp_emp_manager_mapping'),'mapping.eid = manager_mapping.eid')
+			->joinLeft(array('manager'=> 'ijp_employees_list'),'manager.eid = manager_mapping.manager_id',array('manager_name'=>'manager.name'));
+		if ($values['project_id'] && $values['manager_id']) {
+			$get_manager_detals = $get_manager_detals->where('manager_mapping.manager_id = ?',$values['manager_id'])->where ( 'mapping.project_id =?', $values['project_id'] )->order('user_role ASC');
+
+		} else if($values['project_id']) {
+			$get_manager_detals = $get_manager_detals->where ( 'mapping.project_id =?', $values['project_id'] )->order('user_role ASC');
+		} else {
+			$get_manager_detals = $get_manager_detals->order('user_role ASC');
+		}
 		return $this->db->fetchAll($get_manager_detals);
 	}
 }

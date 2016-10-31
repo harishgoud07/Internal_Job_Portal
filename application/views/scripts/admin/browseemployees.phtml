@@ -1,0 +1,50 @@
+<?php 
+$projects_list = $this->projects_list; 
+$managers_list = $this->managers_list;
+$employees_list = $this->employees_list;
+$this->headScript()->appendFile($this->baseUrl('externals\js\browseemployees.js'));
+$this->headLink()->appendStylesheet($this->baseUrl('externals\css\loginrequests.css'));
+?>
+
+	<div class="container">
+	    <div class="row">
+	        <div class="col-lg-4 col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-md-4 col-sm-4 col-xs-4">
+	            <div class="form-group">
+	                <div class="">
+	                    <label for="project_id">Project</label>
+	                    <select required id="project_id" name="project_id" class="form-control">
+	                        <option value=''>Select</option>
+	                        <?php
+	                        if($projects_list){
+	                            foreach($projects_list as $project_data){
+	                                echo "<option value='".$project_data['project_id']."' >".$project_data['name']."</option>";
+	                            }
+	                        }
+	                        ?>
+	                    </select>
+	                </div>
+	            </div>
+	        </div>
+	        <div class="col-lg-4 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-md-4 col-sm-4 col-xs-4">
+	            <div class="form-group">
+	                <div class="">
+	                    <label for="Manager">Manager</label>
+	                    <select required id="manager_id" name="manager_id" class="form-control">
+	                        <option value=''>Select</option>
+	                        <?php
+	                        if($projects_list){
+	                            foreach($managers_list as $manager_data){
+	                                echo "<option value='".$manager_data['eid']."' >".$manager_data['name']."</option>";
+	                            }
+	                        }
+	                        ?>
+	                    </select>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+    <div class="row login-requests-container">
+<?php echo $this->partial('admin/includes/employees_list.phtml', array(
+    'employees_list' => $employees_list));?>
+        </div>
