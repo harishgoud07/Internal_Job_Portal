@@ -59,6 +59,7 @@ if ($storage->active_page) {
                         }else if($user_details->user_role == 'M'){
                              $jobs_href =  $this->url(array('action'=>'index','controller'=>'manager'),null,true);
                             $login_href = $this->url(array('action'=>'loginrequests','controller'=>'manager'),null,true);
+                             $emp_href = $this->url(array('action'=>'browseemployees','controller'=>'admin'),null,true);
                         }
                         
                 ?>
@@ -71,7 +72,7 @@ if ($storage->active_page) {
                     }
                     ?>
                     <?php
-                    if($user_details->user_role =='A'){
+                    if($user_details->user_role !='E'){
                         ?>
                         <li class="<?php echo ($active_page == 'browse_employees')?'active':''?>"><a href="<?php echo $emp_href;?>">Employees</a></li>
                         <?php

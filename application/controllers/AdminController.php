@@ -27,8 +27,15 @@ class AdminController extends Zend_Controller_Action
             $storage->active_page = "browse_employees";
         }
         $request_params = $this->getRequest ()->getParams ();
+        $utilities = new application_models_Utilities ();
+		$user_details = $utilities->get_user_details ();
         $posts = new application_models_Posts();
-        $projects_list = $posts->get_projects_list ();
+        if($user_details->user_role == 'M'){
+           $projects_list = $posts->get_manager_related_projects();
+        }else{
+            $projects_list = $posts->get_projects_list ();
+        }
+      
         $this->view->projects_list = $projects_list;
         $employee = new application_models_Employee();
         $employees_list = $employee->getEmployeesList($request_params);

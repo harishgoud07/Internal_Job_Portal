@@ -32,6 +32,11 @@ class application_models_Employee {
 		),array('name','eid') )->join ( array (
 				'mapping' => 'ijp_employees_project_mapping' 
 		), 'mapping.eid = employee.eid' )->where ( 'employee.user_role = ?', 'M' )->where ( 'mapping.project_id =?', $values['project_id'] );
+		 $utilities = new application_models_Utilities ();
+		$user_details = $utilities->get_user_details ();
+		if($user_details->user_role == 'M'){
+			$get_manager_detals->where ( 'employee.eid = ?', $user_details->eid );
+		}
 		return $this->db->fetchAll($get_manager_detals);
 	}
 	

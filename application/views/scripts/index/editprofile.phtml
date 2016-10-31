@@ -5,7 +5,7 @@ $managers_list = $this->managers_list;
 $utilities = new application_models_Utilities ();
 $user_details = $utilities->get_user_details();
 		if($user_details->user_role =='E'){
-			$current_project = $this->view->current_project;
+			$current_project = $this->current_project;
 			$current_manager = $this->current_manager;
 			$previous_project = $this->previous_project;
 			$previous_manager = $this->previous_manager;
@@ -33,28 +33,28 @@ $user_details = $utilities->get_user_details();
 			<?php if(isset($current_project)){?>
 			<div class="row">
 				<span class="edit-profile-field-title col-lg-3" >Current project <span class='pull-right'>:</span></span>
-				<span class="edit-profile-field-value"><?php echo $employee_details->address;?></span>
+				<span class="edit-profile-field-value"><?php echo $current_project['name'];?></span>
 			</div>
 	<?php } 
 		if(isset($current_manager)){
 	?>		
 			<div class="row">
 				<span class="edit-profile-field-title col-lg-3" >Current manager <span class='pull-right'>:</span></span>
-				<span class="edit-profile-field-value"><?php echo $employee_details->address;?></span>
+				<span class="edit-profile-field-value"><?php echo $current_manager['name'];?></span>
 			</div>
 			<?php } ?>
 
-			<?php if(isset($previous_project)){?>
+			<?php if(isset($previous_project) && $previous_project){?>
 			<div class="row">
 				<span class="edit-profile-field-title col-lg-3" >Previous project <span class='pull-right'>:</span></span>
-				<span class="edit-profile-field-value"><?php echo $employee_details->address;?></span>
+				<span class="edit-profile-field-value"><?php echo $previous_project['name'];?></span>
 			</div>
 	<?php } 
-		if(isset($previous_manager)){
+		if(isset($previous_manager) && $previous_project){
 	?>		
 			<div class="row">
 				<span class="edit-profile-field-title col-lg-3" >Previous manager <span class='pull-right'>:</span></span>
-				<span class="edit-profile-field-value"><?php echo $employee_details->address;?></span>
+				<span class="edit-profile-field-value"><?php echo $previous_manager['name'];?></span>
 			</div>
 			<?php } ?>
 		</div>

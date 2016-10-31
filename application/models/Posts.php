@@ -116,6 +116,29 @@ class application_models_Posts {
 		), array (
 				'id =?' => $values ['applied_job_id'] 
 		) );
+
+		if($values ['status'] == 'A'){
+				$post_details_query = $this->db->select ()->from ( array('applied_job'=>'ijp_job_applied_emp_details'),array('job_applied_emp'=>'eid') )
+				->join (array('posts'=>'ijp_job_posts'),'posts.post_id = applied_job.post_id')
+				->where ( 'id = ?',$values ['applied_job_id']) ;
+				$post_details = $this->db->fetchRow ( $post_details_query );
+				$this->db->update ( 'ijp_emp_manager_mapping', array (
+				'is_deleted' => 1 
+		), array (
+				'eid =?' =>$post_details['job_applied_emp']
+		) );
+		$this->db->update ( 'ijp_employees_project_mapping', array (
+				'is_deleted' => 1 
+		), array (
+				'eid =?' =>$post_details['job_applied_emp']
+		) );
+		$values ['last_inserted_emp_id'] = $post_details['job_applied_emp'];
+		$values ['project_id'] = $post_details['project_id'];
+		$values ['manager_id'] = $post_details['eid'];
+		$registration = new application_models_Register();
+		$registration->store_emp_project_mapping($values);
+		$registration->store_emp_manager_mapping($values);
+		}
 	}
 	function get_requested_posts_count() {
 		$select_post_requests_count_query = $this->db->select ()->from ( 'ijp_job_posts', array (
@@ -218,19 +241,20 @@ public function get_manager_related_projects($values){
 
 	function get_current_project_details(){
 		$get_project_details = $this->db->select ()->from ( array (
-				'ijp_employees_project_mapping' 
-		))->where ( 'eid = ?', $this->user_details->eid )
-		->where ( 'is_deleted = ?', 0 );;
+				'mapping'=>'ijp_employees_project_mapping' 
+		))->join(array('emp'=>'ijp_projects_list'),'mapping.project_id = emp.project_id',array('name'))->where ( 'mapping.eid = ?', $this->user_details->eid )
+		->where ( 'is_deleted = ?', 0 )->order('date_of_modification desc');;
 		//echo $get_manager_project_details;
 		return $this->db->fetchRow($get_project_details);
 	}
 
 	function get_current_manager_details(){
 		$get_project_details = $this->db->select ()->from ( array (
-				'ijp_emp_manager_mapping' 
-		))->where ( 'eid = ?', $this->user_details->eid )
+				'mapping'=>'ijp_emp_manager_mapping' 
+		))->join(array('emp'=>'ijp_employees_list'),'mapping.manager_id = emp.eid',array('name'))
+		->where ( 'mapping.eid = ?', $this->user_details->eid )
 		->where ( 'is_deleted = ?', 0 );;
-		//echo $get_manager_project_details;
+		//echo $get_project_details;
 		return $this->db->fetchRow($get_project_details);
 	}
 
@@ -238,8 +262,8 @@ public function get_manager_related_projects($values){
 
 	function get_previous_project_details(){
 		$get_project_details = $this->db->select ()->from ( array (
-				'ijp_employees_project_mapping' 
-		))->where ( 'eid = ?', $this->user_details->eid )
+				'mapping'=>'ijp_employees_project_mapping' 
+		))->join(array('emp'=>'ijp_projects_list'),'mapping.project_id = emp.project_id',array('name'))->where ( 'mapping.eid = ?', $this->user_details->eid )
 		->where ( 'is_deleted = ?', 1 )->order('date_of_modification desc');;
 		//echo $get_manager_project_details;
 		return $this->db->fetchRow($get_project_details);
@@ -247,8 +271,9 @@ public function get_manager_related_projects($values){
 
 	function get_previous_manager_details(){
 		$get_project_details = $this->db->select ()->from ( array (
-				'ijp_emp_manager_mapping' 
-		))->where ( 'eid = ?', $this->user_details->eid )
+				'mapping'=>'ijp_emp_manager_mapping'
+		))->join(array('emp'=>'ijp_employees_list'),'mapping.manager_id = emp.eid',array('name'))
+		->where ( 'mapping.eid = ?', $this->user_details->eid )
 		->where ( 'is_deleted = ?', 1 )->order('date_of_modification desc');;
 		//echo $get_manager_project_details;
 		return $this->db->fetchRow($get_project_details);
