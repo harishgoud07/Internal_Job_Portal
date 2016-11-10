@@ -30,9 +30,10 @@ class application_models_Posts {
 
 			$get_posts_query->joinLeft ( array (
 				'applied_jobs' => 'ijp_job_applied_emp_details' 
-		), 'applied_jobs.post_id = posts.post_id', array (
+		), 'applied_jobs.post_id = posts.post_id and applied_jobs.eid = '.$user_details->eid, array (
 				'not_applied_post_id' => 'post_id' 
 		) )->where ( 'applied_jobs.post_id is null' )
+		
 		->where('posts.last_date_for_applicants >= ?',new Zend_Db_Expr ( 'now()' ));;
 		}
 		//echo $get_posts_query;
