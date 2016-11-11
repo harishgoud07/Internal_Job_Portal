@@ -40,7 +40,7 @@ $current_page = $this->current_page;
                                     <div class="form-group">
                                         <div class="">
                                             <label for="job_title">Job Title</label>
-                                            <input required type="text" class="form-control" name="job_title" id="job_title" placeholder="">
+                                            <input required type="text" pattern="[a-z|A-Z|.]{6,15}" title="Enter only characters min 6 and maximum 15" class="form-control" name="job_title" id="job_title" placeholder="">
                                         </div>
                                     </div>
                                 </div>
@@ -66,7 +66,7 @@ $current_page = $this->current_page;
                                     <div class="form-group">
                                         <div class="">
                                             <label for="no_of_vacancies">Number of vacancies</label>
-                                            <input required type="number"  min = "0" class="form-control" name="no_of_vacancies" id="no_of_vacancies" placeholder="">
+                                            <input required type="number"   min = "1" max="5" class="form-control" name="no_of_vacancies" id="no_of_vacancies" placeholder="">
                                         </div>
                                     </div>
                                 </div>
@@ -74,7 +74,7 @@ $current_page = $this->current_page;
                                     <div class="form-group">
                                         <div class="">
                                             <label for="salary">Salary</label>
-                                            <input required type="text" class="form-control" name="salary" id="salary" placeholder="">
+                                            <input required  min = "1" max="150000"  type="number" class="form-control" name="salary" id="salary" placeholder="">
                                         </div>
                                     </div>
                                 </div>
@@ -85,7 +85,7 @@ $current_page = $this->current_page;
                                     <div class="form-group">
                                         <div class="">
                                             <label for="experience">Experience required(Years)</label>
-                                            <input required  type="number" min = "0" class="form-control" name="experience" id="experience" placeholder="">
+                                            <input required  type="number" min = "0" max = "15" class="form-control" name="experience" id="experience" placeholder="">
                                         </div>
                                     </div>
                                 </div>
@@ -93,7 +93,7 @@ $current_page = $this->current_page;
                                     <div class="form-group">
                                         <label for="expiry_date">End date for Applicants</label>
                                         <div class="input-group date post-job-date-control" >
-                                            <input required name="last_date_for_applicants" type="text" id="expiry_date_datepicker" class="form-control">
+                                            <input required name="last_date_for_applicants" type="text"  id="expiry_date_datepicker" class="form-control">
 			                                    <span class="input-group-addon">
 			                                        <span class="glyphicon glyphicon-calendar"></span>
 			                                    </span>
@@ -150,7 +150,7 @@ $current_page = $this->current_page;
                             <div class="form-group">
                                 <div class="">
                                     <label for="job_description">Job Description</label>
-                                    <textarea required name="job_description" id="job_description" class="form-control" rows="3"></textarea>
+                                    <textarea required name="job_description" id="job_description" class="form-control"  maxlength="300" rows="5"></textarea>
                                 </div>
                             </div>
                     </div>

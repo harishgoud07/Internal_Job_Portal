@@ -15,7 +15,7 @@ $managers_list = $this->managers_list;
 					<div class="">
 						<label for="full_name">Full name</label> 
 						<input type="text" required
-							name="full_name" id="full_name" placeholder="" value="<?php echo $employee_details->name?>" class="form-control"
+							name="full_name" id="full_name" pattern="[a-z|A-Z|.]{6,26}" title="Enter only characters min 6 and maximum 15" placeholder="" value="<?php echo $employee_details->name?>" class="form-control"
 							autofocus>
 					</div>
 				</div>
